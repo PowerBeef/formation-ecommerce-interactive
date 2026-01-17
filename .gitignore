@@ -1,0 +1,20 @@
+# Virtual environments
+venv/
+playwright-env/
+
+# Audio downloads (large files)
+audio_downloads/
+
+# Test artifacts
+test_screenshots/
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/

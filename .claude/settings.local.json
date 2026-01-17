@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(superpowers:brainstorming)",
+      "WebFetch(domain:www.youtube.com)",
+      "Bash(pip install:*)",
+      "Bash(pip3 install:*)",
+      "Bash(python3:*)",
+      "Bash(source:*)",
+      "Bash(python fetch_transcripts.py:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(python transcribe_missing_videos.py:*)",
+      "Skill(document-skills:webapp-testing)",
+      "Bash(python \"/Users/patricedery/.claude/plugins/cache/anthropic-agent-skills/document-skills/69c0b1a06741/skills/webapp-testing/scripts/with_server.py\":*)",
+      "Bash(python -m playwright:*)",
+      "Bash(python:*)",
+      "mcp__applescript__applescript_execute",
+      "Bash(find:*)",
+      "Bash(pkill:*)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Bash(git init:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
