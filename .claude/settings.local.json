@@ -26,7 +26,8 @@
       "mcp__plugin_github_github__create_repository",
       "Bash(git remote add:*)",
       "Bash(git push:*)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

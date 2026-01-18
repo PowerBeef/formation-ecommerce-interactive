@@ -945,6 +945,22 @@
             font-size: 14px;
         }
 
+        .exercise-duration {
+            margin-top: 8px;
+            color: var(--accent-blue);
+        }
+
+        .lesson-exercise {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .lesson-exercise h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
         /* Timeline */
         .timeline {
             position: relative;
@@ -1195,11 +1211,6 @@
 
             <nav class="nav-section">
                 <div class="nav-section-title">Menu Principal</div>
-                <div class="nav-item" onclick="showExercises()">
-                    <span class="nav-item-icon">📝</span>
-                    <span>Exercices</span>
-                    <span class="nav-item-badge" id="exercises-badge">0/7</span>
-                </div>
                 <div class="nav-item" onclick="showTimeline()">
                     <span class="nav-item-icon">📅</span>
                     <span>Planning 8 semaines</span>
@@ -1323,7 +1334,13 @@
                                 'Pourquoi eviter Minea et AliExpress',
                                 'Comment identifier une tension emotionnelle',
                                 'Le modele economique sain: 70€ minimum, 75% de marge'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-2',
+                                title: 'Simulation de Sourcing',
+                                description: 'Comparer les prix AliExpress vs 1688 pour un produit.',
+                                duration: '1-2 heures'
+                            }
                         },
                         {
                             id: 'lesson-5',
@@ -1349,7 +1366,13 @@
                                 'Observer les marques qui cartonnent',
                                 'Les niches a fort potentiel emotionnel',
                                 'Methode de brainstorming efficace'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-1',
+                                title: 'Brainstorming Produit',
+                                description: 'Lister 10 problemes et les evaluer selon les 5 criteres.',
+                                duration: '2-3 heures'
+                            }
                         }
                     ]
                 },
@@ -1371,7 +1394,13 @@
                                 'Les questions a poser a ta cible',
                                 'Comment creer un avatar client',
                                 'Situation actuelle vs situation desiree'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-3',
+                                title: 'Avatar Client',
+                                description: 'Creer un questionnaire et obtenir 20-30 reponses.',
+                                duration: '2-3 heures'
+                            }
                         },
                         {
                             id: 'lesson-8',
@@ -1384,7 +1413,13 @@
                                 'Les outils de veille gratuits',
                                 'Analyser forces et faiblesses',
                                 'Trouver des opportunites de differenciation'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-4',
+                                title: 'Veille Concurrentielle',
+                                description: 'Analyser 5 concurrents en detail.',
+                                duration: '3-4 heures'
+                            }
                         },
                         {
                             id: 'lesson-9',
@@ -1432,7 +1467,13 @@
                                 'Creer de l\'urgence ethique',
                                 'Les erreurs de site a eviter',
                                 'Audit de son propre site'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-7',
+                                title: 'Audit de Site',
+                                description: 'Evaluer ton site selon les 13 criteres.',
+                                duration: '30 minutes'
+                            }
                         }
                     ]
                 },
@@ -1454,7 +1495,13 @@
                                 'Les 3 regles d\'or du contenu',
                                 'Une video = un angle marketing',
                                 'Le produit est un outil, pas la star'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-5',
+                                title: 'Veille de Contenu',
+                                description: 'Analyser 50 contenus viraux sur TikTok.',
+                                duration: '4-5 heures'
+                            }
                         },
                         {
                             id: 'lesson-13',
@@ -1467,7 +1514,13 @@
                                 'Types de hooks qui fonctionnent',
                                 'Structure d\'un bon hook',
                                 'Exemples concrets de hooks viraux'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-6',
+                                title: 'Premier Script Video',
+                                description: 'Ecrire et produire ta premiere video.',
+                                duration: '1 heure'
+                            }
                         },
                         {
                             id: 'lesson-14',
@@ -1737,50 +1790,6 @@
                     ]
                 }
             ],
-            exercises: [
-                {
-                    id: 'ex-1',
-                    title: 'Brainstorming Produit',
-                    description: 'Lister 10 problèmes et les évaluer selon les 5 critères.',
-                    duration: '2-3 heures'
-                },
-                {
-                    id: 'ex-2',
-                    title: 'Simulation de Sourcing',
-                    description: 'Comparer les prix AliExpress vs 1688 pour un produit.',
-                    duration: '1-2 heures'
-                },
-                {
-                    id: 'ex-3',
-                    title: 'Avatar Client',
-                    description: 'Créer un questionnaire et obtenir 20-30 réponses.',
-                    duration: '2-3 heures'
-                },
-                {
-                    id: 'ex-4',
-                    title: 'Veille Concurrentielle',
-                    description: 'Analyser 5 concurrents en détail.',
-                    duration: '3-4 heures'
-                },
-                {
-                    id: 'ex-5',
-                    title: 'Veille de Contenu',
-                    description: 'Analyser 50 contenus viraux sur TikTok.',
-                    duration: '4-5 heures'
-                },
-                {
-                    id: 'ex-6',
-                    title: 'Premier Script Video',
-                    description: 'Écrire et produire ta première vidéo.',
-                    duration: '1 heure'
-                },
-                {
-                    id: 'ex-7',
-                    title: 'Audit de Site',
-                    description: 'Évaluer ton site selon les 13 critères.',
-                    duration: '30 minutes'
-                }
-            ],
             timeline: [
                 { week: 1, title: 'Recherche produit', tasks: 'Exercice 1: Brainstorming, validation criteres', deliverable: '3 produits potentiels valides' },
                 { week: 2, title: 'Sourcing', tasks: 'Exercice 2: Contact fournisseurs 1688/Alibaba', deliverable: 'Fournisseur sélectionné' },
@@ -1869,6 +1878,16 @@
             headerEl.classList.toggle('expanded');
         }
 
+        function getTotalExercises() {
+            let count = 0;
+            for (const phase of coursData.phases) {
+                for (const lesson of phase.lessons) {
+                    if (lesson.exercise) count++;
+                }
+            }
+            return count;
+        }
+
         function updateProgress() {
             const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
             const completedCount = state.completedLessons.length;
@@ -1876,9 +1895,6 @@
 
             document.getElementById('global-progress-text').textContent = `${percentage}%`;
             document.getElementById('global-progress-bar').style.width = `${percentage}%`;
-
-            const exercisesCompleted = state.completedExercises.length;
-            document.getElementById('exercises-badge').textContent = `${exercisesCompleted}/7`;
         }
 
         function toggleSidebar() {
@@ -1924,7 +1940,7 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon green">📝</div>
-                            <div class="stat-value">${state.completedExercises.length}/7</div>
+                            <div class="stat-value">${state.completedExercises.length}/${getTotalExercises()}</div>
                             <div class="stat-label">Exercices réalisés</div>
                         </div>
                         <div class="stat-card">
@@ -1958,9 +1974,9 @@
                             <div class="section-title">🎉 Félicitations!</div>
                         </div>
                         <div class="section-content">
-                            <p>Tu as complété toutes les leçons! Continue avec les exercices pratiques.</p>
-                            <button class="btn btn-primary" onclick="showExercises()" style="margin-top: 15px;">
-                                Voir les exercices
+                            <p>Tu as complété toutes les leçons! N'oublie pas de faire les exercices pratiques dans chaque leçon.</p>
+                            <button class="btn btn-primary" onclick="showLesson('${coursData.phases[0].lessons[0].id}')" style="margin-top: 15px;">
+                                Revoir les leçons
                             </button>
                         </div>
                     </div>
@@ -2099,6 +2115,23 @@
                             </button>
                         ` : '<div></div>'}
                     </div>
+
+                    ${lesson.exercise ? `
+                    <div class="lesson-exercise">
+                        <h3>📝 Exercice Pratique</h3>
+                        <div class="exercise-item">
+                            <div class="exercise-checkbox ${state.completedExercises.includes(lesson.exercise.id) ? 'checked' : ''}"
+                                 onclick="toggleExercise('${lesson.exercise.id}')">
+                                ${state.completedExercises.includes(lesson.exercise.id) ? '✓' : ''}
+                            </div>
+                            <div class="exercise-content">
+                                <h4>${lesson.exercise.title}</h4>
+                                <p>${lesson.exercise.description}</p>
+                                <p class="exercise-duration">⏱️ Duree estimee: ${lesson.exercise.duration}</p>
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
                 </div>
             `;
 
@@ -2151,40 +2184,6 @@
             }, 500);
         }
 
-        function showExercises() {
-            state.currentView = 'exercises';
-            state.currentLesson = null;
-            saveState();
-            renderSidebar();
-
-            document.getElementById('content-area').innerHTML = `
-                <div class="fade-in">
-                    <h1 style="margin-bottom: 10px;">📝 Exercices Pratiques</h1>
-                    <p style="color: var(--text-secondary); margin-bottom: 30px;">7 exercices pour mettre en pratique ce que tu as appris</p>
-
-                    ${coursData.exercises.map(ex => {
-                        const isCompleted = state.completedExercises.includes(ex.id);
-                        return `
-                            <div class="exercise-item">
-                                <div class="exercise-checkbox ${isCompleted ? 'checked' : ''}" onclick="toggleExercise('${ex.id}')">
-                                    ${isCompleted ? '✓' : ''}
-                                </div>
-                                <div class="exercise-content">
-                                    <h4>${ex.title}</h4>
-                                    <p>${ex.description}</p>
-                                    <p style="margin-top: 8px; color: var(--accent-blue);">⏱️ Durée estimée: ${ex.duration}</p>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-
-            // Update active nav
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[1].classList.add('active');
-        }
-
         function toggleExercise(exId) {
             if (state.completedExercises.includes(exId)) {
                 state.completedExercises = state.completedExercises.filter(id => id !== exId);
@@ -2192,7 +2191,11 @@
                 state.completedExercises.push(exId);
             }
             saveState();
-            showExercises();
+            updateHeaderProgress();
+            // Re-render current lesson to update checkbox
+            if (state.currentLesson) {
+                showLesson(state.currentLesson);
+            }
         }
 
         function showTimeline() {
@@ -2229,7 +2232,7 @@
 
             // Update active nav
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[2].classList.add('active');
+            document.querySelectorAll('.nav-item')[0].classList.add('active');
         }
 
         function toggleWeek(week) {
@@ -2312,7 +2315,7 @@
 
             // Update active nav
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[3].classList.add('active');
+            document.querySelectorAll('.nav-item')[1].classList.add('active');
         }
 
         function resetProgress() {
@@ -2401,7 +2404,7 @@
                             <div class="dropdown-stat-label">Leçons</div>
                         </div>
                         <div class="dropdown-stat">
-                            <div class="dropdown-stat-value">${state.completedExercises.length}/7</div>
+                            <div class="dropdown-stat-value">${state.completedExercises.length}/${getTotalExercises()}</div>
                             <div class="dropdown-stat-label">Exercices</div>
                         </div>
                         <div class="dropdown-stat">
