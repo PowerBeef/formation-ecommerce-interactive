@@ -371,6 +371,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
         }
 
         .progress-indicator {
@@ -380,6 +381,12 @@
             background: var(--bg-tertiary);
             padding: 8px 15px;
             border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .progress-indicator:hover {
+            background: var(--bg-hover);
         }
 
         .progress-ring {
@@ -419,6 +426,125 @@
         .progress-label {
             font-size: 13px;
             color: var(--text-secondary);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+        }
+
+        .progress-indicator.open .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .progress-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 380px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 1000;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .progress-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .dropdown-content {
+            padding: 15px;
+        }
+
+        .dropdown-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .dropdown-stat {
+            background: var(--bg-tertiary);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+
+        .dropdown-stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .dropdown-stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .dropdown-next-lesson {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 15px;
+        }
+
+        .dropdown-next-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .dropdown-next-name {
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .dropdown-modules {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .dropdown-module {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .dropdown-module:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-module-progress {
+            color: var(--text-muted);
+            font-size: 12px;
         }
 
         .btn {
@@ -1069,10 +1195,6 @@
 
             <nav class="nav-section">
                 <div class="nav-section-title">Menu Principal</div>
-                <div class="nav-item active" onclick="showDashboard()">
-                    <span class="nav-item-icon">🏠</span>
-                    <span>Tableau de bord</span>
-                </div>
                 <div class="nav-item" onclick="showExercises()">
                     <span class="nav-item-icon">📝</span>
                     <span>Exercices</span>
@@ -1106,7 +1228,7 @@
                     </div>
                 </div>
                 <div class="header-right">
-                    <div class="progress-indicator" id="progress-indicator">
+                    <div class="progress-indicator" id="progress-indicator" onclick="toggleProgressDropdown(event)">
                         <div class="progress-ring">
                             <svg viewBox="0 0 36 36">
                                 <path class="progress-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
@@ -1115,6 +1237,10 @@
                             <span class="progress-text" id="progress-text">0%</span>
                         </div>
                         <span class="progress-label">Progression</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="progress-dropdown" id="progress-dropdown">
+                        <!-- Content rendered by JS -->
                     </div>
                 </div>
             </header>
@@ -2227,6 +2353,109 @@
         }
 
         // ========================================
+        // PROGRESS DROPDOWN
+        // ========================================
+        function toggleProgressDropdown(event) {
+            event.stopPropagation();
+            const indicator = document.getElementById('progress-indicator');
+            const dropdown = document.getElementById('progress-dropdown');
+            const isOpen = dropdown.classList.contains('open');
+
+            if (isOpen) {
+                dropdown.classList.remove('open');
+                indicator.classList.remove('open');
+            } else {
+                renderProgressDropdown();
+                dropdown.classList.add('open');
+                indicator.classList.add('open');
+            }
+        }
+
+        function renderProgressDropdown() {
+            const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
+            const completedLessons = state.completedLessons.length;
+            const percentage = Math.round((completedLessons / totalLessons) * 100);
+
+            // Find next lesson
+            let nextLesson = null;
+            let nextPhase = null;
+            for (const phase of coursData.phases) {
+                for (const lesson of phase.lessons) {
+                    if (!state.completedLessons.includes(lesson.id)) {
+                        nextLesson = lesson;
+                        nextPhase = phase;
+                        break;
+                    }
+                }
+                if (nextLesson) break;
+            }
+
+            document.getElementById('progress-dropdown').innerHTML = `
+                <div class="dropdown-header">
+                    <span class="dropdown-title">📊 Tableau de bord</span>
+                </div>
+                <div class="dropdown-content">
+                    <div class="dropdown-stats">
+                        <div class="dropdown-stat">
+                            <div class="dropdown-stat-value">${completedLessons}/${totalLessons}</div>
+                            <div class="dropdown-stat-label">Leçons</div>
+                        </div>
+                        <div class="dropdown-stat">
+                            <div class="dropdown-stat-value">${state.completedExercises.length}/7</div>
+                            <div class="dropdown-stat-label">Exercices</div>
+                        </div>
+                        <div class="dropdown-stat">
+                            <div class="dropdown-stat-value">${formatTime(state.timerSeconds)}</div>
+                            <div class="dropdown-stat-label">Temps d'étude</div>
+                        </div>
+                        <div class="dropdown-stat">
+                            <div class="dropdown-stat-value">${percentage}%</div>
+                            <div class="dropdown-stat-label">Progression</div>
+                        </div>
+                    </div>
+
+                    ${nextLesson ? `
+                    <div class="dropdown-next-lesson">
+                        <div class="dropdown-next-title">🚀 Prochaine leçon</div>
+                        <div class="dropdown-next-name">${nextLesson.title}</div>
+                        <button class="btn btn-primary btn-sm" onclick="showLesson('${nextLesson.id}'); toggleProgressDropdown(event);">
+                            ▶️ Continuer
+                        </button>
+                    </div>
+                    ` : `
+                    <div class="dropdown-next-lesson">
+                        <div class="dropdown-next-title">🎉 Félicitations!</div>
+                        <div class="dropdown-next-name">Toutes les leçons sont complétées!</div>
+                    </div>
+                    `}
+
+                    <div class="dropdown-modules">
+                        ${coursData.phases.map(phase => {
+                            const completed = phase.lessons.filter(l => state.completedLessons.includes(l.id)).length;
+                            const total = phase.lessons.length;
+                            return `
+                                <div class="dropdown-module">
+                                    <span>${phase.icon} ${phase.title}</span>
+                                    <span class="dropdown-module-progress">${completed}/${total}</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const indicator = document.getElementById('progress-indicator');
+            const dropdown = document.getElementById('progress-dropdown');
+            if (indicator && dropdown && !indicator.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('open');
+                indicator.classList.remove('open');
+            }
+        });
+
+        // ========================================
         // SEARCH
         // ========================================
         function handleSearch(query) {
@@ -2276,11 +2505,27 @@
             renderSidebar();
             updateHeaderProgress();
 
-            // Show last view or dashboard
+            // Show last view or first uncompleted lesson
             if (state.currentLesson) {
                 showLesson(state.currentLesson);
             } else {
-                showDashboard();
+                // Find first uncompleted lesson or show first lesson
+                let firstLesson = null;
+                for (const phase of coursData.phases) {
+                    for (const lesson of phase.lessons) {
+                        if (!state.completedLessons.includes(lesson.id)) {
+                            firstLesson = lesson;
+                            break;
+                        }
+                    }
+                    if (firstLesson) break;
+                }
+                if (firstLesson) {
+                    showLesson(firstLesson.id);
+                } else {
+                    // All complete, show first lesson
+                    showLesson(coursData.phases[0].lessons[0].id);
+                }
             }
         }
 
