@@ -31,6 +31,217 @@
             --transition: all 0.3s ease;
         }
 
+        /* Light theme variables */
+        body.light-theme {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e8e8e8;
+            --bg-hover: #d5d5d5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+            background: #f5f5f5 !important;
+            color: #1a1a1a !important;
+        }
+
+        body.light-theme .sidebar {
+            background: #ffffff;
+            border-right-color: #e0e0e0;
+        }
+
+        body.light-theme .sidebar-header {
+            background: #ffffff;
+        }
+
+        body.light-theme .header {
+            background: #ffffff;
+            border-bottom-color: #e0e0e0;
+        }
+
+        body.light-theme .content-area {
+            background: #f5f5f5;
+        }
+
+        body.light-theme .section-card,
+        body.light-theme .lesson-exercise,
+        body.light-theme .key-points {
+            background: #ffffff;
+            border-color: #e0e0e0;
+        }
+
+        body.light-theme .video-placeholder {
+            background: #e8e8e8;
+        }
+
+        body.light-theme .nav-item {
+            color: #1a1a1a;
+        }
+
+        body.light-theme .nav-item:hover {
+            background: #e8e8e8;
+        }
+
+        body.light-theme .phase-header {
+            background: #e8e8e8;
+        }
+
+        body.light-theme .phase-header:hover {
+            background: #d5d5d5;
+        }
+
+        body.light-theme .progress-overview {
+            border-bottom-color: #e0e0e0;
+        }
+
+        body.light-theme .progress-bar {
+            background: #e8e8e8;
+        }
+
+        body.light-theme .search-box {
+            background: #e8e8e8;
+            border-color: #e0e0e0;
+        }
+
+        body.light-theme .search-input {
+            color: #1a1a1a;
+        }
+
+        body.light-theme .progress-dropdown,
+        body.light-theme .settings-panel,
+        body.light-theme .search-results {
+            background: #ffffff;
+            border-color: #e0e0e0;
+        }
+
+        body.light-theme .dropdown-header,
+        body.light-theme .settings-header {
+            border-bottom-color: #e0e0e0;
+        }
+
+        body.light-theme .notes-textarea {
+            background: #e8e8e8;
+            color: #1a1a1a;
+            border-color: #e0e0e0;
+        }
+
+        body.light-theme .btn-secondary {
+            background: #e8e8e8;
+            color: #1a1a1a;
+        }
+
+        body.light-theme .btn-secondary:hover {
+            background: #d5d5d5;
+        }
+
+        /* Settings panel styles */
+        .settings-button {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .settings-button:hover {
+            background: var(--bg-hover);
+        }
+
+        .settings-panel {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            width: 300px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .settings-panel.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .settings-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .settings-content {
+            padding: 15px 20px;
+        }
+
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-item-label {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .settings-item-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Toggle switch */
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-blue);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active::after {
+            left: 22px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -1253,6 +1464,37 @@
                     <div class="progress-dropdown" id="progress-dropdown">
                         <!-- Content rendered by JS -->
                     </div>
+                    <button class="settings-button" onclick="toggleSettingsPanel(event)" title="Paramètres">
+                        <span>&#9881;</span>
+                    </button>
+                    <div class="settings-panel" id="settings-panel">
+                        <div class="settings-header">&#9881; Paramètres</div>
+                        <div class="settings-content">
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Mode clair</div>
+                                    <div class="settings-item-desc">Changer le thème de l'interface</div>
+                                </div>
+                                <div class="toggle-switch" id="theme-toggle" onclick="toggleTheme()"></div>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Lecture automatique</div>
+                                    <div class="settings-item-desc">Lancer les vidéos automatiquement</div>
+                                </div>
+                                <div class="toggle-switch" id="autoplay-toggle" onclick="toggleAutoplay()"></div>
+                            </div>
+                            <div class="settings-item" style="flex-direction: column; align-items: stretch;">
+                                <div style="margin-bottom: 10px;">
+                                    <div class="settings-item-label">Réinitialiser la progression</div>
+                                    <div class="settings-item-desc">Supprimer toutes les données sauvegardées</div>
+                                </div>
+                                <button class="btn" style="background: var(--accent-red); color: white; width: 100%;" onclick="resetProgress()">
+                                    &#128465; Réinitialiser
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </header>
 
@@ -1813,15 +2055,25 @@
             currentView: 'dashboard',
             currentLesson: null,
             timerSeconds: 0,
-            searchQuery: ''
+            searchQuery: '',
+            settings: {
+                lightTheme: false,
+                autoplayVideos: false
+            }
         };
 
         // Load state from localStorage
         function loadState() {
             const saved = localStorage.getItem('formation-ecom-state');
             if (saved) {
-                state = { ...state, ...JSON.parse(saved) };
+                const parsed = JSON.parse(saved);
+                state = { ...state, ...parsed };
+                // Ensure settings object exists for backward compatibility
+                if (!state.settings) {
+                    state.settings = { lightTheme: false, autoplayVideos: false };
+                }
             }
+            applyTheme();
         }
 
         // Save state to localStorage
@@ -2068,10 +2320,19 @@
                     </div>
 
                     <div class="video-container">
-                        <div class="video-placeholder" onclick="loadVideo(this, '${lesson.videoId}')">
-                            <div class="play-button">▶</div>
-                            <span>Cliquer pour charger la vidéo</span>
-                        </div>
+                        ${state.settings && state.settings.autoplayVideos ? `
+                            <iframe
+                                src="https://www.youtube-nocookie.com/embed/${lesson.videoId}?autoplay=1&rel=0"
+                                allowfullscreen
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                loading="lazy">
+                            </iframe>
+                        ` : `
+                            <div class="video-placeholder" onclick="loadVideo(this, '${lesson.videoId}')">
+                                <div class="play-button">▶</div>
+                                <span>Cliquer pour charger la vidéo</span>
+                            </div>
+                        `}
                     </div>
                     <div style="margin-top: 10px; text-align: center;">
                         <a href="https://www.youtube.com/watch?v=${lesson.videoId}" target="_blank" rel="noopener" style="color: var(--accent-blue); text-decoration: none; font-size: 14px;">
@@ -2317,9 +2578,19 @@
                     currentView: 'dashboard',
                     currentLesson: null,
                     timerSeconds: 0,
+                    searchQuery: '',
+                    settings: {
+                        lightTheme: false,
+                        autoplayVideos: false
+                    }
                 };
+                applyTheme();
+                updateSettingsUI();
                 updateHeaderProgress();
                 showDashboard();
+                // Close settings panel if open
+                const settingsPanel = document.getElementById('settings-panel');
+                if (settingsPanel) settingsPanel.classList.remove('open');
             }
         }
 
@@ -2449,6 +2720,63 @@
             if (indicator && dropdown && !indicator.contains(e.target) && !dropdown.contains(e.target)) {
                 dropdown.classList.remove('open');
                 indicator.classList.remove('open');
+            }
+        });
+
+        // ========================================
+        // SETTINGS PANEL
+        // ========================================
+        function toggleSettingsPanel(event) {
+            event.stopPropagation();
+            const panel = document.getElementById('settings-panel');
+            panel.classList.toggle('open');
+            updateSettingsUI();
+        }
+
+        function updateSettingsUI() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const autoplayToggle = document.getElementById('autoplay-toggle');
+
+            if (state.settings && state.settings.lightTheme) {
+                themeToggle.classList.add('active');
+            } else {
+                themeToggle.classList.remove('active');
+            }
+
+            if (state.settings && state.settings.autoplayVideos) {
+                autoplayToggle.classList.add('active');
+            } else {
+                autoplayToggle.classList.remove('active');
+            }
+        }
+
+        function toggleTheme() {
+            state.settings.lightTheme = !state.settings.lightTheme;
+            applyTheme();
+            saveState();
+            updateSettingsUI();
+        }
+
+        function applyTheme() {
+            if (state.settings && state.settings.lightTheme) {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+        }
+
+        function toggleAutoplay() {
+            state.settings.autoplayVideos = !state.settings.autoplayVideos;
+            saveState();
+            updateSettingsUI();
+        }
+
+        // Close settings panel when clicking outside
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('settings-panel');
+            const button = document.querySelector('.settings-button');
+            if (panel && button && !panel.contains(e.target) && !button.contains(e.target)) {
+                panel.classList.remove('open');
             }
         });
 
