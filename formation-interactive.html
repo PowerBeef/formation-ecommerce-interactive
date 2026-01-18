@@ -373,19 +373,52 @@
             gap: 15px;
         }
 
-        .timer-display {
+        .progress-indicator {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             background: var(--bg-tertiary);
             padding: 8px 15px;
             border-radius: var(--radius-sm);
-            font-size: 14px;
-            color: var(--text-secondary);
         }
 
-        .timer-display.active {
-            color: var(--accent-green);
+        .progress-ring {
+            position: relative;
+            width: 36px;
+            height: 36px;
+        }
+
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-bg {
+            fill: none;
+            stroke: var(--border-color);
+            stroke-width: 3;
+        }
+
+        .progress-ring-fill {
+            fill: none;
+            stroke: var(--accent-green);
+            stroke-width: 3;
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.3s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .progress-label {
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         .btn {
@@ -1073,13 +1106,16 @@
                     </div>
                 </div>
                 <div class="header-right">
-                    <div class="timer-display" id="timer-display">
-                        <span>⏱️</span>
-                        <span id="timer-value">00:00:00</span>
+                    <div class="progress-indicator" id="progress-indicator">
+                        <div class="progress-ring">
+                            <svg viewBox="0 0 36 36">
+                                <path class="progress-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="progress-ring-fill" id="progress-ring-fill" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            </svg>
+                            <span class="progress-text" id="progress-text">0%</span>
+                        </div>
+                        <span class="progress-label">Progression</span>
                     </div>
-                    <button class="btn btn-secondary" onclick="toggleTimer()" id="timer-btn">
-                        ▶️ Démarrer
-                    </button>
                 </div>
             </header>
 
@@ -1641,7 +1677,6 @@
             notes: {},
             currentView: 'dashboard',
             currentLesson: null,
-            timerRunning: false,
             timerSeconds: 0,
             searchQuery: ''
         };
@@ -1973,6 +2008,7 @@
                 state.completedLessons.push(lessonId);
             }
             saveState();
+            updateHeaderProgress();
             showLesson(lessonId);
         }
 
@@ -2163,38 +2199,26 @@
                     notes: {},
                     currentView: 'dashboard',
                     currentLesson: null,
-                    timerRunning: false,
                     timerSeconds: 0,
                 };
+                updateHeaderProgress();
                 showDashboard();
             }
         }
 
         // ========================================
-        // TIMER
+        // HEADER PROGRESS
         // ========================================
-        let timerInterval = null;
+        function updateHeaderProgress() {
+            const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
+            const completedLessons = state.completedLessons.length;
+            const percentage = Math.round((completedLessons / totalLessons) * 100);
 
-        function toggleTimer() {
-            state.timerRunning = !state.timerRunning;
-            const btn = document.getElementById('timer-btn');
-            const display = document.getElementById('timer-display');
-
-            if (state.timerRunning) {
-                btn.innerHTML = '⏸️ Pause';
-                display.classList.add('active');
-                timerInterval = setInterval(() => {
-                    state.timerSeconds++;
-                    document.getElementById('timer-value').textContent = formatTime(state.timerSeconds);
-                    saveState();
-                }, 1000);
-            } else {
-                btn.innerHTML = '▶️ Démarrer';
-                display.classList.remove('active');
-                clearInterval(timerInterval);
-            }
+            document.getElementById('progress-text').textContent = percentage + '%';
+            document.getElementById('progress-ring-fill').setAttribute('stroke-dasharray', `${percentage}, 100`);
         }
 
+        // Helper for dashboard time display
         function formatTime(seconds) {
             const h = Math.floor(seconds / 3600);
             const m = Math.floor((seconds % 3600) / 60);
@@ -2250,11 +2274,7 @@
         function init() {
             loadState();
             renderSidebar();
-
-            // Restore timer if was running
-            if (state.timerSeconds > 0) {
-                document.getElementById('timer-value').textContent = formatTime(state.timerSeconds);
-            }
+            updateHeaderProgress();
 
             // Show last view or dashboard
             if (state.currentLesson) {
