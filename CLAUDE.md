@@ -42,6 +42,23 @@ python transcribe_missing_videos.py
 
 ```
 
+## Deployment
+
+**IMPORTANT:** After making any changes to this project, always push to GitHub to keep the live site updated.
+
+- **Live site:** https://powerbeef.github.io/formation-ecommerce-interactive/
+- **Repository:** https://github.com/PowerBeef/formation-ecommerce-interactive
+
+```bash
+# After making changes, sync index.html and push
+cp formation-interactive.html index.html
+git add -A
+git commit -m "Your change description"
+git push
+```
+
+Note: `index.html` is the GitHub Pages entry point (copy of `formation-interactive.html`).
+
 ## Testing
 
 **Always use Claude in Chrome** (MCP browser automation tools) for testing the interactive HTML interface. This allows real-time browser interaction and visual verification.

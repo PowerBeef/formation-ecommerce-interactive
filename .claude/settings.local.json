@@ -21,7 +21,12 @@
       "Skill(superpowers:subagent-driven-development)",
       "Bash(git init:*)",
       "Bash(git branch:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: Formation E-commerce Interactive\n\n- Interactive HTML course player for Sofian Kasmi''s e-commerce training\n- Python scripts for YouTube transcript extraction\n- Whisper transcription for videos without subtitles\n- 35+ video transcripts included\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
+      "mcp__plugin_github_github__create_repository",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(gh api:*)"
     ]
   }
 }
