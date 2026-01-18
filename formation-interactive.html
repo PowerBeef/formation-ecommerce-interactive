@@ -2298,18 +2298,6 @@
                         <div class="quote-text">"Tu peux faire de l'argent avec n'importe quel produit sur internet. La marque Petrock a genere plus d'un million de dollars par an en vendant des cailloux. Ce n'est pas le produit le probleme, c'est ta strategie."</div>
                         <div class="quote-author">— Sofian Kasmi</div>
                     </div>
-
-                    <div class="section-card" style="margin-top: 30px; border-color: var(--accent-red);">
-                        <div class="section-header">
-                            <div class="section-title">⚠️ Zone Dangereuse</div>
-                        </div>
-                        <div class="section-content">
-                            <p style="margin-bottom: 15px; color: var(--text-secondary);">Réinitialiser ta progression supprimera toutes tes leçons complétées, exercices, notes et temps d'étude.</p>
-                            <button class="btn" style="background: var(--accent-red); color: white;" onclick="resetProgress()">
-                                🗑️ Réinitialiser ma progression
-                            </button>
-                        </div>
-                    </div>
                 </div>
             `;
 
@@ -2443,6 +2431,12 @@
                                 </div>
                             `;
                         }).join('')}
+                    </div>
+
+                    <div class="dropdown-reset" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                        <button class="btn btn-sm" style="background: var(--accent-red); color: white; width: 100%;" onclick="resetProgress()">
+                            🗑️ Réinitialiser ma progression
+                        </button>
                     </div>
                 </div>
             `;
