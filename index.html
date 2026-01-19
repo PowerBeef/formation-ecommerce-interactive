@@ -1257,6 +1257,77 @@
             font-weight: 500;
         }
 
+        /* Picture-in-Picture Video Player */
+        .pip-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 320px;
+            height: 180px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        }
+
+        .pip-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .pip-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .pip-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 28px;
+            height: 28px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .pip-close:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .pip-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        /* Hide PiP on mobile */
+        @media (max-width: 767px) {
+            .pip-container {
+                display: none;
+            }
+        }
+
         /* Mobile Styles */
         @media (max-width: 768px) {
             .sidebar {
@@ -1500,6 +1571,13 @@
 
             <div class="content-area" id="content-area">
                 <!-- Content will be injected here -->
+            </div>
+
+            <!-- Picture-in-Picture Video Player -->
+            <div class="pip-container" id="pip-container">
+                <button class="pip-close" onclick="closePip()" title="Fermer">&times;</button>
+                <div class="pip-overlay" onclick="scrollToMainVideo()"></div>
+                <div class="pip-video" id="pip-video"></div>
             </div>
         </main>
     </div>
@@ -2059,7 +2137,8 @@
             settings: {
                 lightTheme: false,
                 autoplayVideos: false
-            }
+            },
+            pipDismissed: false
         };
 
         // Load state from localStorage
@@ -2400,6 +2479,9 @@
             if (window.innerWidth <= 768) {
                 toggleSidebar();
             }
+
+            // Initialize PiP observer for this lesson
+            setTimeout(initPipObserver, 100);
         }
 
         function loadVideo(placeholder, videoId) {
@@ -2419,6 +2501,9 @@
                     </a>
                 </div>
             `;
+
+            // Reinitialize PiP observer after video loads
+            setTimeout(initPipObserver, 100);
         }
 
         function toggleLessonComplete(lessonId) {
@@ -2821,6 +2906,84 @@
                 document.getElementById('search-results').classList.remove('active');
             }
         });
+
+        // ========================================
+        // PICTURE-IN-PICTURE VIDEO
+        // ========================================
+        let pipObserver = null;
+
+        function initPipObserver() {
+            // Clean up existing observer
+            if (pipObserver) {
+                pipObserver.disconnect();
+            }
+
+            const videoContainer = document.querySelector('.video-container');
+            if (!videoContainer) return;
+
+            // Reset dismissed state for new lesson
+            state.pipDismissed = false;
+
+            pipObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (state.pipDismissed) return;
+
+                    const mainIframe = document.querySelector('.video-container iframe');
+                    if (!mainIframe) return; // Only show PiP if video is loaded
+
+                    if (!entry.isIntersecting) {
+                        showPip(mainIframe.src);
+                    } else {
+                        hidePip();
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            pipObserver.observe(videoContainer);
+        }
+
+        function showPip(videoSrc) {
+            const pipContainer = document.getElementById('pip-container');
+            const pipVideo = document.getElementById('pip-video');
+
+            if (!pipContainer || !videoSrc) return;
+
+            // Only create iframe if not already showing
+            if (!pipContainer.classList.contains('active')) {
+                pipVideo.innerHTML = `<iframe src="${videoSrc}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+            }
+
+            pipContainer.classList.add('active');
+        }
+
+        function hidePip() {
+            const pipContainer = document.getElementById('pip-container');
+            if (pipContainer) {
+                pipContainer.classList.remove('active');
+                // Clear iframe after animation to stop playback
+                setTimeout(() => {
+                    if (!pipContainer.classList.contains('active')) {
+                        const pipVideo = document.getElementById('pip-video');
+                        if (pipVideo) pipVideo.innerHTML = '';
+                    }
+                }, 300);
+            }
+        }
+
+        function closePip() {
+            state.pipDismissed = true;
+            hidePip();
+        }
+
+        function scrollToMainVideo() {
+            const videoContainer = document.querySelector('.video-container');
+            if (videoContainer) {
+                videoContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                hidePip();
+            }
+        }
 
         // ========================================
         // INITIALIZATION
