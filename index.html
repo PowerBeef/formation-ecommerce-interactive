@@ -15,7 +15,7 @@
             --bg-hover: #2d2d2d;
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
-            --text-muted: #666666;
+            --text-muted: #8a8a8a;
             --accent-blue: #3B82F6;
             --accent-blue-hover: #2563EB;
             --accent-green: #10B981;
@@ -513,6 +513,17 @@
             background: var(--accent-green);
             border-color: var(--accent-green);
             color: white;
+        }
+
+        .exercise-badge {
+            margin-left: auto;
+            font-size: 11px;
+            opacity: 0.7;
+            flex-shrink: 0;
+        }
+
+        .lesson-item:hover .exercise-badge {
+            opacity: 1;
         }
 
         /* Main Content */
@@ -1021,10 +1032,84 @@
             margin-top: 10px;
             font-size: 12px;
             color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .notes-status.saving {
+            color: var(--accent-blue);
         }
 
         .notes-status.saved {
             color: var(--accent-green);
+        }
+
+        .notes-status.warning {
+            color: var(--accent-orange);
+        }
+
+        /* Transcript Panel */
+        .transcript-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            margin-top: 20px;
+            max-height: 400px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .transcript-header {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            flex-shrink: 0;
+        }
+
+        .transcript-header input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .transcript-header input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .transcript-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0 8px;
+            transition: var(--transition);
+        }
+
+        .transcript-close:hover {
+            color: var(--text-primary);
+        }
+
+        #transcript-content {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .transcript-highlight {
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            padding: 2px 4px;
+            border-radius: 3px;
         }
 
         /* Navigation Buttons */
@@ -1470,10 +1555,10 @@
 <body>
     <div class="app-container">
         <!-- Sidebar Overlay -->
-        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+        <div class="sidebar-overlay" onclick="toggleSidebar()" aria-hidden="true"></div>
 
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Navigation du cours">
             <div class="sidebar-header">
                 <a href="#" class="logo" onclick="showDashboard()">
                     <div class="logo-icon">📚</div>
@@ -1510,13 +1595,13 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content">
-            <header class="header">
+        <main class="main-content" role="main" aria-label="Contenu principal">
+            <header class="header" role="banner">
                 <div class="header-left">
-                    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-                    <div class="search-box">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" class="search-input" placeholder="Rechercher une leçon..." id="search-input" oninput="handleSearch(this.value)">
+                    <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Ouvrir/fermer le menu" aria-expanded="false">☰</button>
+                    <div class="search-box" role="search">
+                        <span class="search-icon" aria-hidden="true">🔍</span>
+                        <input type="text" class="search-input" placeholder="Rechercher une leçon..." id="search-input" oninput="debouncedSearch(this.value)" aria-label="Rechercher une leçon">
                         <div class="search-results" id="search-results"></div>
                     </div>
                 </div>
@@ -1583,6 +1668,43 @@
     </div>
 
     <script>
+        // ========================================
+        // TRANSCRIPT MAP (video ID -> transcript filename)
+        // ========================================
+        const transcriptMap = {
+            'GYjzjHlaod0': 'GYjzjHlaod0_6H  FORMATION ECOMMERCE COMPLÈTE de 0 à ta 1ère ve.txt',
+            'ORxp10Ujlm8': 'ORxp10Ujlm8_How to create a successful e-commerce brand in 202.txt',
+            'K8sL9iC9jyk': 'K8sL9iC9jyk_862 hours of product research condensed into 23 mi.txt',
+            'bR08-Cidqx8': 'bR08-Cidqx8_27 minutes of PURE value to determine if your prod_whisper.txt',
+            'jrKPpgBW7j8': 'jrKPpgBW7j8_Comment connaître ton client mieux que tes concurr_whisper.txt',
+            'PFKZv5OcD6A': 'PFKZv5OcD6A_978 hours of competitive intelligence condensed in.txt',
+            'CetJSjR3B0M': 'CetJSjR3B0M_32 Minutes to Successfully Create Your First Succe.txt',
+            'XCpIHbp7YLE': 'XCpIHbp7YLE_How to create high-performing organic content for .txt',
+            'F_-DY_UXtKo': 'F_-DY_UXtKo_Comment créer des accroches impossible à scroller .txt',
+            'adcAy24qCIo': 'adcAy24qCIo_51 Minutes of PURE Value to Succeed in E-Commerce _whisper.txt',
+            'xGxYcbWPq6w': 'xGxYcbWPq6w_52 Min de PURE Valeur pour passer de 0 à 1ère vent.txt',
+            '6OPSuToFc9o': '6OPSuToFc9o_1h19 pour passer de 0 à 1ère vente E-commerce je c_whisper.txt',
+            'WH1Kmji0zMU': 'WH1Kmji0zMU_He earned 45000 at 19 thanks to e-commerce - The i.txt',
+            'AS7d1gP27R4': 'AS7d1gP27R4_From broke employee to 50000 in e-commerce - The i.txt',
+            's3hu7WdIOr4': 's3hu7WdIOr4_From 0 to 13500 in 5 months of e-commerce at age 4.txt',
+            'j6l_2Kig6Fg': 'j6l_2Kig6Fg_From 0 to 3000 in 3 weeks of organic e-commerce te.txt',
+            'lpsAclXJxFw': 'lpsAclXJxFw_1500 in 5 days without showing his face he explain.txt',
+            'eykj3-bQAEk': 'eykj3-bQAEk_How E-commerce Can Make You Poor.txt',
+            '6nmrqBgQnQw': '6nmrqBgQnQw_Why you should NOT listen to Yomi Denzel.txt',
+            'MohkR_vT0HM': 'MohkR_vT0HM_I paid 14000 for e-commerce coaching so you dont h.txt',
+            'cxp5Hq5FPVc': 'cxp5Hq5FPVc_I bought all the E-commerce training courses hones.txt',
+            'yaI299cHSFE': 'yaI299cHSFE_The difference between an amateur and a real e-com.txt',
+            'GOZ70cfrazo': 'GOZ70cfrazo_I answer all the questions of this e-commerce begi.txt',
+            'WZ5n5dTxwuA': 'WZ5n5dTxwuA_A beginner explains how he went from 0 to his firs.txt',
+            'l2PnZI1VgQ8': 'l2PnZI1VgQ8_CONFÉRENCE - Passer de 0 à 1ère marque à succès en.txt',
+            'E0WkbFcbEWA': 'E0WkbFcbEWA_Here is the Q4 strategy I use to go from 0 to 5000.txt',
+            'AtgKhgcdsXo': 'AtgKhgcdsXo_La stratégie qui permet à mes élèves de faire 10 0.txt',
+            'o-gQX4FQRPE': 'o-gQX4FQRPE_Everything an E-commerce Beginner Should Know Live.txt'
+        };
+
+        // Current transcript state
+        let currentTranscript = '';
+
         // ========================================
         // DATA
         // ========================================
@@ -2133,6 +2255,8 @@
             currentView: 'dashboard',
             currentLesson: null,
             timerSeconds: 0,
+            timerInterval: null,
+            timerRunning: false,
             searchQuery: '',
             settings: {
                 lightTheme: false,
@@ -2155,9 +2279,94 @@
             applyTheme();
         }
 
-        // Save state to localStorage
+        // Storage constants
+        const MAX_NOTE_LENGTH = 50000; // ~50KB per lesson
+        const STORAGE_WARNING_KB = 4500; // Warn at 4.5MB (localStorage limit is typically 5MB)
+
+        // Save state to localStorage with size management
         function saveState() {
-            localStorage.setItem('formation-ecom-state', JSON.stringify(state));
+            const serialized = JSON.stringify(state);
+            const sizeKB = new Blob([serialized]).size / 1024;
+
+            if (sizeKB > STORAGE_WARNING_KB) {
+                showStorageWarning(sizeKB);
+            }
+
+            try {
+                localStorage.setItem('formation-ecom-state', serialized);
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    showStorageError();
+                }
+            }
+        }
+
+        function showStorageWarning(sizeKB) {
+            // Only show warning once per session
+            if (state._storageWarningShown) return;
+            state._storageWarningShown = true;
+
+            const warning = document.createElement('div');
+            warning.className = 'storage-warning';
+            warning.innerHTML = `
+                <div style="position: fixed; bottom: 20px; right: 20px; background: var(--accent-orange); color: white; padding: 15px 20px; border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 10000; max-width: 300px;">
+                    <strong>⚠️ Stockage presque plein</strong>
+                    <p style="margin: 10px 0 0; font-size: 13px;">Vos notes utilisent ${Math.round(sizeKB)}KB. Pensez à exporter vos notes importantes.</p>
+                    <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: 5px; right: 10px; background: none; border: none; color: white; cursor: pointer; font-size: 18px;">×</button>
+                </div>
+            `;
+            document.body.appendChild(warning);
+            setTimeout(() => warning.remove(), 10000);
+        }
+
+        function showStorageError() {
+            const error = document.createElement('div');
+            error.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-secondary); padding: 30px; border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 10001; max-width: 400px; text-align: center;">
+                    <span style="font-size: 48px;">💾</span>
+                    <h3 style="margin: 15px 0;">Stockage plein!</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Impossible de sauvegarder. Exportez vos notes pour éviter toute perte de données.</p>
+                    <button onclick="this.parentElement.parentElement.remove()" class="btn btn-primary">Compris</button>
+                </div>
+            `;
+            document.body.appendChild(error);
+        }
+
+        // ========================================
+        // STUDY TIMER
+        // ========================================
+        function startTimer() {
+            if (state.timerRunning) return;
+            state.timerRunning = true;
+            state.timerInterval = setInterval(() => {
+                state.timerSeconds++;
+                updateTimerDisplay();
+                // Save every minute to persist progress
+                if (state.timerSeconds % 60 === 0) saveState();
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (!state.timerRunning) return;
+            state.timerRunning = false;
+            clearInterval(state.timerInterval);
+            state.timerInterval = null;
+            saveState();
+        }
+
+        function updateTimerDisplay() {
+            // Update dashboard timer display if visible
+            const timerElements = document.querySelectorAll('.stat-value');
+            timerElements.forEach(el => {
+                if (el.previousElementSibling && el.previousElementSibling.textContent.includes('⏱️')) {
+                    el.textContent = formatTime(state.timerSeconds);
+                }
+            });
+            // Update header dropdown timer
+            const dropdownTimer = document.querySelector('.dropdown-stat-value');
+            if (dropdownTimer && dropdownTimer.closest('.dropdown-stat')?.querySelector('.dropdown-stat-label')?.textContent.includes('Temps')) {
+                dropdownTimer.textContent = formatTime(state.timerSeconds);
+            }
         }
 
         // ========================================
@@ -2187,9 +2396,10 @@
                             ${phase.lessons.map(lesson => `
                                 <div class="lesson-item ${state.completedLessons.includes(lesson.id) ? 'completed' : ''} ${state.currentLesson === lesson.id ? 'active' : ''}"
                                      onclick="showLesson('${lesson.id}')"
-                                     title="${lesson.title}">
+                                     title="${lesson.title} (${lesson.duration})">
                                     <div class="lesson-checkbox">${state.completedLessons.includes(lesson.id) ? '✓' : ''}</div>
-                                    <span>${lesson.title.substring(0, 35)}${lesson.title.length > 35 ? '...' : ''}</span>
+                                    <span>${lesson.title.substring(0, 30)}${lesson.title.length > 30 ? '...' : ''}</span>
+                                    ${lesson.exercise ? '<span class="exercise-badge" title="Exercice disponible">📝</span>' : ''}
                                 </div>
                             `).join('')}
                         </div>
@@ -2239,6 +2449,7 @@
         function showDashboard() {
             state.currentView = 'dashboard';
             state.currentLesson = null;
+            stopTimer(); // Stop timer when leaving lesson
             saveState();
             renderSidebar();
 
@@ -2353,6 +2564,7 @@
             state.currentView = 'lesson';
             state.currentLesson = lessonId;
             saveState();
+            startTimer(); // Start tracking study time
             renderSidebar();
 
             // Find lesson
@@ -2413,10 +2625,24 @@
                             </div>
                         `}
                     </div>
-                    <div style="margin-top: 10px; text-align: center;">
+                    <div style="margin-top: 10px; text-align: center; display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
                         <a href="https://www.youtube.com/watch?v=${lesson.videoId}" target="_blank" rel="noopener" style="color: var(--accent-blue); text-decoration: none; font-size: 14px;">
-                            🔗 Regarder directement sur YouTube
+                            🔗 Regarder sur YouTube
                         </a>
+                        ${transcriptMap[lesson.videoId] ? `
+                            <button onclick="toggleTranscript('${lesson.videoId}')" class="btn btn-secondary" style="font-size: 13px; padding: 6px 12px;">
+                                📄 Transcription
+                            </button>
+                        ` : ''}
+                    </div>
+
+                    <div id="transcript-container" class="transcript-panel" style="display: none;">
+                        <div class="transcript-header">
+                            <input type="text" id="transcript-search" placeholder="Rechercher dans la transcription..."
+                                   oninput="debouncedTranscriptSearch(this.value)">
+                            <button onclick="closeTranscript()" class="transcript-close">✕</button>
+                        </div>
+                        <div id="transcript-content"></div>
                     </div>
 
                     <p class="lesson-description">${lesson.description}</p>
@@ -2486,24 +2712,55 @@
 
         function loadVideo(placeholder, videoId) {
             const container = placeholder.parentElement;
-            // Use youtube-nocookie.com for privacy-enhanced mode (fewer restrictions)
+
+            // Create iframe element for better error handling
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.allowFullscreen = true;
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.loading = 'lazy';
+
+            // Create fallback link
+            const fallbackDiv = document.createElement('div');
+            fallbackDiv.style.cssText = 'text-align: center; margin-top: 10px; font-size: 13px; color: var(--text-secondary);';
+            fallbackDiv.innerHTML = `
+                Si la vidéo ne se charge pas,
+                <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" style="color: var(--accent-blue);">
+                    cliquez ici pour la voir sur YouTube
+                </a>
+            `;
+
+            // Timeout fallback - YouTube iframes don't fire onerror reliably
+            let loaded = false;
+            const timeout = setTimeout(() => {
+                if (!loaded) {
+                    showVideoError(container, videoId);
+                }
+            }, 15000); // 15 second timeout
+
+            iframe.onload = () => {
+                loaded = true;
+                clearTimeout(timeout);
+                // Reinitialize PiP observer after video loads
+                setTimeout(initPipObserver, 100);
+            };
+
+            // Clear container and add new elements
+            container.innerHTML = '';
+            container.appendChild(iframe);
+            container.appendChild(fallbackDiv);
+        }
+
+        function showVideoError(container, videoId) {
             container.innerHTML = `
-                <iframe
-                    src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0"
-                    allowfullscreen
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    loading="lazy">
-                </iframe>
-                <div style="text-align: center; margin-top: 10px; font-size: 13px; color: var(--text-secondary);">
-                    Si la vidéo ne se charge pas,
-                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" style="color: var(--accent-blue);">
-                        cliquez ici pour la voir sur YouTube
+                <div class="video-error" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; background: var(--bg-tertiary); border-radius: var(--radius); text-align: center;">
+                    <span style="font-size: 48px; margin-bottom: 15px;">📺</span>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">Vidéo non disponible ou connexion lente</p>
+                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" class="btn btn-primary" style="text-decoration: none;">
+                        ▶️ Regarder sur YouTube
                     </a>
                 </div>
             `;
-
-            // Reinitialize PiP observer after video loads
-            setTimeout(initPipObserver, 100);
         }
 
         function toggleLessonComplete(lessonId) {
@@ -2518,16 +2775,35 @@
         }
 
         function saveNotes(lessonId) {
-            const notes = document.getElementById('lesson-notes').value;
+            let notes = document.getElementById('lesson-notes').value;
+            const status = document.getElementById('notes-status');
+
+            // Limit note length to prevent storage issues
+            if (notes.length > MAX_NOTE_LENGTH) {
+                notes = notes.substring(0, MAX_NOTE_LENGTH);
+                document.getElementById('lesson-notes').value = notes;
+                status.textContent = `⚠️ Note tronquée (max ${MAX_NOTE_LENGTH / 1000}K caractères)`;
+                status.classList.add('warning');
+                setTimeout(() => {
+                    status.classList.remove('warning');
+                }, 3000);
+            }
+
             state.notes[lessonId] = notes;
             saveState();
 
-            const status = document.getElementById('notes-status');
+            // Improved save feedback sequence
             status.textContent = 'Sauvegarde...';
-            status.classList.add('saved');
+            status.classList.add('saving');
             setTimeout(() => {
-                status.textContent = 'Notes sauvegardees ✓';
-            }, 500);
+                status.textContent = '✓ Sauvegardé';
+                status.classList.remove('saving');
+                status.classList.add('saved');
+                setTimeout(() => {
+                    status.textContent = 'Auto-sauvegarde activée';
+                    status.classList.remove('saved');
+                }, 2000);
+            }, 300);
         }
 
         function toggleExercise(exId) {
@@ -2547,6 +2823,7 @@
         function showTimeline() {
             state.currentView = 'timeline';
             state.currentLesson = null;
+            stopTimer(); // Stop timer when leaving lesson
             saveState();
             renderSidebar();
 
@@ -2594,6 +2871,7 @@
         function showResources() {
             state.currentView = 'resources';
             state.currentLesson = null;
+            stopTimer(); // Stop timer when leaving lesson
             saveState();
             renderSidebar();
 
@@ -2868,6 +3146,15 @@
         // ========================================
         // SEARCH
         // ========================================
+        // Debounce utility for search optimization
+        function debounce(fn, delay) {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => fn(...args), delay);
+            };
+        }
+
         function handleSearch(query) {
             state.searchQuery = query.toLowerCase();
             const resultsEl = document.getElementById('search-results');
@@ -2900,12 +3187,94 @@
             resultsEl.classList.add('active');
         }
 
+        // Create debounced version for input handler (200ms delay)
+        const debouncedSearch = debounce(handleSearch, 200);
+
         // Close search on click outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-box')) {
                 document.getElementById('search-results').classList.remove('active');
             }
         });
+
+        // ========================================
+        // TRANSCRIPT FEATURE
+        // ========================================
+        async function toggleTranscript(videoId) {
+            const container = document.getElementById('transcript-container');
+            const content = document.getElementById('transcript-content');
+            const searchInput = document.getElementById('transcript-search');
+
+            // Toggle visibility if already open
+            if (container.style.display !== 'none' && container.dataset.videoId === videoId) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.dataset.videoId = videoId;
+            container.style.display = 'block';
+            content.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted);">Chargement de la transcription...</p>';
+            searchInput.value = '';
+
+            const filename = transcriptMap[videoId];
+            if (!filename) {
+                content.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted);">📄 Transcription non disponible pour cette leçon</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`transcripts/${filename}`);
+                if (!response.ok) throw new Error('Transcript not found');
+                const text = await response.text();
+                currentTranscript = text;
+                content.innerHTML = formatTranscript(text);
+            } catch (e) {
+                content.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <p style="color: var(--text-muted); margin-bottom: 15px;">📄 Transcription non disponible</p>
+                        <p style="font-size: 13px; color: var(--text-muted);">La transcription n'a pas pu être chargée.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function closeTranscript() {
+            document.getElementById('transcript-container').style.display = 'none';
+            currentTranscript = '';
+        }
+
+        function formatTranscript(text) {
+            // Split into paragraphs and format
+            const paragraphs = text.split(/\n\n+/).filter(p => p.trim());
+            return paragraphs.map(p => `<p style="margin-bottom: 15px; line-height: 1.7;">${p.replace(/\n/g, ' ')}</p>`).join('');
+        }
+
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        const debouncedTranscriptSearch = debounce(searchTranscript, 200);
+
+        function searchTranscript(query) {
+            const content = document.getElementById('transcript-content');
+
+            if (!currentTranscript || !query.trim()) {
+                content.innerHTML = formatTranscript(currentTranscript);
+                return;
+            }
+
+            const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+            const highlighted = currentTranscript.replace(regex, '<mark class="transcript-highlight">$1</mark>');
+            content.innerHTML = formatTranscript(highlighted);
+
+            // Scroll to first match
+            setTimeout(() => {
+                const firstMatch = content.querySelector('.transcript-highlight');
+                if (firstMatch) {
+                    firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
 
         // ========================================
         // PICTURE-IN-PICTURE VIDEO
@@ -3020,8 +3389,52 @@
         // Run on load
         init();
 
-        // Keyboard navigation
+        // Keyboard navigation and shortcuts
         document.addEventListener('keydown', function(e) {
+            // Escape key - close open panels/modals
+            if (e.key === 'Escape') {
+                // Close transcript panel
+                const transcriptPanel = document.getElementById('transcript-container');
+                if (transcriptPanel && transcriptPanel.style.display !== 'none') {
+                    closeTranscript();
+                    return;
+                }
+
+                // Close search results
+                const searchResults = document.getElementById('search-results');
+                if (searchResults && searchResults.classList.contains('active')) {
+                    searchResults.classList.remove('active');
+                    document.getElementById('search-input').value = '';
+                    return;
+                }
+
+                // Close settings panel
+                const settingsPanel = document.getElementById('settings-panel');
+                if (settingsPanel && settingsPanel.classList.contains('open')) {
+                    settingsPanel.classList.remove('open');
+                    return;
+                }
+
+                // Close progress dropdown
+                const progressDropdown = document.getElementById('progress-dropdown');
+                if (progressDropdown && progressDropdown.classList.contains('open')) {
+                    progressDropdown.classList.remove('open');
+                    return;
+                }
+
+                // Close mobile sidebar
+                const sidebar = document.querySelector('.sidebar');
+                if (sidebar && sidebar.classList.contains('open')) {
+                    toggleSidebar();
+                    return;
+                }
+            }
+
+            // Arrow navigation for lessons (only when not in an input field)
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
             if (state.currentView === 'lesson' && state.currentLesson) {
                 const allLessons = coursData.phases.flatMap(p => p.lessons);
                 const currentIndex = allLessons.findIndex(l => l.id === state.currentLesson);
@@ -3030,6 +3443,18 @@
                     showLesson(allLessons[currentIndex - 1].id);
                 } else if (e.key === 'ArrowRight' && currentIndex < allLessons.length - 1) {
                     showLesson(allLessons[currentIndex + 1].id);
+                }
+            }
+
+            // Quick navigation shortcuts (Ctrl/Cmd + number)
+            if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '9') {
+                e.preventDefault();
+                const phaseIndex = parseInt(e.key) - 1;
+                if (phaseIndex < coursData.phases.length) {
+                    const firstLesson = coursData.phases[phaseIndex].lessons[0];
+                    if (firstLesson) {
+                        showLesson(firstLesson.id);
+                    }
                 }
             }
         });
