@@ -7,9 +7,15 @@ Tests all features of formation-interactive.html using Playwright
 from playwright.sync_api import sync_playwright
 import os
 import time
+from pathlib import Path
 
-HTML_FILE = "/Users/patricedery/Coding Projects/Formation Samir/formation-interactive.html"
-SCREENSHOTS_DIR = "/Users/patricedery/Coding Projects/Formation Samir/test_screenshots"
+REPO_DIR = Path(__file__).resolve().parent
+HTML_FILE = str(REPO_DIR / "formation-interactive.html")
+SCREENSHOTS_DIR = str(REPO_DIR / "test_screenshots")
+
+# Defaults: run headless for reliability; set HEADLESS=0 for interactive mode.
+HEADLESS = os.environ.get("HEADLESS", "1") != "0"
+SLOW_MO = int(os.environ.get("SLOW_MO", "0" if HEADLESS else "500"))
 
 def ensure_dir(path):
     os.makedirs(path, exist_ok=True)
@@ -17,9 +23,25 @@ def ensure_dir(path):
 def run_tests():
     ensure_dir(SCREENSHOTS_DIR)
 
+    def parse_hhmmss(value: str) -> int:
+        parts = value.strip().split(":")
+        if len(parts) != 3:
+            raise ValueError(f"Unexpected time format: {value!r}")
+        h, m, s = (int(p) for p in parts)
+        return h * 3600 + m * 60 + s
+
+    def get_dashboard_study_seconds(page) -> int:
+        timer_card = page.locator(
+            ".stat-card",
+            has=page.locator(".stat-label", has_text="Temps d'étude total"),
+        )
+        assert timer_card.count() == 1, "Expected a single study-time stat card on dashboard"
+        raw = timer_card.locator(".stat-value").inner_text()
+        return parse_hhmmss(raw)
+
     with sync_playwright() as p:
-        # Launch browser in headed mode so user can see the testing
-        browser = p.chromium.launch(headless=False, slow_mo=500)
+        # Launch browser; set HEADLESS=0 to watch the run.
+        browser = p.chromium.launch(headless=HEADLESS, slow_mo=SLOW_MO)
         context = browser.new_context(viewport={'width': 1400, 'height': 900})
         page = context.new_page()
 
@@ -38,8 +60,12 @@ def run_tests():
         print("\n[TEST 2] Checking header elements...")
         logo = page.locator(".logo-text")
         assert logo.is_visible(), "Logo should be visible"
-        timer = page.locator("#timer-display")
-        assert timer.is_visible(), "Timer should be visible"
+        search = page.locator("#search-input")
+        assert search.is_visible(), "Search input should be visible"
+        progress = page.locator("#progress-indicator")
+        assert progress.is_visible(), "Progress indicator should be visible"
+        settings = page.locator(".settings-button")
+        assert settings.is_visible(), "Settings button should be visible"
         print("  ✅ Header elements present")
 
         # Test 3: Test sidebar navigation
@@ -47,8 +73,8 @@ def run_tests():
         phases = page.locator(".phase-header")
         phase_count = phases.count()
         print(f"  Found {phase_count} phases in sidebar")
-        assert phase_count == 9, f"Expected 9 phases, found {phase_count}"
-        print("  ✅ All 9 phases present in sidebar")
+        assert phase_count == 10, f"Expected 10 phases, found {phase_count}"
+        print("  ✅ All 10 phases present in sidebar")
 
         # Test 4: Expand a phase and click a lesson
         print("\n[TEST 4] Expanding Phase 1 and clicking first lesson...")
@@ -89,7 +115,7 @@ def run_tests():
 
         # Test 7: Mark lesson as complete
         print("\n[TEST 7] Testing progress tracking (mark lesson complete)...")
-        complete_btn = page.locator("text=Marquer comme termine")
+        complete_btn = page.locator("button:has-text('Marquer comme')")
         if complete_btn.count() > 0:
             complete_btn.first.click()
             page.wait_for_timeout(500)
@@ -100,7 +126,7 @@ def run_tests():
 
         # Test 8: Navigate to Exercises
         print("\n[TEST 8] Testing Exercises section...")
-        exercises_nav = page.locator("text=Exercices")
+        exercises_nav = page.locator('.nav-item[data-view="exercises"]')
         if exercises_nav.count() > 0:
             exercises_nav.first.click()
             page.wait_for_timeout(500)
@@ -120,7 +146,7 @@ def run_tests():
 
         # Test 9: Navigate to Timeline
         print("\n[TEST 9] Testing Timeline section...")
-        timeline_nav = page.locator("text=Planning")
+        timeline_nav = page.locator('.nav-item[data-view="timeline"]')
         if timeline_nav.count() > 0:
             timeline_nav.first.click()
             page.wait_for_timeout(500)
@@ -134,7 +160,7 @@ def run_tests():
 
         # Test 10: Navigate to Resources
         print("\n[TEST 10] Testing Resources section...")
-        resources_nav = page.locator("text=Ressources")
+        resources_nav = page.locator('.nav-item[data-view="resources"]')
         if resources_nav.count() > 0:
             resources_nav.first.click()
             page.wait_for_timeout(500)
@@ -144,27 +170,39 @@ def run_tests():
             print("  ⚠️ Resources nav not found")
 
         # Test 11: Test study timer
-        print("\n[TEST 11] Testing study timer...")
-        timer_btn = page.locator("#timer-btn")
-        if timer_btn.is_visible():
-            timer_btn.click()
-            page.wait_for_timeout(2000)  # Let timer run for 2 seconds
-            timer_value = page.locator("#timer-value").inner_text()
-            print(f"  Timer value: {timer_value}")
-            timer_btn.click()  # Stop timer
-            print("  ✅ Timer start/stop works")
+        print("\n[TEST 11] Testing study timer accumulation...")
+        dashboard_nav = page.locator('.nav-item[data-view="dashboard"]')
+        if dashboard_nav.count() > 0:
+            dashboard_nav.first.click()
+            page.wait_for_timeout(400)
+            before_seconds = get_dashboard_study_seconds(page)
+
+            # Open a lesson and let the timer run briefly.
+            phases.first.click()
+            page.wait_for_timeout(300)
+            lessons = page.locator(".lesson-item")
+            if lessons.count() > 0:
+                lessons.first.click()
+                page.wait_for_timeout(2500)
+
+            dashboard_nav.first.click()
+            page.wait_for_timeout(400)
+            after_seconds = get_dashboard_study_seconds(page)
+            assert after_seconds >= before_seconds + 2, "Study time should increase while viewing a lesson"
+            print(f"  ✅ Study time increased: {before_seconds}s → {after_seconds}s")
         else:
-            print("  ⚠️ Timer button not found")
+            print("  ⚠️ Dashboard nav not found")
 
         # Test 12: Test search functionality
         print("\n[TEST 12] Testing search functionality...")
         search_input = page.locator("#search-input")
         if search_input.is_visible():
-            search_input.fill("produit")
+            search_input.fill("formation")
             page.wait_for_timeout(500)
             page.screenshot(path=f"{SCREENSHOTS_DIR}/08_search.png", full_page=True)
-            search_results = page.locator(".search-result")
-            print(f"  Found {search_results.count()} search results for 'produit'")
+            search_results = page.locator(".search-result-item")
+            assert search_results.count() > 0, "Expected at least one search result"
+            print(f"  Found {search_results.count()} search results for 'formation'")
             search_input.fill("")  # Clear search
             print("  ✅ Search functionality works")
         else:

@@ -66,9 +66,9 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 
 | # | Video | Duree | Lien | Ce que tu vas apprendre |
 |---|-------|-------|------|-------------------------|
-| 1 | **6H - Formation E-commerce Complete** | 5h59 | [Regarder](https://www.youtube.com/watch?v=GYjzjHlaod0) | Vue d'ensemble complete de A a Z |
+| 1 | **6H - Formation E-commerce Complete** | 5:59:14 | [Regarder](https://www.youtube.com/watch?v=GYjzjHlaod0) | Vue d'ensemble complete de A a Z |
 | 2 | **Comment creer une marque E-commerce a succes en 2026** | 38:10 | [Regarder](https://www.youtube.com/watch?v=ORxp10Ujlm8) | Roadmap complete actualisee |
-| 3 | **Comment Devenir un Maitre en E-Commerce en 2026** | ~25 min | [Regarder](https://www.youtube.com/watch?v=w3zLPz78Xfo) | Mindset et vision long terme |
+| 3 | **Comment Devenir un Maitre en E-Commerce en 2026** | 48:50 | [Regarder](https://www.youtube.com/watch?v=T4TRD4OT8o4) | Mindset et vision long terme |
 
 ## Phase 2: Recherche Produit (Semaine 2-3)
 
@@ -78,7 +78,7 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 |---|-------|-------|------|-------------------------|
 | 4 | **862 heures de recherche produit condensees en 23 minutes** | 23:33 | [Regarder](https://www.youtube.com/watch?v=K8sL9iC9jyk) | Methodologie complete de recherche |
 | 5 | **27 minutes pour determiner si ton produit a du potentiel** | 27:28 | [Regarder](https://www.youtube.com/watch?v=bR08-Cidqx8) | Validation de produit |
-| 6 | **Voici comment Reussir la recherche produit** | ~45 min | [Regarder](https://www.youtube.com/watch?v=IvxMM-1nq04) | Methodes avancees |
+| 6 | **Voici comment Reussir la recherche produit** | 31:24 | [Regarder](https://www.youtube.com/watch?v=vuN_piY1Pw8) | Methodes avancees |
 
 ## Phase 3: Connaissance Client et Positionnement (Semaine 3-4)
 
@@ -88,7 +88,7 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 |---|-------|-------|------|-------------------------|
 | 7 | **Comment connaitre ton client mieux que tes concurrents** | 27:53 | [Regarder](https://www.youtube.com/watch?v=jrKPpgBW7j8) | Avatar client et recherche |
 | 8 | **978 heures de veille concurrentielle condensees en 49 minutes** | 49:19 | [Regarder](https://www.youtube.com/watch?v=PFKZv5OcD6A) | Analyse de la concurrence |
-| 9 | **Voici comment etre DIFFERENT en E-commerce** | ~15 min | [Regarder](https://www.youtube.com/watch?v=w9y3nfQ26D8) | Strategies de differenciation |
+| 9 | **Voici comment etre DIFFERENT en E-commerce** | 16:24 | [Regarder](https://www.youtube.com/watch?v=Nje_okWBlLk) | Strategies de differenciation |
 
 ## Phase 4: Site Web et Conversion (Semaine 4-5)
 
@@ -97,7 +97,7 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 | # | Video | Duree | Lien | Ce que tu vas apprendre |
 |---|-------|-------|------|-------------------------|
 | 10 | **32 Minutes pour reussir ton premier site E-commerce** | 32:36 | [Regarder](https://www.youtube.com/watch?v=CetJSjR3B0M) | Creation site optimise |
-| 11 | **34 min pour ENFIN Reussir son Site E-Commerce** | ~35 min | [Regarder](https://www.youtube.com/watch?v=U3D3HFDj5xk) | Optimisation conversion |
+| 11 | **34 min pour ENFIN Reussir son Site E-Commerce** | 34:46 | [Regarder](https://www.youtube.com/watch?v=uUY_rfUo4Ak) | Optimisation conversion |
 
 ## Phase 5: Marketing Organique (Semaine 5-7)
 
@@ -107,8 +107,8 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 |---|-------|-------|------|-------------------------|
 | 12 | **Comment creer du contenu organique performant (Masterclass)** | 36:48 | [Regarder](https://www.youtube.com/watch?v=XCpIHbp7YLE) | Process complet de creation |
 | 13 | **Comment creer des accroches impossible a scroller** | 35:37 | [Regarder](https://www.youtube.com/watch?v=F_-DY_UXtKo) | Maitriser les hooks |
-| 14 | **Reussir en Organique E-commerce Etape par Etape** | ~40 min | [Regarder](https://www.youtube.com/watch?v=HzKL8QHk4T4) | Guide pas a pas |
-| 15 | **47 Minutes de FULL Valeur pour Reussir en Organique** | ~47 min | [Regarder](https://www.youtube.com/watch?v=VCgWq-EfRTE) | Strategies avancees |
+| 14 | **Reussir en Organique E-commerce Etape par Etape** | 46:16 | [Regarder](https://www.youtube.com/watch?v=hrJTlRKivlM) | Guide pas a pas |
+| 15 | **47 Minutes de FULL Valeur pour Reussir en Organique** | 47:52 | [Regarder](https://www.youtube.com/watch?v=tdIk-WnKIYQ) | Strategies avancees |
 
 ## Phase 6: Testing et Optimisation (Semaine 7-8)
 
@@ -116,9 +116,9 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 
 | # | Video | Duree | Lien | Ce que tu vas apprendre |
 |---|-------|-------|------|-------------------------|
-| 16 | **Voici comment reussir tous vos testings sans ads** | ~55 min | [Regarder](https://www.youtube.com/watch?v=1iZ2p3-dIYI) | Process de testing |
-| 17 | **31 min pour enfin reussir tous vos testings** | ~31 min | [Regarder](https://www.youtube.com/watch?v=zBM6aHE5xRM) | Diagnostic et correction |
-| 18 | **51 Minutes of PURE Value to Succeed in E-Commerce** | ~51 min | [Regarder](https://www.youtube.com/watch?v=adcAy24qCIo) | Coaching live complet |
+| 16 | **Voici comment reussir tous vos testings sans ads** | 44:46 | [Regarder](https://www.youtube.com/watch?v=JGjjs9FdQLU) | Process de testing |
+| 17 | **31 min pour enfin reussir tous vos testings** | 31:57 | [Regarder](https://www.youtube.com/watch?v=WRec6Zq6K6s) | Diagnostic et correction |
+| 18 | **51 Minutes of PURE Value to Succeed in E-Commerce** | 51:18 | [Regarder](https://www.youtube.com/watch?v=adcAy24qCIo) | Coaching live complet |
 
 ## Phase 7: Coaching Live et Cas Pratiques (En continu)
 
@@ -127,9 +127,9 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 | # | Video | Duree | Lien | Apprentissage cle |
 |---|-------|-------|------|-------------------|
 | 19 | **52 Min de PURE Valeur pour passer de 0 a 1ere vente** | 52:47 | [Regarder](https://www.youtube.com/watch?v=xGxYcbWPq6w) | Coaching live d'un debutant |
-| 20 | **1h12 pour reussir vos testings E-commerce** | ~72 min | [Regarder](https://www.youtube.com/watch?v=26W7VYsjb3w) | Session coaching complete |
-| 21 | **1h19 pour passer de 0 a 1ere vente** | ~79 min | [Regarder](https://www.youtube.com/watch?v=6OPSuToFc9o) | Parcours complet |
-| 22 | **J'analyse les boutiques de debutants** | ~20 min | [Regarder](https://www.youtube.com/watch?v=2v4c5oZAIXg) | Audit de sites |
+| 20 | **1h12 pour reussir vos testings E-commerce** | 1:12:48 | [Regarder](https://www.youtube.com/watch?v=Lm-F1iFhC3Y) | Session coaching complete |
+| 21 | **1h19 pour passer de 0 a 1ere vente** | 1:19:36 | [Regarder](https://www.youtube.com/watch?v=6OPSuToFc9o) | Parcours complet |
+| 22 | **J'analyse les boutiques de debutants** | 37:04 | [Regarder](https://www.youtube.com/watch?v=y1hOO8qWHDY) | Audit de sites |
 
 ## Phase 8: Temoignages et Success Stories
 
@@ -142,8 +142,8 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 | 25 | **De 0EUR a 13 500EUR en 5 mois a 40 ans** | 49:47 | [Regarder](https://www.youtube.com/watch?v=s3hu7WdIOr4) | Jamais trop tard |
 | 26 | **De 0 a +3000EUR en 3 semaines** | 26:17 | [Regarder](https://www.youtube.com/watch?v=j6l_2Kig6Fg) | Resultats rapides |
 | 27 | **1500EUR en 5 jours sans montrer son visage** | 26:15 | [Regarder](https://www.youtube.com/watch?v=lpsAclXJxFw) | Sans face cam |
-| 28 | **De 0 a 15 000EUR en 3 mois** | ~58 min | [Regarder](https://www.youtube.com/watch?v=8qYcGTJNYrI) | Success story |
-| 29 | **POV: je suis passe de 0 a 201 381EUR en 6 mois** | ~28 min | [Regarder](https://www.youtube.com/watch?v=XJVaRc8ZWYc) | Cas d'etude |
+| 28 | **De 0 a 15 000EUR en 3 mois** | 58:05 | [Regarder](https://www.youtube.com/watch?v=MWQ9f8Hymcc) | Success story |
+| 29 | **POV: je suis passe de 0 a 201 381EUR en 6 mois** | 26:15 | [Regarder](https://www.youtube.com/watch?v=ol_XCtVagpU) | Cas d'etude |
 
 ## Videos Bonus: Mindset et Erreurs a Eviter
 
@@ -154,8 +154,29 @@ COMPETENCES --> BONNES DECISIONS --> BONNES ACTIONS --> ARGENT
 | 32 | **J'ai paye 14 000EUR pour un coaching e-commerce** | 19:51 | [Regarder](https://www.youtube.com/watch?v=MohkR_vT0HM) | Retour d'experience |
 | 33 | **J'ai achete toutes les formations E-commerce** | 13:12 | [Regarder](https://www.youtube.com/watch?v=cxp5Hq5FPVc) | Review honnete |
 | 34 | **La difference entre amateur et vrai e-commercant** | 22:40 | [Regarder](https://www.youtube.com/watch?v=yaI299cHSFE) | Mindset pro |
-| 35 | **Je classe les pires conseils pour debutants** | ~25 min | [Regarder](https://www.youtube.com/watch?v=3Fk7tXYdVEw) | Erreurs communes |
-| 36 | **27 Minutes pour ENFIN Arreter d'echouer** | ~27 min | [Regarder](https://www.youtube.com/watch?v=TkDNP9QWWRI) | Diagnostic echecs |
+| 35 | **Je classe les pires conseils pour debutants** | 18:53 | [Regarder](https://www.youtube.com/watch?v=modhqjHuPX0) | Erreurs communes |
+| 36 | **27 Minutes pour ENFIN Arreter d'echouer** | 27:35 | [Regarder](https://www.youtube.com/watch?v=JSFeCRYg_O4) | Diagnostic echecs |
+
+## Phase 9: Approfondissement (Semaine 9-12) — Bonus
+
+**Objectif**: Approfondir les strategies (execution, scaling, saisonnalite) et apprendre via cas pratiques.
+
+| # | Video | Duree | Lien | Ce que tu vas apprendre |
+|---|-------|-------|------|-------------------------|
+| 37 | **Everything an E-commerce Beginner Should Know (Live Coaching)** | 23:49 | [Regarder](https://www.youtube.com/watch?v=o-gQX4FQRPE) | Coaching live debutant, priorites |
+| 38 | **Reussir la recherche produit (Debutant)** | 21:09 | [Regarder](https://www.youtube.com/watch?v=ZnXEx7HsqKs) | Recherche produit debutant (guide complet) |
+| 39 | **52 min to launch a successful e-commerce brand** | 52:45 | [Regarder](https://www.youtube.com/watch?v=cIYX1PW6l1w) | Roadmap de lancement sans dispersion |
+| 40 | **Strategie 0 → 10 000€ en 150 jours (sans Ads)** | 1:17:27 | [Regarder](https://www.youtube.com/watch?v=AtgKhgcdsXo) | Roadmap + execution sur 150 jours |
+| 41 | **Generate +10,000€/month in 150 days (coaching)** | 39:00 | [Regarder](https://www.youtube.com/watch?v=7oKaLNMRjJE) | Plan 150 jours, metriques, erreurs |
+| 42 | **41 Minutes de valeur INTENSE (0 → 10k/mois)** | 41:52 | [Regarder](https://www.youtube.com/watch?v=7lJpeplKlHA) | Principes et systemes pour accelerer |
+| 43 | **223 722€ en 9 mois: strategie A a Z (2025)** | 40:33 | [Regarder](https://www.youtube.com/watch?v=GAUH_gtzvNQ) | Strategie complete + lecons reutilisables |
+| 44 | **Comment faire 60 000€/mois en E-commerce (2025)** | 31:46 | [Regarder](https://www.youtube.com/watch?v=_ia0V0Wb7G0) | Scaling: systemes, process, offre, retention |
+| 45 | **Q4 Strategy (0 → 50,000€) (2025)** | 29:51 | [Regarder](https://www.youtube.com/watch?v=E0WkbFcbEWA) | Saisonnalite, offre, stock, calendrier |
+| 46 | **CONFERENCE: Passer de 0 a 1ere marque a succes** | 1:34:18 | [Regarder](https://www.youtube.com/watch?v=l2PnZI1VgQ8) | Conference long format, vision globale |
+| 47 | **3 Etapes pour passer de 0 a 97 130€ (2025)** | 8:37 | [Regarder](https://www.youtube.com/watch?v=M7IVwgXVa1M) | Resume des 3 etapes qui comptent |
+| 48 | **Q&A: Everything for an E-commerce beginner** | 51:43 | [Regarder](https://www.youtube.com/watch?v=GOZ70cfrazo) | Questions/reponses (blocages debutants) |
+| 49 | **Debutant: de 0 a 1ere vente (temoignage)** | 31:25 | [Regarder](https://www.youtube.com/watch?v=WZ5n5dTxwuA) | Parcours debutant + apprentissages |
+| 50 | **De salarie a 10 000€/mois (histoire)** | 1:04:54 | [Regarder](https://www.youtube.com/watch?v=4OFBkYphTnc) | Success story + systeme mis en place |
 
 ---
 
@@ -906,18 +927,22 @@ _________________________________________________
 
 ---
 
-## Exercice Recap: Planning de Lancement 8 Semaines
+## Exercice Recap: Planning de Lancement 12 Semaines
 
 | Semaine | Objectif | Actions | Livrable |
 |---------|----------|---------|----------|
-| 1 | Recherche produit | Exercice 1: Brainstorming | 3 produits potentiels valides |
-| 2 | Sourcing | Exercice 2: Contact fournisseurs | Fournisseur selectionne |
-| 3 | Connaissance cliente | Exercice 3: Questionnaire | Document avatar client |
-| 4 | Veille concurrentielle | Exercice 4: Analyse concurrents | Tableau comparatif + differenciation |
-| 5 | Creation site | Shopify/WooCommerce | Site live avec les 6 elements |
-| 6 | Veille contenu | Exercice 5: 50 contenus analyses | Tableau veille rempli |
-| 7 | Production contenu | Exercice 6: 10-15 videos | Stock de contenus prets |
-| 8 | Lancement testing | Publication quotidienne | Premieres ventes! |
+| 1 | Fondations & Roadmap | Exercice 8: Plan 12 semaines + KPI | Plan + KPI de depart |
+| 2 | Recherche produit | Exercice 1: Brainstorming + scorecard | Top 3 produits short-listes |
+| 3 | Sourcing & validation | Exercice 2: Shortlist + echantillons | 2 fournisseurs + plan echantillons |
+| 4 | Connaissance cliente | Exercice 3: Questionnaire + entretiens | Avatar client + insights |
+| 5 | Differenciation & offre | Exercice 11: Positionnement + offre | Positionnement + offre claire |
+| 6 | Creation du site (CRO) | Exercice 7 + 12: Audit + checklist page produit | Site live + checklist CRO |
+| 7 | Systeme de contenu | Exercice 5 + 13: Veille + dashboard | 50 analyses + 10 angles |
+| 8 | Production contenu | Exercice 6 + 14: Scripts + batch | 10-15 videos pretes |
+| 9 | Testing organique | Exercice 15: Plan de testing + metriques | Plan tests + KPI tracking |
+| 10 | Retention | 3 flows email + FAQ + politique retours | Flows + FAQ + politique |
+| 11 | Optimisation | Analyse data + iteration hooks/offre/site | Amelioration CTR/CVR |
+| 12 | Scaling & saisonnalite | Plan Q4 + stock + calendrier + SOP | Plan scaling + SOP |
 
 ---
 

@@ -24,11 +24,21 @@
             --accent-red: #EF4444;
             --accent-purple: #8B5CF6;
             --border-color: #333333;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.45);
             --radius: 12px;
             --radius-sm: 8px;
-            --transition: all 0.3s ease;
+            --transition: 180ms ease;
+
+            /* Spacing & layout */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-7: 32px;
+            --content-max: 1160px;
         }
 
         /* Light theme variables */
@@ -258,6 +268,9 @@
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         /* ========================================
@@ -346,6 +359,64 @@
             transition: width 0.5s ease;
         }
 
+        .sidebar-continue {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .sidebar-continue-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .sidebar-continue-button {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        .sidebar-continue-button:hover {
+            background: var(--bg-hover);
+        }
+
+        .sidebar-continue-title {
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sidebar-continue-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sidebar-continue-arrow {
+            font-size: 18px;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
         /* Navigation */
         .nav-section {
             padding: 15px 0;
@@ -398,6 +469,11 @@
         }
 
         .nav-item.completed .nav-item-badge {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .nav-item-badge.completed {
             background: var(--accent-green);
             color: white;
         }
@@ -538,9 +614,10 @@
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border-color);
             padding: 15px 30px;
-            display: flex;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
             align-items: center;
-            justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 50;
@@ -549,7 +626,32 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .header-center {
+            min-width: 0;
+            text-align: center;
+        }
+
+        .header-title {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-subtitle {
+            margin-top: 2px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .menu-toggle {
@@ -601,8 +703,9 @@
             align-items: center;
             gap: 10px;
             background: var(--bg-tertiary);
-            padding: 8px 15px;
-            border-radius: var(--radius-sm);
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
             cursor: pointer;
             transition: var(--transition);
         }
@@ -613,8 +716,8 @@
 
         .progress-ring {
             position: relative;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
         }
 
         .progress-ring svg {
@@ -645,7 +748,7 @@
             color: var(--text-primary);
         }
 
-        .progress-label {
+        .progress-indicator-label {
             font-size: 13px;
             color: var(--text-secondary);
         }
@@ -776,10 +879,12 @@
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
-            border: none;
+            border: 1px solid transparent;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            line-height: 1;
+            text-decoration: none;
         }
 
         .btn-primary {
@@ -813,8 +918,49 @@
         /* Content Area */
         .content-area {
             padding: 30px;
-            max-width: 1200px;
+            max-width: var(--content-max);
             margin: 0 auto;
+        }
+
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        /* Page headers */
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+
+        .page-header-left {
+            min-width: 0;
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: 28px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .page-subtitle {
+            margin: 6px 0 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 70ch;
+        }
+
+        .page-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         /* Dashboard View */
@@ -834,8 +980,8 @@
         }
 
         .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            transform: none;
+            box-shadow: var(--shadow);
         }
 
         .stat-icon {
@@ -994,7 +1140,26 @@
             align-items: center;
             gap: 6px;
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 13px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 6px 10px;
+            border-radius: 999px;
+        }
+
+        .meta-item.meta-success {
+            color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.12);
+            border-color: rgba(16, 185, 129, 0.35);
+        }
+
+        .lesson-links {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
         }
 
         .lesson-description {
@@ -1283,6 +1448,214 @@
             border-top: 1px solid var(--border-color);
         }
 
+        /* Guides & Templates */
+        .guide-details {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .guide-details summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .guide-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .guide-toggle {
+            color: var(--text-muted);
+            font-size: 13px;
+            user-select: none;
+        }
+
+        .guide-details[open] .guide-toggle {
+            color: var(--text-secondary);
+        }
+
+        .guide-body {
+            padding: 22px;
+        }
+
+        .guide-intro {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .guide-section {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+
+        .guide-section summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        body.light-theme .guide-section summary {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .guide-section summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .guide-section-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .guide-section-body {
+            padding: 16px;
+        }
+
+        .guide-section-body p {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .guide-bullets {
+            margin: 10px 0 0;
+            padding-left: 18px;
+            color: var(--text-secondary);
+        }
+
+        .guide-bullets li {
+            margin: 8px 0;
+        }
+
+        .checklist {
+            margin-top: 12px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checklist-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .checklist-checkbox {
+            width: 20px;
+            height: 20px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--transition);
+            font-size: 12px;
+        }
+
+        .checklist-checkbox.checked {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: white;
+        }
+
+        .checklist-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .template-wrap {
+            margin-top: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
+        .template-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        body.light-theme .template-header {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .template-title {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .template-block {
+            margin: 0;
+            padding: 14px;
+            background: var(--bg-tertiary);
+            overflow-x: auto;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .btn-copy {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 7px 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+            background: var(--bg-hover);
+        }
+
         .lesson-exercise h3 {
             margin-bottom: 20px;
             font-size: 18px;
@@ -1470,12 +1843,30 @@
                 gap: 10px;
             }
 
+            .header-center {
+                display: none;
+            }
+
             .timer-display span:not(:first-child) {
                 display: none;
             }
 
             .content-area {
                 padding: 20px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-4);
+            }
+
+            .page-actions {
+                justify-content: flex-start;
+            }
+
+            .page-title {
+                font-size: 22px;
             }
 
             .dashboard-grid {
@@ -1605,15 +1996,39 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="global-progress-bar" style="width: 0%"></div>
                 </div>
+                <div class="sidebar-continue" id="sidebar-continue" style="display: none;">
+                    <div class="sidebar-continue-label">Prochaine leçon</div>
+                    <button class="sidebar-continue-button" id="sidebar-continue-btn" onclick="continueNextLesson()">
+                        <div style="min-width: 0;">
+                            <div class="sidebar-continue-title" id="sidebar-continue-title"></div>
+                            <div class="sidebar-continue-meta" id="sidebar-continue-meta"></div>
+                        </div>
+                        <div class="sidebar-continue-arrow">→</div>
+                    </button>
+                </div>
             </div>
 
             <nav class="nav-section">
                 <div class="nav-section-title">Menu Principal</div>
-                <div class="nav-item" onclick="showTimeline()">
-                    <span class="nav-item-icon">📅</span>
-                    <span>Planning 8 semaines</span>
+                <div class="nav-item" data-view="dashboard" onclick="showDashboard()">
+                    <span class="nav-item-icon">🏠</span>
+                    <span>Tableau de bord</span>
                 </div>
-                <div class="nav-item" onclick="showResources()">
+                <div class="nav-item" data-view="timeline" onclick="showTimeline()">
+                    <span class="nav-item-icon">📅</span>
+                    <span>Planning (12 semaines)</span>
+                </div>
+                <div class="nav-item" data-view="exercises" onclick="showExercises()">
+                    <span class="nav-item-icon">📝</span>
+                    <span>Exercices</span>
+                    <span class="nav-item-badge" id="nav-badge-exercises">0</span>
+                </div>
+                <div class="nav-item" data-view="guides" onclick="showGuides()">
+                    <span class="nav-item-icon">🧩</span>
+                    <span>Guides & Templates</span>
+                    <span class="nav-item-badge" id="nav-badge-guides">0</span>
+                </div>
+                <div class="nav-item" data-view="resources" onclick="showResources()">
                     <span class="nav-item-icon">🔗</span>
                     <span>Ressources</span>
                 </div>
@@ -1636,6 +2051,10 @@
                         <div class="search-results" id="search-results"></div>
                     </div>
                 </div>
+                <div class="header-center" aria-live="polite">
+                    <div class="header-title" id="header-title">Tableau de bord</div>
+                    <div class="header-subtitle" id="header-subtitle">Formation E-commerce Organique</div>
+                </div>
                 <div class="header-right">
                     <div class="progress-indicator" id="progress-indicator" onclick="toggleProgressDropdown(event)">
                         <div class="progress-ring">
@@ -1645,7 +2064,7 @@
                             </svg>
                             <span class="progress-text" id="progress-text">0%</span>
                         </div>
-                        <span class="progress-label">Progression</span>
+                        <span class="progress-indicator-label">Progression</span>
                         <span class="dropdown-arrow">▼</span>
                     </div>
                     <div class="progress-dropdown" id="progress-dropdown">
@@ -1705,32 +2124,54 @@
         const transcriptMap = {
             'GYjzjHlaod0': 'GYjzjHlaod0_6H  FORMATION ECOMMERCE COMPLÈTE de 0 à ta 1ère ve.txt',
             'ORxp10Ujlm8': 'ORxp10Ujlm8_How to create a successful e-commerce brand in 202.txt',
+            'T4TRD4OT8o4': 'T4TRD4OT8o4_Comment Devenir un Maître en E-Commerce en 2026_whisper.txt',
             'K8sL9iC9jyk': 'K8sL9iC9jyk_862 hours of product research condensed into 23 mi.txt',
             'bR08-Cidqx8': 'bR08-Cidqx8_27 minutes of PURE value to determine if your prod_whisper.txt',
+            'vuN_piY1Pw8': 'vuN_piY1Pw8_Voici Comment Réussir la Recherche Produit en E-Co_whisper.txt',
             'jrKPpgBW7j8': 'jrKPpgBW7j8_Comment connaître ton client mieux que tes concurr_whisper.txt',
             'PFKZv5OcD6A': 'PFKZv5OcD6A_978 hours of competitive intelligence condensed in.txt',
+            'Nje_okWBlLk': 'Nje_okWBlLk_Voici comment être DIFFÉRENT en E-commerce 2025_whisper.txt',
             'CetJSjR3B0M': 'CetJSjR3B0M_32 Minutes to Successfully Create Your First Succe.txt',
+            'uUY_rfUo4Ak': 'uUY_rfUo4Ak_34 min pour ENFIN Réussir son Site E-Commerce 2026_whisper.txt',
             'XCpIHbp7YLE': 'XCpIHbp7YLE_How to create high-performing organic content for .txt',
             'F_-DY_UXtKo': 'F_-DY_UXtKo_Comment créer des accroches impossible à scroller .txt',
+            'hrJTlRKivlM': 'hrJTlRKivlM_Réussir en Organique E-commerce Etape par Etape 20_whisper.txt',
+            'tdIk-WnKIYQ': 'tdIk-WnKIYQ_47 Minutes de FULL Valeur pour Réussir en Organiqu_whisper.txt',
+            'JGjjs9FdQLU': 'JGjjs9FdQLU_Voici comment réussir tous vos testings sans ads e_whisper.txt',
+            'WRec6Zq6K6s': 'WRec6Zq6K6s_31 min pour enfin réussir tous vos testings en E-c_whisper.txt',
             'adcAy24qCIo': 'adcAy24qCIo_51 Minutes of PURE Value to Succeed in E-Commerce _whisper.txt',
             'xGxYcbWPq6w': 'xGxYcbWPq6w_52 Min de PURE Valeur pour passer de 0 à 1ère vent.txt',
+            'Lm-F1iFhC3Y': 'Lm-F1iFhC3Y_1h12 pour réussir vos testings E-commerce je coach_whisper.txt',
             '6OPSuToFc9o': '6OPSuToFc9o_1h19 pour passer de 0 à 1ère vente E-commerce je c_whisper.txt',
+            'y1hOO8qWHDY': 'y1hOO8qWHDY_Janalyse les boutiques de débutants dropshipping c_whisper.txt',
             'WH1Kmji0zMU': 'WH1Kmji0zMU_He earned 45000 at 19 thanks to e-commerce - The i.txt',
             'AS7d1gP27R4': 'AS7d1gP27R4_From broke employee to 50000 in e-commerce - The i.txt',
             's3hu7WdIOr4': 's3hu7WdIOr4_From 0 to 13500 in 5 months of e-commerce at age 4.txt',
             'j6l_2Kig6Fg': 'j6l_2Kig6Fg_From 0 to 3000 in 3 weeks of organic e-commerce te.txt',
             'lpsAclXJxFw': 'lpsAclXJxFw_1500 in 5 days without showing his face he explain.txt',
+            'MWQ9f8Hymcc': 'MWQ9f8Hymcc_From 0 to 15000 in 3 months with my 1-1 E-commerce_whisper.txt',
+            'ol_XCtVagpU': 'ol_XCtVagpU_Pov  je suis passé de 0 à 201381 en 6 mois grâce u_whisper.txt',
             'eykj3-bQAEk': 'eykj3-bQAEk_How E-commerce Can Make You Poor.txt',
             '6nmrqBgQnQw': '6nmrqBgQnQw_Why you should NOT listen to Yomi Denzel.txt',
             'MohkR_vT0HM': 'MohkR_vT0HM_I paid 14000 for e-commerce coaching so you dont h.txt',
             'cxp5Hq5FPVc': 'cxp5Hq5FPVc_I bought all the E-commerce training courses hones.txt',
             'yaI299cHSFE': 'yaI299cHSFE_The difference between an amateur and a real e-com.txt',
+            'modhqjHuPX0': 'modhqjHuPX0_Je classe les pires conseils pour débutants en Eco_whisper.txt',
+            'JSFeCRYg_O4': 'JSFeCRYg_O4_27 Minutes pour ENFIN Arrêter déchouer en E-commer_whisper.txt',
             'GOZ70cfrazo': 'GOZ70cfrazo_I answer all the questions of this e-commerce begi.txt',
             'WZ5n5dTxwuA': 'WZ5n5dTxwuA_A beginner explains how he went from 0 to his firs.txt',
             'l2PnZI1VgQ8': 'l2PnZI1VgQ8_CONFÉRENCE - Passer de 0 à 1ère marque à succès en.txt',
             'E0WkbFcbEWA': 'E0WkbFcbEWA_Here is the Q4 strategy I use to go from 0 to 5000.txt',
             'AtgKhgcdsXo': 'AtgKhgcdsXo_La stratégie qui permet à mes élèves de faire 10 0.txt',
-            'o-gQX4FQRPE': 'o-gQX4FQRPE_Everything an E-commerce Beginner Should Know Live.txt'
+            'o-gQX4FQRPE': 'o-gQX4FQRPE_Everything an E-commerce Beginner Should Know Live.txt',
+            '4OFBkYphTnc': '4OFBkYphTnc_De Salarié à 10000mois en E-commerce - Lhistoire f_whisper.txt',
+            '7lJpeplKlHA': '7lJpeplKlHA_41 Minutes de valeur INTENSE pour passer de 0 à 10_whisper.txt',
+            '7oKaLNMRjJE': '7oKaLNMRjJE_I explain to them how to generate 10000month in 15_whisper.txt',
+            'GAUH_gtzvNQ': 'GAUH_gtzvNQ_Jai généré 223 722 en 9 mois grâce à lE-commerce V_whisper.txt',
+            'M7IVwgXVa1M': 'M7IVwgXVa1M_3 Étapes pour passer de 0 à 97 130  en E-commerce _whisper.txt',
+            'ZnXEx7HsqKs': 'ZnXEx7HsqKs_Voici comment Réussir la recherche produit en tant_whisper.txt',
+            '_ia0V0Wb7G0': '_ia0V0Wb7G0_Comment faire 60 000mois en E-commerce en 2025 Gui_whisper.txt',
+            'cIYX1PW6l1w': 'cIYX1PW6l1w_52 min to launch a successful e-commerce brand Com_whisper.txt'
         };
 
         // Current transcript state
@@ -1752,14 +2193,20 @@
                             id: 'lesson-1',
                             title: '6H - Formation E-commerce Complete',
                             videoId: 'GYjzjHlaod0',
-                            duration: '5h59',
+                            duration: '5:59:14',
                             description: 'La formation complete de A a Z pour maitriser le e-commerce organique.',
                             keyPoints: [
                                 'Les 5 piliers de la methode Sofian Kasmi',
                                 'Pourquoi devenir competent avant de chercher l\'argent',
                                 'Le cercle vertueux: Competences → Decisions → Actions → Argent',
                                 'Eviter les pieges du dropshipping classique'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-8',
+                                title: 'Plan 12 Semaines',
+                                description: 'Definir objectifs, contraintes, KPI, et plan hebdomadaire (1 page).',
+                                duration: '45 minutes'
+                            }
                         },
                         {
                             id: 'lesson-2',
@@ -1772,20 +2219,32 @@
                                 'Les erreurs a eviter absolument',
                                 'Comment se differencier de la concurrence',
                                 'La vision long terme vs court terme'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-9',
+                                title: 'Audit Realite (Competences & Temps)',
+                                description: 'Lister tes competences actuelles, ton temps dispo, et tes 3 priorites (a enlever).',
+                                duration: '30 minutes'
+                            }
                         },
                         {
                             id: 'lesson-3',
                             title: 'Comment Devenir un Maitre en E-Commerce',
-                            videoId: 'w3zLPz78Xfo',
-                            duration: '~25 min',
+                            videoId: 'T4TRD4OT8o4',
+                            duration: '48:50',
                             description: 'Mindset et vision long terme pour reussir.',
                             keyPoints: [
                                 'Le mindset du vrai e-commercant',
                                 'Difference entre amateur et professionnel',
                                 'Comment developper ses competences',
                                 'La patience et la perseverance'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-10',
+                                title: 'Routine de Progression (14 jours)',
+                                description: 'Mettre en place une routine quotidienne (30-60min) + un journal de decisions.',
+                                duration: '20 minutes'
+                            }
                         }
                     ]
                 },
@@ -1831,8 +2290,8 @@
                         {
                             id: 'lesson-6',
                             title: 'Voici comment Reussir la recherche produit',
-                            videoId: 'IvxMM-1nq04',
-                            duration: '~45 min',
+                            videoId: 'vuN_piY1Pw8',
+                            duration: '31:24',
                             description: 'Methodes avancees de recherche de produits.',
                             keyPoints: [
                                 'Partir de soi et son entourage',
@@ -1897,15 +2356,21 @@
                         {
                             id: 'lesson-9',
                             title: 'Voici comment etre DIFFERENT en E-commerce',
-                            videoId: 'w9y3nfQ26D8',
-                            duration: '~15 min',
+                            videoId: 'Nje_okWBlLk',
+                            duration: '16:24',
                             description: 'Strategies de differenciation efficaces.',
                             keyPoints: [
                                 'Les axes de differenciation possibles',
                                 'Concept, branding, produit, promesse',
                                 'Comment creer une offre unique',
                                 'Se positionner dans l\'esprit du client'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-11',
+                                title: 'Positionnement en 1 Phrase',
+                                description: 'Ecrire 3 phrases de positionnement + choisir la plus simple (avec 3 preuves).',
+                                duration: '40 minutes'
+                            }
                         }
                     ]
                 },
@@ -1927,13 +2392,19 @@
                                 'Proposition de valeur claire',
                                 'Trust et social proof',
                                 'Copywriting persuasif'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-12',
+                                title: 'Checklist Page Produit (CRO)',
+                                description: 'Construire ta page produit avec: promesse, preuves, objections, livraison/retours, FAQ.',
+                                duration: '60 minutes'
+                            }
                         },
                         {
                             id: 'lesson-11',
                             title: '34 min pour ENFIN Reussir son Site E-Commerce',
-                            videoId: 'U3D3HFDj5xk',
-                            duration: '~35 min',
+                            videoId: 'uUY_rfUo4Ak',
+                            duration: '34:46',
                             description: 'Optimisation du taux de conversion.',
                             keyPoints: [
                                 'Offre irresistible',
@@ -1998,28 +2469,40 @@
                         {
                             id: 'lesson-14',
                             title: 'Reussir en Organique E-commerce Etape par Etape',
-                            videoId: 'HzKL8QHk4T4',
-                            duration: '~40 min',
+                            videoId: 'hrJTlRKivlM',
+                            duration: '46:16',
                             description: 'Guide pas a pas pour le marketing organique.',
                             keyPoints: [
                                 'TikTok vs Instagram: les differences',
                                 'Comment analyser ses performances',
                                 'Creer du volume de contenu',
                                 'Iterer sur ce qui fonctionne'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-13',
+                                title: 'Dashboard Contenus (14 jours)',
+                                description: 'Suivre: vues, retention 3s, clics, ventes + noter hypotheses et learnings.',
+                                duration: '45 minutes'
+                            }
                         },
                         {
                             id: 'lesson-15',
                             title: '47 Minutes de FULL Valeur pour Reussir en Organique',
-                            videoId: 'VCgWq-EfRTE',
-                            duration: '~47 min',
+                            videoId: 'tdIk-WnKIYQ',
+                            duration: '47:52',
                             description: 'Strategies avancees de marketing organique.',
                             keyPoints: [
                                 'Strategies avancees de contenu',
                                 'Comment scaler en organique',
                                 'Automatiser sa creation',
                                 'Preparer la transition vers les ads'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-14',
+                                title: 'SOP Production (Batch)',
+                                description: 'Ecrire ton process (SOP) pour produire 10 videos/semaine (roles, outils, timing).',
+                                duration: '45 minutes'
+                            }
                         }
                     ]
                 },
@@ -2033,21 +2516,27 @@
                         {
                             id: 'lesson-16',
                             title: 'Voici comment reussir tous vos testings sans ads',
-                            videoId: '1iZ2p3-dIYI',
-                            duration: '~55 min',
+                            videoId: 'JGjjs9FdQLU',
+                            duration: '44:46',
                             description: 'Process complet de testing en organique.',
                             keyPoints: [
                                 'Les metriques a suivre (Gold, Silver, Bronze)',
                                 'Diagnostic: pourquoi ca ne fonctionne pas',
                                 'Quand passer aux ads',
                                 'Checklist avant de scaler'
-                            ]
+                            ],
+                            exercise: {
+                                id: 'ex-15',
+                                title: 'Plan de Testing (2 semaines)',
+                                description: 'Definir hypotheses, variables a tester (hook/preuve/CTA) et criteres de succes.',
+                                duration: '45 minutes'
+                            }
                         },
                         {
                             id: 'lesson-17',
                             title: '31 min pour enfin reussir tous vos testings',
-                            videoId: 'zBM6aHE5xRM',
-                            duration: '~31 min',
+                            videoId: 'WRec6Zq6K6s',
+                            duration: '31:57',
                             description: 'Diagnostic et correction des erreurs.',
                             keyPoints: [
                                 'Identifier le probleme unique',
@@ -2060,7 +2549,7 @@
                             id: 'lesson-18',
                             title: '51 Minutes of PURE Value to Succeed',
                             videoId: 'adcAy24qCIo',
-                            duration: '~51 min',
+                            duration: '51:18',
                             description: 'Coaching live complet avec exemples.',
                             keyPoints: [
                                 'Cas pratiques de testing',
@@ -2094,8 +2583,8 @@
                         {
                             id: 'lesson-20',
                             title: '1h12 pour reussir vos testings E-commerce',
-                            videoId: '26W7VYsjb3w',
-                            duration: '~72 min',
+                            videoId: 'Lm-F1iFhC3Y',
+                            duration: '1:12:48',
                             description: 'Session coaching complete.',
                             keyPoints: [
                                 'Session de coaching approfondie',
@@ -2108,7 +2597,7 @@
                             id: 'lesson-21',
                             title: '1h19 pour passer de 0 a 1ere vente',
                             videoId: '6OPSuToFc9o',
-                            duration: '~79 min',
+                            duration: '1:19:36',
                             description: 'Parcours complet d\'un debutant.',
                             keyPoints: [
                                 'De zero a la premiere vente',
@@ -2120,8 +2609,8 @@
                         {
                             id: 'lesson-22',
                             title: 'J\'analyse les boutiques de debutants',
-                            videoId: '2v4c5oZAIXg',
-                            duration: '~20 min',
+                            videoId: 'y1hOO8qWHDY',
+                            duration: '37:04',
                             description: 'Audit de sites e-commerce.',
                             keyPoints: [
                                 'Audit de vrais sites',
@@ -2182,16 +2671,16 @@
                         {
                             id: 'lesson-28',
                             title: 'De 0 a 15 000€ en 3 mois',
-                            videoId: '8qYcGTJNYrI',
-                            duration: '~58 min',
+                            videoId: 'MWQ9f8Hymcc',
+                            duration: '58:05',
                             description: 'Success story detaillee.',
                             keyPoints: ['Parcours de 3 mois', '15k€ de CA', 'Les etapes cles', 'Les apprentissages']
                         },
                         {
                             id: 'lesson-29',
                             title: 'POV: je suis passe de 0 a 201 381€ en 6 mois',
-                            videoId: 'XJVaRc8ZWYc',
-                            duration: '~28 min',
+                            videoId: 'ol_XCtVagpU',
+                            duration: '26:15',
                             description: 'Cas d\'etude exceptionnel.',
                             keyPoints: ['201k€ en 6 mois', 'La strategie utilisee', 'Les moments difficiles', 'Ce qui a fait la difference']
                         }
@@ -2247,31 +2736,737 @@
                         {
                             id: 'lesson-35',
                             title: 'Je classe les pires conseils pour debutants',
-                            videoId: '3Fk7tXYdVEw',
-                            duration: '~25 min',
+                            videoId: 'modhqjHuPX0',
+                            duration: '18:53',
                             description: 'Erreurs communes a eviter.',
                             keyPoints: ['Les pires conseils du marche', 'Pourquoi ils sont dangereux', 'Les bons conseils a suivre', 'Faire le tri']
                         },
                         {
                             id: 'lesson-36',
                             title: '27 Minutes pour ENFIN Arreter d\'echouer',
-                            videoId: 'TkDNP9QWWRI',
-                            duration: '~27 min',
+                            videoId: 'JSFeCRYg_O4',
+                            duration: '27:35',
                             description: 'Diagnostic de ses echecs.',
                             keyPoints: ['Analyser ses echecs', 'Trouver les vraies causes', 'Comment rebondir', 'Transformer l\'echec en succes']
+                        }
+                    ]
+                },
+                {
+                    id: 'approfondissement',
+                    title: 'Approfondissement',
+                    icon: '🚀',
+                    weeks: '9-12',
+                    description: 'Strategies avancees, scaling et cas pratiques',
+                    lessons: [
+                        {
+                            id: 'lesson-37',
+                            title: 'Everything an E-commerce Beginner Should Know (Live Coaching)',
+                            videoId: 'o-gQX4FQRPE',
+                            duration: '23:49',
+                            description: 'Coaching live: fondamentaux pour debuter sans se disperser.',
+                            keyPoints: [
+                                'Les priorites debutant: produit, offre, contenu, site',
+                                'Eviter la dispersion et se concentrer sur l\'execution',
+                                'Checklist de decisions simples (quoi faire ensuite)',
+                                'Plan d\'action 7 jours'
+                            ]
+                        },
+                        {
+                            id: 'lesson-38',
+                            title: 'Voici comment Reussir la recherche produit (Debutant)',
+                            videoId: 'ZnXEx7HsqKs',
+                            duration: '21:09',
+                            description: 'Guide complet pour trouver un produit en tant que debutant.',
+                            keyPoints: [
+                                'Partir des problemes (pas des produits)',
+                                'Verifier tension emotionnelle + demo visuelle',
+                                'Eviter les methodes saturees',
+                                'Short-list + validation'
+                            ]
+                        },
+                        {
+                            id: 'lesson-39',
+                            title: '52 min to launch a successful e-commerce brand',
+                            videoId: 'cIYX1PW6l1w',
+                            duration: '52:45',
+                            description: 'Roadmap de lancement: structure, execution et erreurs a eviter.',
+                            keyPoints: [
+                                'Roadmap et ordre des priorites',
+                                'Construire une offre claire',
+                                'Lancer en organique et iterer',
+                                'Ne pas bloquer sur le perfectionnisme'
+                            ]
+                        },
+                        {
+                            id: 'lesson-40',
+                            title: 'Strategie 0 → 10 000€ en 150 jours (sans Ads)',
+                            videoId: 'AtgKhgcdsXo',
+                            duration: '1:17:27',
+                            description: 'Strategie organique pour atteindre 10k€ de CA en 150 jours.',
+                            keyPoints: [
+                                'Pourquoi les strategies 2017 ne marchent plus',
+                                'Roadmap avec deadlines et intensite',
+                                'Volume de contenu et iteration',
+                                'Systeme: produit, site, contenu, analyse'
+                            ],
+                            exercise: {
+                                id: 'ex-16',
+                                title: 'Mindmap Strategie 150 Jours',
+                                description: 'Creer ta mindmap (etapes + deadlines + actions hebdo) et la rendre executable.',
+                                duration: '45 minutes'
+                            }
+                        },
+                        {
+                            id: 'lesson-41',
+                            title: 'Generate +10,000€/month in 150 days (coaching)',
+                            videoId: '7oKaLNMRjJE',
+                            duration: '39:00',
+                            description: 'Session orientee execution: plan, attentes, erreurs frequentes.',
+                            keyPoints: [
+                                'Process et attentes realistes',
+                                'Focus sur les actions a ROI',
+                                'Metriques et boucles d\'iteration',
+                                'Erreurs a eviter'
+                            ]
+                        },
+                        {
+                            id: 'lesson-42',
+                            title: '41 Minutes de valeur INTENSE (0 → 10k/mois)',
+                            videoId: '7lJpeplKlHA',
+                            duration: '41:52',
+                            description: 'Masterclass intensif: accelerer l\'apprentissage et le passage a l\'action.',
+                            keyPoints: [
+                                'Principes qui font gagner du temps',
+                                'Execution > information',
+                                'Systeme de contenu et repetition',
+                                'Savoir quoi mesurer'
+                            ]
+                        },
+                        {
+                            id: 'lesson-43',
+                            title: '223 722€ en 9 mois: strategie A a Z (2025)',
+                            videoId: 'GAUH_gtzvNQ',
+                            duration: '40:33',
+                            description: 'Case study: strategie, systeme de contenu et execution.',
+                            keyPoints: [
+                                'Strategie globale et priorites',
+                                'Ce qui a vraiment fait la difference',
+                                'Organisation et process',
+                                'Lecons reutilisables'
+                            ],
+                            exercise: {
+                                id: 'ex-17',
+                                title: 'Audit Strategie (A a Z)',
+                                description: 'Extraire 10 decisions/strategies de la video et les traduire en actions pour ton projet.',
+                                duration: '45 minutes'
+                            }
+                        },
+                        {
+                            id: 'lesson-44',
+                            title: 'Comment faire 60 000€/mois en E-commerce (Guide 2025)',
+                            videoId: '_ia0V0Wb7G0',
+                            duration: '31:46',
+                            description: 'Scaling: systemes, process, offre et execution.',
+                            keyPoints: [
+                                'Penser systemes (pas hacks)',
+                                'Structurer offre + acquisition + retention',
+                                'Standardiser (SOP) pour scaler',
+                                'Erreurs de scaling'
+                            ]
+                        },
+                        {
+                            id: 'lesson-45',
+                            title: 'Q4 Strategy (0 → 50,000€) (2025)',
+                            videoId: 'E0WkbFcbEWA',
+                            duration: '29:51',
+                            description: 'Strategie saisonniere: offre, stock, creatifs, execution.',
+                            keyPoints: [
+                                'Saisonnalite et opportunites Q4',
+                                'Adapter l\'offre et le messaging',
+                                'Gestion stock et delais',
+                                'Plan creatifs et calendrier'
+                            ],
+                            exercise: {
+                                id: 'ex-18',
+                                title: 'Plan Q4 (Saisonnalite)',
+                                description: 'Ecrire ton plan Q4: offre, calendrier contenu, stock, risques, KPIs.',
+                                duration: '45 minutes'
+                            }
+                        },
+                        {
+                            id: 'lesson-46',
+                            title: 'CONFERENCE: Passer de 0 a 1ere marque a succes',
+                            videoId: 'l2PnZI1VgQ8',
+                            duration: '1:34:18',
+                            description: 'Conference long format: roadmap, mindset et execution.',
+                            keyPoints: [
+                                'Roadmap long terme',
+                                'Priorites et choix difficiles',
+                                'Competences a developper',
+                                'Erreurs classiques et corrections'
+                            ]
+                        },
+                        {
+                            id: 'lesson-47',
+                            title: '3 Etapes pour passer de 0 a 97 130€ (2025)',
+                            videoId: 'M7IVwgXVa1M',
+                            duration: '8:37',
+                            description: 'Resume ultra-condense: les 3 etapes qui comptent.',
+                            keyPoints: [
+                                'Focus sur l\'essentiel',
+                                'Eviter l\'overthinking',
+                                'Execution et iteration',
+                                'Savoir mesurer'
+                            ]
+                        },
+                        {
+                            id: 'lesson-48',
+                            title: 'Q&A: Everything for an E-commerce beginner',
+                            videoId: 'GOZ70cfrazo',
+                            duration: '51:43',
+                            description: 'Questions/reponses: clarifier les blocages debutants.',
+                            keyPoints: [
+                                'Reponses aux questions frequentes',
+                                'Erreurs de debutant demystifiees',
+                                'Priorites et ordre des actions',
+                                'Conseils actionables'
+                            ]
+                        },
+                        {
+                            id: 'lesson-49',
+                            title: 'Debutant: de 0 a 1ere vente (temoignage)',
+                            videoId: 'WZ5n5dTxwuA',
+                            duration: '31:25',
+                            description: 'Temoignage: parcours debutant et ce qui a marche.',
+                            keyPoints: [
+                                'Ce qui a declenche la 1ere vente',
+                                'Les erreurs corrigees',
+                                'Le process simplifie',
+                                'Lecons pour debutants'
+                            ]
+                        },
+                        {
+                            id: 'lesson-50',
+                            title: 'De salarie a 10 000€/mois (histoire)',
+                            videoId: '4OFBkYphTnc',
+                            duration: '1:04:54',
+                            description: 'Success story: transition et systeme mis en place.',
+                            keyPoints: [
+                                'Parcours et declic',
+                                'Systeme et execution',
+                                'Les obstacles et solutions',
+                                'Lecons reutilisables'
+                            ]
                         }
                     ]
                 }
             ],
             timeline: [
-                { week: 1, title: 'Recherche produit', tasks: 'Exercice 1: Brainstorming, validation criteres', deliverable: '3 produits potentiels valides' },
-                { week: 2, title: 'Sourcing', tasks: 'Exercice 2: Contact fournisseurs 1688/Alibaba', deliverable: 'Fournisseur sélectionné' },
-                { week: 3, title: 'Connaissance cliente', tasks: 'Exercice 3: Questionnaire, entretiens', deliverable: 'Document avatar client' },
-                { week: 4, title: 'Veille concurrentielle', tasks: 'Exercice 4: Analyse 5 concurrents', deliverable: 'Tableau comparatif + differenciation' },
-                { week: 5, title: 'Creation site', tasks: 'Shopify/WooCommerce', deliverable: 'Site live avec les 6 elements' },
-                { week: 6, title: 'Veille contenu', tasks: 'Exercice 5: 50 contenus analysés', deliverable: 'Tableau veille rempli' },
-                { week: 7, title: 'Production contenu', tasks: 'Exercice 6: 10-15 vidéos', deliverable: 'Stock de contenus prêts' },
-                { week: 8, title: 'Lancement testing', tasks: 'Publication quotidienne', deliverable: 'Premières ventes!' }
+                { week: 1, title: 'Fondations & Roadmap', tasks: 'Exercice 8: Plan 12 semaines + objectifs + contraintes', deliverable: 'Plan + KPI de départ' },
+                { week: 2, title: 'Recherche produit', tasks: 'Exercice 1: Brainstorming + scorecard, validation critères', deliverable: 'Top 3 produits short-listés' },
+                { week: 3, title: 'Sourcing & validation', tasks: 'Exercice 2: Shortlist fournisseurs + demande d’échantillons', deliverable: '2 fournisseurs + plan échantillons' },
+                { week: 4, title: 'Connaissance cliente', tasks: 'Exercice 3: Questionnaire + entretiens + synthèse pains', deliverable: 'Avatar client + insights' },
+                { week: 5, title: 'Différenciation & offre', tasks: 'Exercice 11: Positionnement + promesse + offre de lancement', deliverable: 'Positionnement + offre claire' },
+                { week: 6, title: 'Création du site (CRO)', tasks: 'Exercice 7 + 12: Audit site + checklist page produit', deliverable: 'Site live + checklist CRO' },
+                { week: 7, title: 'Système de contenu', tasks: 'Exercice 5 + 13: Veille + dashboard contenus', deliverable: '50 analyses + 10 angles' },
+                { week: 8, title: 'Production contenu', tasks: 'Exercice 6 + 14: Scripts + batch production', deliverable: '10–15 vidéos prêtes' },
+                { week: 9, title: 'Testing organique', tasks: 'Exercice 15: Plan de testing + métriques (views → clics → ventes)', deliverable: 'Plan de tests + KPI tracking' },
+                { week: 10, title: 'Rétention', tasks: 'Mettre en place 3 flows email + FAQ + politique retours', deliverable: 'Flows + FAQ + politique' },
+                { week: 11, title: 'Optimisation', tasks: 'Analyser data + itérer hooks/offre/site', deliverable: 'Amélioration CTR/CVR' },
+                { week: 12, title: 'Scaling & saisonnalité', tasks: 'Plan Q4 + stock + calendrier contenu + SOP', deliverable: 'Plan scaling + SOP' }
+            ],
+            resources: [
+                {
+                    category: 'Recherche & Validation',
+                    items: [
+                        { name: 'Google Trends', desc: 'Valider la demande et la saisonnalité', url: 'https://trends.google.com' },
+                        { name: 'TikTok Creative Center', desc: 'Observer les formats/angles performants', url: 'https://ads.tiktok.com/business/creativecenter' },
+                        { name: 'AnswerThePublic', desc: 'Idées de questions + pains (option)', url: 'https://answerthepublic.com' },
+                        { name: 'Exploding Topics', desc: 'Détecter des tendances montantes (option)', url: 'https://explodingtopics.com' }
+                    ]
+                },
+                {
+                    category: 'Sourcing & Logistique',
+                    items: [
+                        { name: 'Alibaba', desc: 'Contacter des fournisseurs', url: 'https://www.alibaba.com' },
+                        { name: '1688', desc: 'Prix usine (Chine)', url: 'https://www.1688.com' },
+                        { name: 'Incoterms (ICC)', desc: 'Comprendre EXW/FOB/DDP', url: 'https://icc.academy' }
+                    ]
+                },
+                {
+                    category: 'Site & CRO',
+                    items: [
+                        { name: 'Shopify', desc: 'Créer et gérer ta boutique', url: 'https://www.shopify.com' },
+                        { name: 'web.dev', desc: 'Core Web Vitals & performance', url: 'https://web.dev/vitals/' },
+                        { name: 'PageSpeed Insights', desc: 'Diagnostiquer la performance', url: 'https://pagespeed.web.dev' },
+                        { name: 'Baymard Institute', desc: 'Recherche UX checkout (résumés)', url: 'https://baymard.com/blog/checkout-usability' }
+                    ]
+                },
+                {
+                    category: 'Contenu & Création',
+                    items: [
+                        { name: 'CapCut', desc: 'Montage mobile', url: 'https://www.capcut.com' },
+                        { name: 'TikTok for Business Blog', desc: 'Bonnes pratiques créatives', url: 'https://ads.tiktok.com/business/blog' }
+                    ]
+                },
+                {
+                    category: 'Analytics',
+                    items: [
+                        { name: 'Google Analytics (GA4)', desc: 'Mesurer trafic + conversions', url: 'https://analytics.google.com' },
+                        { name: 'Looker Studio', desc: 'Dashboards KPI', url: 'https://lookerstudio.google.com' }
+                    ]
+                }
+            ],
+            sources: [
+                { name: 'TikTok for Business — Creative Center guide', desc: 'Bonnes pratiques, Creative Center, inspiration créative.', url: 'https://ads.tiktok.com/business/blog/how-to-use-tiktok-creative-center' },
+                { name: 'Baymard — Checkout usability', desc: 'Recherche UX checkout (guidelines + findings).', url: 'https://baymard.com/blog/checkout-usability' },
+                { name: 'web.dev — Core Web Vitals', desc: 'Mesures de performance web (LCP/INP/CLS).', url: 'https://web.dev/vitals/' },
+                { name: 'Your Europe — Retours (droit de rétractation)', desc: '14 jours de rétractation (UE) + exceptions.', url: 'https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_fr.htm' },
+                { name: 'Service-Public — Droit de rétractation (vente à distance)', desc: 'Explications officielles (France), cas et délais.', url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F10485' },
+                { name: 'CNIL — Prospection commerciale par email (B2C)', desc: 'Consentement, opt-in, désinscription, exceptions.', url: 'https://www.cnil.fr/fr/cnil-direct/question/prospection-commerciale-par-courrier-electronique-fax-ou-sms-le-consentement' },
+                { name: 'ICC Academy — Incoterms', desc: 'Notions clés EXW/FOB/DDP, responsabilités.', url: 'https://icc.academy/lesson/incoterms-2020/' }
+            ],
+            guides: [
+                {
+                    id: 'product-research',
+                    icon: '🔍',
+                    title: 'Recherche Produit (Playbook)',
+                    description: 'Trouver un produit “contentable” avec tension émotionnelle et marge.',
+                    intro: 'Objectif: passer de “j’ai une idée” à un short-list rationnel + un plan de validation rapide.',
+                    sections: [
+                        {
+                            id: 'scorecard',
+                            title: '1) Scorecard produit (15 min)',
+                            open: true,
+                            paragraphs: [
+                                'Une bonne idée ne suffit pas: tu veux une décision. Utilise une scorecard simple pour comparer plusieurs produits.',
+                                'Évite les critères “vagues” (cool, original). Score sur des critères actionnables: tension émotionnelle, simplicité de démonstration, marge, logistique, risques.'
+                            ],
+                            bullets: [
+                                'Tension: le problème est fréquent + frustrant + coûteux (temps/argent/émotion).',
+                                'Contentability: tu peux montrer le “avant/après” en 2 secondes.',
+                                'Concurrence: tu peux expliquer en quoi tu es différent en 1 phrase.',
+                                'Marge: tu peux viser une marge brute saine après livraison/retours.',
+                                'Risque: pas de red flags (IP, sécurité, réglementation).'
+                            ],
+                            checklist: [
+                                'Lister 10 problèmes concrets (toi, entourage, reviews, forums).',
+                                'Choisir 5 idées et les scorer 1–5 sur 7 critères.',
+                                'Garder les 3 meilleurs (score total + intuition).'
+                            ],
+                            templates: [
+                                {
+                                    title: 'Template — Scorecard produit',
+                                    content:
+`PRODUIT: ____________________________\n\n1) TENSION (1-5): __  Pourquoi: ____________________________\n2) DEMO VISUELLE (1-5): __  Preuve: _______________________\n3) DIFFERENCIATION (1-5): __  Angle: ______________________\n4) MARGE BRUTE (1-5): __  Prix: ____  COGS: ____  Ship: ____\n5) LOGISTIQUE (1-5): __  Fragile? Batterie? Taille? _______\n6) RISQUE IP/REG (1-5): __  Notes: ________________________\n7) REPEAT/UPSELL (1-5): __  Idées: ________________________\n\nSCORE TOTAL: ____ / 35\nNEXT STEP (validation): _________________________________`
+                                }
+                            ]
+                        },
+                        {
+                            id: 'validation',
+                            title: '2) Validation de demande (sans te mentir)',
+                            paragraphs: [
+                                'Tu valides une demande, pas “un produit”. Cherche des signaux cohérents sur plusieurs sources.',
+                                'Le but: réduire le risque, pas prouver à 100%.'
+                            ],
+                            bullets: [
+                                'Demande: tendances (Google Trends), volume de conversations, problèmes récurrents.',
+                                'Preuve: concurrents qui vendent déjà, reviews, UGC, commentaires.',
+                                'Contenu: angles possibles (problème → mécanisme → preuve → CTA).'
+                            ],
+                            checklist: [
+                                'Chercher le problème sur Google + TikTok/Instagram et noter 10 angles.',
+                                'Lister 5 concurrents et comparer: prix, promesse, avis, shipping.',
+                                'Écrire 3 hooks + 1 script court pour tester le produit en contenu.'
+                            ],
+                            templates: [
+                                {
+                                    title: 'Template — 10 angles de contenu',
+                                    content:
+`PROBLEME PRINCIPAL: ____________________________\n\nANGLES (10):\n1) Erreur #1: ________________________________\n2) Erreur #2: ________________________________\n3) Avant/Après: ______________________________\n4) Mythe vs réalité: _________________________\n5) “Je pensais que…”: ________________________\n6) Démo 3 étapes: ___________________________\n7) Comparatif: ______________________________\n8) Témoignage (script): ______________________\n9) Contrarian: _______________________________\n10) Guide rapide: ____________________________`
+                                }
+                            ]
+                        },
+                        {
+                            id: 'unit-econ',
+                            title: '3) Unit economics (version rapide)',
+                            paragraphs: [
+                                'Avant de scaler, tu veux une marge “utilisable”: COGS + livraison + paiement + retours + SAV.',
+                                'Si tu n’as pas de chiffre exact, pars sur des estimations conservatrices.'
+                            ],
+                            bullets: [
+                                'Marge brute ≈ Prix de vente - COGS - livraison - frais paiement.',
+                                'Prévois une réserve retours/SAV (selon ton offre).',
+                                'Un produit “trop serré” te force à tricher (promesses, qualité, SAV).'
+                            ],
+                            checklist: [
+                                'Écrire 3 prix possibles (low/mid/high) et calculer la marge brute.',
+                                'Lister les coûts “cachés”: packaging, insert, app, chargebacks.',
+                                'Décider un prix de test + 1 bundle.'
+                            ],
+                            templates: [
+                                {
+                                    title: 'Template — Calcul rapide',
+                                    content:
+`PRIX: ____€\nCOGS: ____€\nLIVRAISON: ____€\nPAIEMENT (2.5-3.5%): ____€\nEMBALLAGE/INSERT: ____€\nRESERVE RETOURS/SAV: ____€\n\nMARGE BRUTE ESTIMEE: ____€\nNOTE: _______________________________________`
+                                }
+                            ]
+                        },
+                        {
+                            id: 'risk',
+                            title: '4) Risques & conformité (mini-check)',
+                            paragraphs: [
+                                'Avant même de commander en volume: check IP, catégories sensibles, sécurité.',
+                                'Règle d’or: si tu n’es pas sûr, tu vérifies (ou tu changes de produit).'
+                            ],
+                            checklist: [
+                                'Le produit n’empiète pas sur une marque (nom/logo/design).',
+                                'Pas de promesses santé/médicales non prouvées.',
+                                'Pas de risque batterie/chargeur non conforme sans contrôle.',
+                                'Politique retours et infos légales prêtes (voir guide conformité).'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'sourcing-qc',
+                    icon: '🏭',
+                    title: 'Sourcing & Qualité (Playbook)',
+                    description: 'Réduire les surprises: incoterms, échantillons, QC, négociation.',
+                    intro: 'Objectif: sécuriser la qualité et le timing avant de passer en volume.',
+                    sections: [
+                        {
+                            id: 'incoterms',
+                            title: '1) Incoterms (EXW/FOB/DDP) — comprendre vite',
+                            open: true,
+                            paragraphs: [
+                                'Les incoterms définissent qui paie quoi et qui est responsable à chaque étape.',
+                                'Si tu débutes, évite les zones grises: clarifie toujours (prix, transport, taxes, délais).'
+                            ],
+                            bullets: [
+                                'EXW: tu récupères à l’usine (plus de complexité).',
+                                'FOB: le fournisseur amène au port (plus simple).',
+                                'DDP: livré “tout compris” (souvent simple mais vérifie ce qui est inclus).'
+                            ],
+                            checklist: [
+                                'Demander 2 devis: FOB + DDP (mêmes quantités).',
+                                'Exiger une date estimée de production + livraison.',
+                                'Demander les specs exactes (matériaux, dimensions, packaging).'
+                            ]
+                        },
+                        {
+                            id: 'supplier-message',
+                            title: '2) Message fournisseur (copier/coller)',
+                            paragraphs: [
+                                'Ton objectif: obtenir un devis comparable + valider qu’ils comprennent tes exigences.',
+                                'Sois clair: quantités, options, packaging, QC, délais.'
+                            ],
+                            templates: [
+                                {
+                                    title: 'Template — Message fournisseur',
+                                    content:
+`Bonjour,\n\nJe cherche un fournisseur pour [PRODUIT].\nPouvez-vous me confirmer:\n1) Prix pour 100 / 300 / 500 unités (FOB et DDP)\n2) MOQ, délai de production, délai de livraison\n3) Photos/vidéos réelles du produit + packaging\n4) Possibilité de logo/packaging personnalisé (coût et MOQ)\n5) Contrôle qualité (AQL/inspection) possible avant expédition\n6) Certificats disponibles (si applicable)\n\nMerci,\n[Nom]\n[WhatsApp]`
+                                }
+                            ],
+                            checklist: [
+                                'Demander 3 fournisseurs minimum.',
+                                'Comparer sur un tableau (prix, MOQ, délai, qualité comm).',
+                                'Commander 1–2 échantillons (pas juste 1).'
+                            ]
+                        },
+                        {
+                            id: 'qc',
+                            title: '3) Plan échantillons + QC (AQL simple)',
+                            paragraphs: [
+                                'L’échantillon “OK” n’est pas suffisant: tu veux éviter le “sample good / batch bad”.',
+                                'Même un QC simple (checklist) réduit énormément le risque.'
+                            ],
+                            bullets: [
+                                'Échantillon 1: vérifier usage + solidité + packaging.',
+                                'Échantillon 2 (si possible): d’un autre lot ou autre usine.',
+                                'QC: définir 10 critères non négociables + tolérances.'
+                            ],
+                            templates: [
+                                {
+                                    title: 'Template — Checklist QC (10 points)',
+                                    content:
+`CHECKLIST QC — PRODUIT: ____________________\n\n1) Dimensions conformes (tolérance __mm)\n2) Matériau/texture conforme\n3) Couleur conforme\n4) Fonctionnement OK (test 3 fois)\n5) Aucun défaut visible (rayure, couture, colle)\n6) Packaging conforme + intact\n7) Accessoires présents (liste)\n8) Notice/étiquette conforme\n9) Odeur/contamination: OK\n10) Poids conforme\n\nDécision: [OK / REWORK / REJECT]\nNotes: _____________________________________`
+                                }
+                            ],
+                            checklist: [
+                                'Définir tes “non-negotiables” avant de payer le solde.',
+                                'Demander photos QC + vidéo de test.',
+                                'Garder une trace écrite (chat/email).'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'positioning-offer',
+                    icon: '🧠',
+                    title: 'Positionnement & Offre (Playbook)',
+                    description: 'Dire clairement: pour qui, quel résultat, pourquoi toi.',
+                    intro: 'Objectif: une promesse simple + une offre cohérente avec tes contenus.',
+                    sections: [
+                        {
+                            id: 'positioning',
+                            title: '1) Positionnement en 1 phrase',
+                            open: true,
+                            paragraphs: [
+                                'Si tu ne peux pas l’expliquer en 1 phrase, ton prospect ne peut pas l’acheter.',
+                                'Ton contenu doit répéter la même promesse, avec des preuves différentes.'
+                            ],
+                            templates: [
+                                {
+                                    title: 'Template — Phrase de positionnement',
+                                    content:
+`J’aide [CIBLE] à obtenir [RESULTAT] en [DELAI] grâce à [MECANISME], sans [FRUSTRATION PRINCIPALE].\n\nExemple:\nJ’aide les propriétaires de chiens anxieux à calmer leur chien en 7 jours grâce à un protocole simple + un accessoire, sans médicaments.`
+                                }
+                            ],
+                            checklist: [
+                                'Écrire 3 versions et choisir la plus simple.',
+                                'Lister 3 preuves possibles (démo, avis, données, before/after).'
+                            ]
+                        },
+                        {
+                            id: 'offer',
+                            title: '2) Offre de lancement (structure)',
+                            paragraphs: [
+                                'Une offre n’est pas “un produit”. C’est: promesse + preuve + réduction de risque + friction minimale.',
+                                'Pour débuter: simplicité > sophistication.'
+                            ],
+                            bullets: [
+                                'Produit + bundle simple (x2/x3) + seuil livraison offerte.',
+                                'Garantie claire (sans promesse impossible).',
+                                'FAQ et objections traitées (livraison, retours, usage).'
+                            ],
+                            checklist: [
+                                'Définir: 1 offre principale + 2 bundles.',
+                                'Écrire 5 objections + réponses.',
+                                'Décider un angle de contenu qui pousse naturellement vers l’offre.'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'site-cro',
+                    icon: '🛒',
+                    title: 'Site qui convertit (CRO)',
+                    description: 'Optimiser la page produit et le checkout (UX + performance).',
+                    intro: 'Objectif: réduire la friction et augmenter la clarté (pas “mettre des badges”).',
+                    sections: [
+                        {
+                            id: 'above-fold',
+                            title: '1) Above the fold: clarté immédiate',
+                            open: true,
+                            bullets: [
+                                'Titre: résultat + pour qui (pas un slogan).',
+                                'Preuve: avis, chiffres, démo courte, médias.',
+                                'CTA: clair + répétée; options simples.',
+                                'Infos livraison/retours visibles (avant le scroll).'
+                            ],
+                            checklist: [
+                                'Quel est le produit et à quoi il sert en 3 secondes ?',
+                                'La politique retours est-elle visible ?',
+                                'Le CTA est-il évident sur mobile ?'
+                            ]
+                        },
+                        {
+                            id: 'product-page',
+                            title: '2) Structure page produit (template)',
+                            paragraphs: [
+                                'Ta page produit doit répondre aux questions dans le bon ordre: “c’est quoi”, “ça marche comment”, “preuve”, “détails”, “risque”, “FAQ”.'
+                            ],
+                            templates: [
+                                {
+                                    title: 'Template — Plan page produit',
+                                    content:
+`1) HERO: Promesse + preuve + CTA\n2) PROBLEME: “Si tu vis X…”\n3) MECANISME: comment ça résout X\n4) PREUVE: démo / avis / chiffres\n5) DETAILS: matériaux, dimensions, contenu du pack\n6) LIVRAISON & RETOURS: clair\n7) FAQ: objections\n8) CTA final + bundles`
+                                }
+                            ],
+                            checklist: [
+                                'Ajouter une FAQ basée sur 10 DM/commentaires réels.',
+                                'Rendre la livraison/retours “scannable”.',
+                                'Mettre les preuves près du CTA.'
+                            ]
+                        },
+                        {
+                            id: 'checkout',
+                            title: '3) Checkout: réduire la friction (research UX)',
+                            paragraphs: [
+                                'Le checkout est souvent la plus grosse source de perte. Les guidelines UX (ex: Baymard) convergent sur: moins de surprises, moins de champs, plus de transparence.',
+                                'Ton objectif: supprimer les “micro-frictions” cumulées.'
+                            ],
+                            bullets: [
+                                'Pas de coûts surprises (livraison, taxes).',
+                                'Moins de champs, auto-complete, checkout invité.',
+                                'Rassurance: retours, support, paiement sécurisé.'
+                            ],
+                            checklist: [
+                                'Tester ton checkout en mobile (1 main).',
+                                'Supprimer les champs inutiles.',
+                                'Afficher les coûts tôt (avant paiement).'
+                            ]
+                        },
+                        {
+                            id: 'performance',
+                            title: '4) Performance (Core Web Vitals) — simple',
+                            bullets: [
+                                'Images: compresser, limiter les carrousels lourds.',
+                                'Apps: supprimer le superflu (chaque app = latence).',
+                                'Mobile d’abord: c’est là que tu perds le plus.',
+                                'Mesurer avec PageSpeed + web.dev (LCP/INP/CLS).'
+                            ],
+                            checklist: [
+                                'Faire un test PageSpeed mobile (home + product).',
+                                'Supprimer 1 app inutile.',
+                                'Optimiser 3 images lourdes.'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'content-system',
+                    icon: '📱',
+                    title: 'Système de contenu organique',
+                    description: 'Créer un pipeline: angles → scripts → production → itération.',
+                    intro: 'Objectif: produire du volume sans perdre la qualité des hooks.',
+                    sections: [
+                        {
+                            id: 'hooks',
+                            title: '1) Hooks: 3 secondes pour gagner',
+                            open: true,
+                            bullets: [
+                                'Curiosity gap: “Personne ne te dit que…”',
+                                'Problème direct: “Si ton [cible] fait X…”',
+                                'Contrarian: “Arrête de faire Y…”',
+                                'Démo: avant/après immédiat.'
+                            ],
+                            checklist: [
+                                'Écrire 20 hooks (5 formats × 4 variantes).',
+                                'Filmer 3 intros différentes pour le même script.',
+                                'Analyser la rétention sur les 3 premières secondes.'
+                            ]
+                        },
+                        {
+                            id: 'script',
+                            title: '2) Structure de script (simple)',
+                            templates: [
+                                {
+                                    title: 'Template — Script 30–45s',
+                                    content:
+`HOOK (0-2s): __________________________\nPROBLEME (2-6s): ______________________\nMECANISME (6-20s): ____________________\nPREUVE (20-32s): ______________________\nCTA (32-45s): _________________________`
+                                }
+                            ],
+                            checklist: [
+                                'Un seul message par vidéo (1 angle).',
+                                'Preuve: démo, avis, chiffres, comparaison.',
+                                'CTA cohérent (commentaire, DM, site).'
+                            ]
+                        },
+                        {
+                            id: 'pipeline',
+                            title: '3) Pipeline: batch production',
+                            paragraphs: [
+                                'La constance bat la motivation. Mets en place un système (SOP) et produis par lots.'
+                            ],
+                            bullets: [
+                                'Jour 1: veille + angles (1–2h)',
+                                'Jour 2: scripts (1–2h)',
+                                'Jour 3: tournage batch (2–4h)',
+                                'Jour 4: montage batch (2–4h)',
+                                'Jour 5: publication + analyse (30min/jour)'
+                            ],
+                            checklist: [
+                                'Créer une liste “Angles à filmer”.',
+                                'Préparer un shot list (plans B-roll).',
+                                'Standardiser un style de montage.'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'testing-metrics',
+                    icon: '🧪',
+                    title: 'Testing organique & métriques',
+                    description: 'Mesurer un funnel simple: vues → clics → ventes.',
+                    intro: 'Objectif: tester vite, apprendre vite, documenter tes itérations.',
+                    sections: [
+                        {
+                            id: 'kpis',
+                            title: '1) KPI funnel (template dashboard)',
+                            open: true,
+                            paragraphs: [
+                                'Choisis quelques métriques qui représentent tes goulots (contenu, site, offre).',
+                                'Ne change pas 10 variables à la fois.'
+                            ],
+                            templates: [
+                                {
+                                    title: 'Template — Tracker quotidien',
+                                    content:
+`DATE: ____\nVIDEOS POSTEES: ____\nVUES (total): ____\nRETENTION 3s (%): ____\nCLICS SITE: ____\nADD TO CART: ____\nACHATS: ____\nAOV: ____€\nNOTE (hypothèse): ____________________\nNEXT TEST: ___________________________`
+                                }
+                            ],
+                            checklist: [
+                                'Définir “succès” par étape (ex: 3s retention, clics, CVR).',
+                                'Tenir le tracker 14 jours.',
+                                'Faire une revue hebdo (1 page).'
+                            ]
+                        },
+                        {
+                            id: 'experiments',
+                            title: '2) Expérimentation (simple)',
+                            bullets: [
+                                'Hypothèse: “Si je change X, alors Y”.',
+                                'Variable: hook OU preuve OU CTA (pas tout).',
+                                'Règle: itérer sur ce qui marche, arrêter le bruit.'
+                            ],
+                            checklist: [
+                                'Documenter: hypothèse, changement, résultat.',
+                                'Garder une baseline (vidéo “contrôle”).',
+                                'Éviter les conclusions sur 1 vidéo.'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'compliance',
+                    icon: '⚖️',
+                    title: 'Conformité (bases)',
+                    description: 'Retours, rétractation, email marketing: le minimum à respecter.',
+                    intro: 'Objectif: éviter les erreurs faciles. Ceci n’est pas un avis juridique: vérifie selon ton pays.',
+                    sections: [
+                        {
+                            id: 'withdrawal',
+                            title: '1) Droit de rétractation (UE) — résumé',
+                            open: true,
+                            bullets: [
+                                'Vente à distance: délai de rétractation de 14 jours (avec exceptions).',
+                                'Informer clairement le client avant achat (CGV/politique).',
+                                'Process retours: simple, traçable, et délais de remboursement.'
+                            ],
+                            checklist: [
+                                'Avoir une politique retours accessible (footer + checkout).',
+                                'Mettre un résumé “livraison/retours” sur la page produit.',
+                                'Avoir une adresse de support + délais de réponse.'
+                            ]
+                        },
+                        {
+                            id: 'email',
+                            title: '2) Email marketing (B2C): opt-in',
+                            bullets: [
+                                'Prospection email vers particuliers: consentement préalable (case non pré-cochée).',
+                                'Toujours un lien de désinscription simple.',
+                                'Exception possible: client existant pour produits/services analogues (selon règles).'
+                            ],
+                            checklist: [
+                                'Case opt-in dédiée (non pré-cochée) à la collecte.',
+                                'Lien désinscription dans chaque email.',
+                                'Éviter “j’accepte les CGV” comme consentement marketing.'
+                            ]
+                        }
+                    ]
+                }
             ]
         };
 
@@ -2281,6 +3476,7 @@
         let state = {
             completedLessons: [],
             completedExercises: [],
+            completedChecklistItems: [],
             completedWeeks: [],
             notes: {},
             currentView: 'dashboard',
@@ -2305,6 +3501,9 @@
                 // Ensure settings object exists for backward compatibility
                 if (!state.settings) {
                     state.settings = { lightTheme: false, autoplayVideos: false };
+                }
+                if (!Array.isArray(state.completedChecklistItems)) {
+                    state.completedChecklistItems = [];
                 }
             }
             applyTheme();
@@ -2442,6 +3641,20 @@
             updateProgress();
         }
 
+        function setActiveNav(view) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            if (!view) return;
+            const active = document.querySelector(`.nav-item[data-view="${view}"]`);
+            if (active) active.classList.add('active');
+        }
+
+        function setHeaderContext(title, subtitle = '') {
+            const titleEl = document.getElementById('header-title');
+            const subtitleEl = document.getElementById('header-subtitle');
+            if (titleEl) titleEl.textContent = title || '';
+            if (subtitleEl) subtitleEl.textContent = subtitle || '';
+        }
+
         function togglePhase(index) {
             const phaseEl = document.getElementById(`phase-${index}`);
             const headerEl = phaseEl.previousElementSibling;
@@ -2467,11 +3680,77 @@
 
             document.getElementById('global-progress-text').textContent = `${percentage}%`;
             document.getElementById('global-progress-bar').style.width = `${percentage}%`;
+            updateNavBadges();
+            updateSidebarContinue();
+            updateHeaderProgress();
+        }
+
+        function getNextLessonData() {
+            for (const phase of coursData.phases) {
+                for (const lesson of phase.lessons) {
+                    if (!state.completedLessons.includes(lesson.id)) {
+                        return { phase, lesson };
+                    }
+                }
+            }
+            return null;
+        }
+
+        function continueNextLesson() {
+            const next = getNextLessonData();
+            if (!next) return;
+            showLesson(next.lesson.id);
+        }
+
+        function updateSidebarContinue() {
+            const container = document.getElementById('sidebar-continue');
+            const titleEl = document.getElementById('sidebar-continue-title');
+            const metaEl = document.getElementById('sidebar-continue-meta');
+            if (!container || !titleEl || !metaEl) return;
+
+            const next = getNextLessonData();
+            if (!next) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            titleEl.textContent = next.lesson.title;
+            metaEl.textContent = `${next.phase.icon} ${next.phase.title} • ${next.lesson.duration}`;
+        }
+
+        function updateNavBadges() {
+            const exercisesBadge = document.getElementById('nav-badge-exercises');
+            const guidesBadge = document.getElementById('nav-badge-guides');
+
+            const totalExercises = getTotalExercises();
+            const completedExercises = state.completedExercises.length;
+            const remainingExercises = Math.max(0, totalExercises - completedExercises);
+
+            if (exercisesBadge) {
+                exercisesBadge.textContent = totalExercises > 0 && remainingExercises === 0 ? '✓' : String(remainingExercises);
+                exercisesBadge.title = `${completedExercises}/${totalExercises} exercices complétés`;
+                exercisesBadge.classList.toggle('completed', totalExercises > 0 && remainingExercises === 0);
+            }
+
+            if (guidesBadge) {
+                const count = Array.isArray(coursData.guides) ? coursData.guides.length : 0;
+                guidesBadge.textContent = String(count);
+                guidesBadge.title = `${count} guides disponibles`;
+            }
         }
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
             document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
+
+        function closeSidebarOnMobileIfOpen() {
+            if (window.innerWidth > 768) return;
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar && sidebar.classList.contains('open')) {
+                toggleSidebar();
+            }
         }
 
         // ========================================
@@ -2483,27 +3762,29 @@
             stopTimer(); // Stop timer when leaving lesson
             saveState();
             renderSidebar();
+            setActiveNav('dashboard');
+            setHeaderContext('Tableau de bord', 'Formation E-commerce Organique');
 
             const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
             const completedLessons = state.completedLessons.length;
             const percentage = Math.round((completedLessons / totalLessons) * 100);
 
-            // Find next lesson
-            let nextLesson = null;
-            for (const phase of coursData.phases) {
-                for (const lesson of phase.lessons) {
-                    if (!state.completedLessons.includes(lesson.id)) {
-                        nextLesson = lesson;
-                        break;
-                    }
-                }
-                if (nextLesson) break;
-            }
+            const nextData = getNextLessonData();
+            const nextLesson = nextData ? nextData.lesson : null;
+            const nextPhase = nextData ? nextData.phase : null;
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
-                    <h1 style="margin-bottom: 10px;">👋 Bienvenue dans ta formation</h1>
-                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Marketing Organique pour E-commerce par Sofian Kasmi</p>
+                    <div class="page-header">
+                        <div class="page-header-left">
+                            <h1 class="page-title">👋 Bienvenue dans ta formation</h1>
+                            <p class="page-subtitle">Marketing Organique pour E-commerce par Sofian Kasmi</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary btn-sm" onclick="showGuides()">🧩 Guides</button>
+                            <button class="btn btn-secondary btn-sm" onclick="showExercises()">📝 Exercices</button>
+                        </div>
+                    </div>
 
                     <div class="dashboard-grid">
                         <div class="stat-card">
@@ -2535,9 +3816,10 @@
                         </div>
                         <div class="section-content">
                             <h3 style="margin-bottom: 10px;">${nextLesson.title}</h3>
+                            ${nextPhase ? `<p style="color: var(--text-muted); font-size: 13px; margin-bottom: 10px;">${nextPhase.icon} ${nextPhase.title} • ${nextLesson.duration}</p>` : ''}
                             <p style="color: var(--text-secondary); margin-bottom: 20px;">${nextLesson.description}</p>
                             <button class="btn btn-primary" onclick="showLesson('${nextLesson.id}')">
-                                ▶️ Reprendre
+                                ▶️ Continuer
                             </button>
                         </div>
                     </div>
@@ -2585,10 +3867,7 @@
                     </div>
                 </div>
             `;
-
-            // Update active nav
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.querySelector('.nav-item').classList.add('active');
+            closeSidebarOnMobileIfOpen();
         }
 
         function showLesson(lessonId) {
@@ -2598,6 +3877,7 @@
             startTimer(); // Start tracking study time
             resetPipState();
             renderSidebar();
+            setActiveNav(null);
 
             // Find lesson
             let lesson = null;
@@ -2617,9 +3897,12 @@
             }
 
             if (!lesson) return;
+            setHeaderContext(lesson.title, `${phase.icon} ${phase.title}`);
 
             const prevLesson = lessonIndex > 0 ? allLessons[lessonIndex - 1].lesson : null;
             const nextLesson = lessonIndex < allLessons.length - 1 ? allLessons[lessonIndex + 1].lesson : null;
+            const lessonNumber = lessonIndex + 1;
+            const totalLessons = allLessons.length;
             const isCompleted = state.completedLessons.includes(lessonId);
             const notes = state.notes[lessonId] || '';
 
@@ -2630,16 +3913,34 @@
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
-                    <div style="margin-bottom: 20px;">
-                        <span style="color: var(--accent-blue); font-size: 14px;">${phase.icon} ${phase.title}</span>
-                    </div>
-
-                    <h1 style="margin-bottom: 20px;">${lesson.title}</h1>
-
-                    <div class="lesson-meta">
-                        <div class="meta-item">⏱️ ${lesson.duration}</div>
-                        <div class="meta-item">📹 YouTube</div>
-                        ${isCompleted ? '<div class="meta-item" style="color: var(--accent-green);">✅ Complete</div>' : ''}
+                    <div class="page-header">
+                        <div class="page-header-left">
+                            <h1 class="page-title">${lesson.title}</h1>
+                            <p class="page-subtitle">${phase.icon} ${phase.title}</p>
+                            <div class="lesson-meta">
+                                <div class="meta-item">📍 Leçon ${lessonNumber}/${totalLessons}</div>
+                                <div class="meta-item">⏱️ ${lesson.duration}</div>
+                                ${lesson.exercise ? '<div class="meta-item">📝 Exercice</div>' : ''}
+                                ${transcriptMap[lesson.videoId] ? '<div class="meta-item">📄 Transcription</div>' : ''}
+                                ${isCompleted ? '<div class="meta-item meta-success">✅ Terminé</div>' : ''}
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary btn-sm" onclick="showDashboard()">← Tableau de bord</button>
+                            ${prevLesson ? `
+                                <button class="btn btn-secondary btn-sm" onclick="showLesson('${prevLesson.id}')">
+                                    ← Précédente
+                                </button>
+                            ` : ''}
+                            <button class="btn ${isCompleted ? 'btn-secondary' : 'btn-success'} btn-sm" onclick="toggleLessonComplete('${lessonId}')">
+                                ${isCompleted ? '↩️ Annuler' : '✅ Terminer'}
+                            </button>
+                            ${nextLesson ? `
+                                <button class="btn btn-primary btn-sm" onclick="showLesson('${nextLesson.id}')">
+                                    Suivante →
+                                </button>
+                            ` : ''}
+                        </div>
                     </div>
 
                     <div class="video-container">
@@ -2657,12 +3958,12 @@
                             </div>
                         `}
                     </div>
-                    <div style="margin-top: 10px; text-align: center; display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                        <a href="https://www.youtube.com/watch?v=${lesson.videoId}" target="_blank" rel="noopener" style="color: var(--accent-blue); text-decoration: none; font-size: 14px;">
-                            🔗 Regarder sur YouTube
+                    <div class="lesson-links">
+                        <a href="https://www.youtube.com/watch?v=${lesson.videoId}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                            🔗 YouTube
                         </a>
                         ${transcriptMap[lesson.videoId] ? `
-                            <button onclick="toggleTranscript('${lesson.videoId}')" class="btn btn-secondary" style="font-size: 13px; padding: 6px 12px;">
+                            <button onclick="toggleTranscript('${lesson.videoId}')" class="btn btn-secondary btn-sm">
                                 📄 Transcription
                             </button>
                         ` : ''}
@@ -2680,7 +3981,7 @@
                     <p class="lesson-description">${lesson.description}</p>
 
                     <div class="key-points">
-                        <h4>🎯 Points cles a retenir</h4>
+                        <h4>🎯 Points clés à retenir</h4>
                         <ul>
                             ${lesson.keyPoints.map(point => `<li>${point}</li>`).join('')}
                         </ul>
@@ -2689,7 +3990,7 @@
                     <div class="section-card">
                         <div class="section-header">
                             <div class="section-title">📝 Mes notes</div>
-                            <span class="notes-status" id="notes-status">Auto-sauvegarde activee</span>
+                            <span class="notes-status" id="notes-status">Auto-sauvegarde activée</span>
                         </div>
                         <div class="section-content">
                             <textarea class="notes-textarea" id="lesson-notes" placeholder="Prends des notes ici..." oninput="saveNotes('${lessonId}')">${notes}</textarea>
@@ -2699,7 +4000,7 @@
                     <div class="lesson-navigation">
                         ${prevLesson ? `
                             <button class="btn btn-secondary" onclick="showLesson('${prevLesson.id}')">
-                                ← Leçon précédente
+                                ← Précédente
                             </button>
                         ` : '<div></div>'}
 
@@ -2709,7 +4010,7 @@
 
                         ${nextLesson ? `
                             <button class="btn btn-primary" onclick="showLesson('${nextLesson.id}')">
-                                Leçon suivante →
+                                Suivante →
                             </button>
                         ` : '<div></div>'}
                     </div>
@@ -2725,7 +4026,7 @@
                             <div class="exercise-content">
                                 <h4>${lesson.exercise.title}</h4>
                                 <p>${lesson.exercise.description}</p>
-                                <p class="exercise-duration">⏱️ Duree estimee: ${lesson.exercise.duration}</p>
+                                <p class="exercise-duration">⏱️ Durée estimée: ${lesson.exercise.duration}</p>
                             </div>
                         </div>
                     </div>
@@ -2733,10 +4034,7 @@
                 </div>
             `;
 
-            // Close sidebar on mobile
-            if (window.innerWidth <= 768) {
-                toggleSidebar();
-            }
+            closeSidebarOnMobileIfOpen();
 
             // Initialize PiP observer for this lesson
             setTimeout(initPipObserver, 100);
@@ -2858,11 +4156,17 @@
             stopTimer(); // Stop timer when leaving lesson
             saveState();
             renderSidebar();
+            setActiveNav('timeline');
+            setHeaderContext('Planning', 'Roadmap 12 semaines');
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
-                    <h1 style="margin-bottom: 10px;">📅 Planning 8 Semaines</h1>
-                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Roadmap complète pour lancer ta première marque</p>
+                    <div class="page-header">
+                        <div class="page-header-left">
+                            <h1 class="page-title">📅 Planning (12 semaines)</h1>
+                            <p class="page-subtitle">Roadmap complète (débutant → intermédiaire) pour lancer et stabiliser ta marque</p>
+                        </div>
+                    </div>
 
                     <div class="timeline">
                         ${coursData.timeline.map(item => {
@@ -2884,10 +4188,7 @@
                     </div>
                 </div>
             `;
-
-            // Update active nav
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[0].classList.add('active');
+            closeSidebarOnMobileIfOpen();
         }
 
         function toggleWeek(week) {
@@ -2906,37 +4207,38 @@
             stopTimer(); // Stop timer when leaving lesson
             saveState();
             renderSidebar();
+            setActiveNav('resources');
+            setHeaderContext('Ressources', 'Outils et liens utiles');
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
-                    <h1 style="margin-bottom: 10px;">🔗 Ressources</h1>
-                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Outils et liens utiles pour ta formation</p>
-
-                    <div class="section-card">
-                        <div class="section-header">
-                            <div class="section-title">🛠️ Outils Recommandes</div>
-                        </div>
-                        <div class="section-content">
-                            <div style="display: grid; gap: 15px;">
-                                ${[
-                                    { name: 'Google Trends', desc: 'Valider la demande pour ton produit', url: 'https://trends.google.com' },
-                                    { name: '1688.com', desc: 'Trouver les prix usine', url: 'https://1688.com' },
-                                    { name: 'Alibaba', desc: 'Contacter les fournisseurs', url: 'https://alibaba.com' },
-                                    { name: 'TikTok Creative Center', desc: 'Analyser les ads performantes', url: 'https://ads.tiktok.com/business/creativecenter' },
-                                    { name: 'CapCut', desc: 'Montage video gratuit', url: 'https://capcut.com' },
-                                    { name: 'Shopify', desc: 'Creer ta boutique', url: 'https://shopify.com' }
-                                ].map(tool => `
-                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--bg-tertiary); border-radius: var(--radius-sm);">
-                                        <div>
-                                            <div style="font-weight: 500;">${tool.name}</div>
-                                            <div style="font-size: 13px; color: var(--text-secondary);">${tool.desc}</div>
-                                        </div>
-                                        <a href="${tool.url}" target="_blank" class="btn btn-secondary" style="padding: 8px 15px;">Ouvrir →</a>
-                                    </div>
-                                `).join('')}
-                            </div>
+                    <div class="page-header">
+                        <div class="page-header-left">
+                            <h1 class="page-title">🔗 Ressources</h1>
+                            <p class="page-subtitle">Outils et liens utiles pour ta formation</p>
                         </div>
                     </div>
+
+                    ${(coursData.resources || []).map(group => `
+                        <div class="section-card">
+                            <div class="section-header">
+                                <div class="section-title">🛠️ ${group.category}</div>
+                            </div>
+                            <div class="section-content">
+                                <div style="display: grid; gap: 12px;">
+                                    ${(group.items || []).map(tool => `
+                                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px; background: var(--bg-tertiary); border-radius: var(--radius-sm);">
+                                            <div>
+                                                <div style="font-weight: 500;">${tool.name}</div>
+                                                <div style="font-size: 13px; color: var(--text-secondary);">${tool.desc}</div>
+                                            </div>
+                                            <a href="${tool.url}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 8px 12px; white-space: nowrap;">Ouvrir →</a>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
 
                     <div class="section-card">
                         <div class="section-header">
@@ -2950,16 +4252,309 @@
                         </div>
                     </div>
 
+                    <div class="section-card">
+                        <div class="section-header">
+                            <div class="section-title">🧩 Guides & Templates</div>
+                        </div>
+                        <div class="section-content">
+                            <p style="color: var(--text-secondary); margin-bottom: 14px;">Playbooks pratiques pour appliquer la formation (CRO, contenu, sourcing, conformité, etc.).</p>
+                            <button class="btn btn-primary" onclick="showGuides()">Ouvrir les guides →</button>
+                        </div>
+                    </div>
+
                     <div class="quote-box">
                         <div class="quote-text">"Tu peux faire de l'argent avec n'importe quel produit sur internet. La marque Petrock a genere plus d'un million de dollars par an en vendant des cailloux. Ce n'est pas le produit le probleme, c'est ta strategie."</div>
                         <div class="quote-author">— Sofian Kasmi</div>
                     </div>
                 </div>
             `;
+            closeSidebarOnMobileIfOpen();
+        }
 
-            // Update active nav
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[1].classList.add('active');
+        // ========================================
+        // EXERCISES VIEW
+        // ========================================
+        function getAllExercises() {
+            const items = [];
+            for (const phase of coursData.phases) {
+                for (const lesson of phase.lessons) {
+                    if (!lesson.exercise) continue;
+                    items.push({
+                        phase,
+                        lesson,
+                        exercise: lesson.exercise
+                    });
+                }
+            }
+            return items;
+        }
+
+        function showExercises() {
+            state.currentView = 'exercises';
+            state.currentLesson = null;
+            stopTimer(); // Stop timer when leaving lesson
+            saveState();
+            renderSidebar();
+            setActiveNav('exercises');
+
+            const exercises = getAllExercises();
+            const completed = state.completedExercises.length;
+            setHeaderContext('Exercices', `${completed}/${exercises.length} complétés`);
+
+            const byPhase = new Map();
+            for (const item of exercises) {
+                if (!byPhase.has(item.phase.id)) byPhase.set(item.phase.id, { phase: item.phase, items: [] });
+                byPhase.get(item.phase.id).items.push(item);
+            }
+
+            document.getElementById('content-area').innerHTML = `
+                <div class="fade-in">
+                    <div class="page-header">
+                        <div class="page-header-left">
+                            <h1 class="page-title">📝 Exercices</h1>
+                            <p class="page-subtitle">${completed}/${exercises.length} complétés — avance en priorité sur les exercices des modules 1 à 6.</p>
+                        </div>
+                    </div>
+
+                    ${Array.from(byPhase.values()).map(({ phase, items }) => `
+                        <div class="section-card">
+                            <div class="section-header">
+                                <div class="section-title">${phase.icon} ${phase.title}</div>
+                                <div style="color: var(--text-muted); font-size: 13px;">
+                                    ${items.filter(i => state.completedExercises.includes(i.exercise.id)).length}/${items.length}
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                ${items.map(({ lesson, exercise }) => `
+                                    <div class="exercise-item" style="align-items: flex-start;">
+                                        <div class="exercise-checkbox ${state.completedExercises.includes(exercise.id) ? 'checked' : ''}"
+                                             onclick="toggleExercise('${exercise.id}'); showExercises();">
+                                            ${state.completedExercises.includes(exercise.id) ? '✓' : ''}
+                                        </div>
+                                        <div class="exercise-content" style="flex: 1;">
+                                            <h4 style="margin-bottom: 6px;">${exercise.title}</h4>
+                                            <p style="margin-bottom: 8px;">${exercise.description}</p>
+                                            <p class="exercise-duration">⏱️ ${exercise.duration} • <span style="color: var(--text-muted);">Leçon: ${lesson.title}</span></p>
+                                            <div style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">
+                                                <button class="btn btn-secondary btn-sm" onclick="showLesson('${lesson.id}')">Ouvrir la leçon →</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            closeSidebarOnMobileIfOpen();
+        }
+
+        // ========================================
+        // GUIDES & TEMPLATES VIEW
+        // ========================================
+        function escapeHtml(text) {
+            return String(text)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        async function copyElementText(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.innerText || el.textContent || '';
+
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copié dans le presse-papiers');
+            } catch (e) {
+                // Fallback for older browsers / insecure contexts
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Copié dans le presse-papiers');
+                } catch (e2) {
+                    showToast('Impossible de copier (navigateur)', 'error');
+                } finally {
+                    document.body.removeChild(ta);
+                }
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            const bg = type === 'error' ? 'var(--accent-red)' : (type === 'success' ? 'var(--accent-green)' : 'var(--bg-tertiary)');
+            toast.innerHTML = `
+                <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: ${bg}; color: var(--text-primary); padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); z-index: 10002; font-size: 13px;">
+                    ${escapeHtml(message)}
+                </div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 1800);
+        }
+
+        function toggleChecklistItem(itemId, checkboxEl) {
+            const idx = state.completedChecklistItems.indexOf(itemId);
+            if (idx >= 0) {
+                state.completedChecklistItems.splice(idx, 1);
+            } else {
+                state.completedChecklistItems.push(itemId);
+            }
+            saveState();
+
+            if (checkboxEl) {
+                const checked = state.completedChecklistItems.includes(itemId);
+                checkboxEl.classList.toggle('checked', checked);
+                checkboxEl.textContent = checked ? '✓' : '';
+            }
+        }
+
+        function showGuides(openGuideId = null) {
+            state.currentView = 'guides';
+            state.currentLesson = null;
+            stopTimer(); // Stop timer when leaving lesson
+            saveState();
+            renderSidebar();
+            setActiveNav('guides');
+            const guideCount = Array.isArray(coursData.guides) ? coursData.guides.length : 0;
+            setHeaderContext('Guides & Templates', `${guideCount} guides`);
+
+            if (!Array.isArray(coursData.guides) || coursData.guides.length === 0) {
+                document.getElementById('content-area').innerHTML = `
+                    <div class="fade-in">
+                        <div class="page-header">
+                            <div class="page-header-left">
+                                <h1 class="page-title">🧩 Guides & Templates</h1>
+                                <p class="page-subtitle">Aucun guide n'est disponible.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            const guidesHtml = coursData.guides.map(guide => `
+                <details class="guide-details" id="guide-${guide.id}" ${openGuideId === guide.id ? 'open' : ''}>
+                    <summary>
+                        <div>
+                            <div class="guide-title">${guide.icon} ${guide.title}</div>
+                            <div style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">${guide.description}</div>
+                        </div>
+                        <div class="guide-toggle">Cliquer pour ${openGuideId === guide.id ? 'refermer' : 'ouvrir'} ▼</div>
+                    </summary>
+                    <div class="guide-body">
+                        ${guide.intro ? `<p class="guide-intro">${guide.intro}</p>` : ''}
+
+                        ${guide.sections.map(section => {
+                            const sectionChecklist = Array.isArray(section.checklist) && section.checklist.length
+                                ? `
+                                    <div class="checklist">
+                                        ${section.checklist.map((text, index) => {
+                                            const itemId = `g-${guide.id}-${section.id}-${index}`;
+                                            const checked = state.completedChecklistItems.includes(itemId);
+                                            return `
+                                                <div class="checklist-item" onclick="toggleChecklistItem('${itemId}', this.querySelector('.checklist-checkbox'))">
+                                                    <div class="checklist-checkbox ${checked ? 'checked' : ''}">${checked ? '✓' : ''}</div>
+                                                    <div class="checklist-text">${escapeHtml(text)}</div>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                `
+                                : '';
+
+                            const sectionBullets = Array.isArray(section.bullets) && section.bullets.length
+                                ? `<ul class="guide-bullets">${section.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ul>`
+                                : '';
+
+                            const templatesHtml = Array.isArray(section.templates) && section.templates.length
+                                ? section.templates.map((tpl, idx) => {
+                                    const elementId = `tpl-${guide.id}-${section.id}-${idx}`;
+                                    return `
+                                        <div class="template-wrap">
+                                            <div class="template-header">
+                                                <div class="template-title">${escapeHtml(tpl.title || 'Template')}</div>
+                                                <button class="btn-copy" onclick="copyElementText('${elementId}')">Copier</button>
+                                            </div>
+                                            <pre class="template-block" id="${elementId}">${escapeHtml(tpl.content || '')}</pre>
+                                        </div>
+                                    `;
+                                }).join('')
+                                : '';
+
+                            return `
+                                <details class="guide-section" id="guide-${guide.id}-section-${section.id}" ${section.open ? 'open' : ''}>
+                                    <summary>
+                                        <div class="guide-section-title">${escapeHtml(section.title)}</div>
+                                        <div style="color: var(--text-muted); font-size: 12px;">▼</div>
+                                    </summary>
+                                    <div class="guide-section-body">
+                                        ${(section.paragraphs || []).map(p => `<p>${escapeHtml(p)}</p>`).join('')}
+                                        ${sectionBullets}
+                                        ${sectionChecklist}
+                                        ${templatesHtml}
+                                    </div>
+                                </details>
+                            `;
+                        }).join('')}
+                    </div>
+                </details>
+            `).join('');
+
+            document.getElementById('content-area').innerHTML = `
+                <div class="fade-in">
+                    <div class="page-header">
+                        <div class="page-header-left">
+                            <h1 class="page-title">🧩 Guides & Templates</h1>
+                            <p class="page-subtitle">Des playbooks pratiques (CRO, contenu organique, sourcing, conformité) pour appliquer la formation.</p>
+                        </div>
+                    </div>
+
+                    ${guidesHtml}
+
+                    ${Array.isArray(coursData.sources) && coursData.sources.length ? `
+                        <div class="section-card">
+                            <div class="section-header">
+                                <div class="section-title">📚 Sources (recherche)</div>
+                            </div>
+                            <div class="section-content">
+                                <p style="color: var(--text-secondary); margin-bottom: 14px;">
+                                    Guides rédigés à partir de sources reconnues (TikTok for Business, Baymard, web.dev, EU/CNIL). Vérifie toujours les règles locales (ceci n'est pas un avis juridique).
+                                </p>
+                                <div style="display: grid; gap: 10px;">
+                                    ${coursData.sources.map(s => `
+                                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px; background: var(--bg-tertiary); border-radius: var(--radius-sm);">
+                                            <div>
+                                                <div style="font-weight: 500;">${escapeHtml(s.name)}</div>
+                                                ${s.desc ? `<div style="font-size: 13px; color: var(--text-secondary);">${escapeHtml(s.desc)}</div>` : ''}
+                                            </div>
+                                            <a href="${s.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Ouvrir →</a>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            closeSidebarOnMobileIfOpen();
+
+            if (openGuideId) {
+                setTimeout(() => {
+                    const el = document.getElementById(`guide-${openGuideId}`);
+                    if (el) {
+                        el.open = true;
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 50);
+            }
         }
 
         function resetProgress() {
@@ -2968,16 +4563,20 @@
                 state = {
                     completedLessons: [],
                     completedExercises: [],
+                    completedChecklistItems: [],
                     completedWeeks: [],
                     notes: {},
                     currentView: 'dashboard',
                     currentLesson: null,
                     timerSeconds: 0,
+                    timerInterval: null,
+                    timerRunning: false,
                     searchQuery: '',
                     settings: {
                         lightTheme: false,
                         autoplayVideos: false
-                    }
+                    },
+                    pipDismissed: false
                 };
                 applyTheme();
                 updateSettingsUI();
@@ -3477,31 +5076,34 @@
         // ========================================
         function init() {
             loadState();
-            renderSidebar();
-            updateHeaderProgress();
 
-            // Show last view or first uncompleted lesson
-            if (state.currentLesson) {
+            // Resume the last view for a predictable UX.
+            if (state.currentView === 'lesson' && state.currentLesson) {
                 showLesson(state.currentLesson);
-            } else {
-                // Find first uncompleted lesson or show first lesson
-                let firstLesson = null;
-                for (const phase of coursData.phases) {
-                    for (const lesson of phase.lessons) {
-                        if (!state.completedLessons.includes(lesson.id)) {
-                            firstLesson = lesson;
-                            break;
-                        }
-                    }
-                    if (firstLesson) break;
-                }
-                if (firstLesson) {
-                    showLesson(firstLesson.id);
-                } else {
-                    // All complete, show first lesson
-                    showLesson(coursData.phases[0].lessons[0].id);
-                }
+                return;
             }
+
+            if (state.currentView === 'timeline') {
+                showTimeline();
+                return;
+            }
+
+            if (state.currentView === 'exercises') {
+                showExercises();
+                return;
+            }
+
+            if (state.currentView === 'guides') {
+                showGuides();
+                return;
+            }
+
+            if (state.currentView === 'resources') {
+                showResources();
+                return;
+            }
+
+            showDashboard();
         }
 
         // Run on load
