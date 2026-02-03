@@ -91,13 +91,15 @@ def run_tests():
 
         # Test 5: Check video placeholder is present
         print("\n[TEST 5] Checking video player...")
-        video_placeholder = page.locator(".video-placeholder")
-        if video_placeholder.count() > 0:
-            print("  ✅ Video placeholder present (lazy loading)")
+        page.wait_for_timeout(1000)
+        iframe = page.locator(".video-container iframe")
+        error_panel = page.locator(".video-error")
+        if iframe.count() > 0:
+            print("  ✅ Invidious iframe present")
+        elif error_panel.count() > 0:
+            print("  ✅ Invidious error panel visible")
         else:
-            video_container = page.locator(".video-container")
-            assert video_container.is_visible(), "Video container should be visible"
-            print("  ✅ Video container present")
+            raise AssertionError("Expected Invidious iframe or error panel")
 
         # Test 6: Test notes functionality
         print("\n[TEST 6] Testing notes functionality...")

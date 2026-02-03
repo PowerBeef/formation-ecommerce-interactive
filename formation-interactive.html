@@ -2090,6 +2090,10 @@
                                 </div>
                                 <div class="toggle-switch" id="autoplay-toggle" onclick="toggleAutoplay()"></div>
                             </div>
+                            <div class="settings-item" style="flex-direction: column; align-items: flex-start;">
+                                <div class="settings-item-label">Lecture via Invidious</div>
+                                <div class="settings-item-desc">Rotation automatique d'instances si l'une est bloquée.</div>
+                            </div>
                             <div class="settings-item" style="flex-direction: column; align-items: stretch;">
                                 <div style="margin-bottom: 10px;">
                                     <div class="settings-item-label">Réinitialiser la progression</div>
@@ -2173,6 +2177,16 @@
             '_ia0V0Wb7G0': '_ia0V0Wb7G0_Comment faire 60 000mois en E-commerce en 2025 Gui_whisper.txt',
             'cIYX1PW6l1w': 'cIYX1PW6l1w_52 min to launch a successful e-commerce brand Com_whisper.txt'
         };
+
+        // ========================================
+        // INVIDIOUS CONFIG
+        // ========================================
+        const INVIDIOUS_INSTANCES = [
+            'https://inv.nadeko.net',
+            'https://yewtu.be',
+            'https://invidious.nerdvpn.de'
+        ];
+        const INVIDIOUS_TIMEOUT_MS = 8000;
 
         // Current transcript state
         let currentTranscript = '';
@@ -3487,7 +3501,8 @@
             searchQuery: '',
             settings: {
                 lightTheme: false,
-                autoplayVideos: false
+                autoplayVideos: false,
+                lastInvidiousBase: INVIDIOUS_INSTANCES[0]
             },
             pipDismissed: false
         };
@@ -3500,7 +3515,10 @@
                 state = { ...state, ...parsed };
                 // Ensure settings object exists for backward compatibility
                 if (!state.settings) {
-                    state.settings = { lightTheme: false, autoplayVideos: false };
+                    state.settings = { lightTheme: false, autoplayVideos: false, lastInvidiousBase: INVIDIOUS_INSTANCES[0] };
+                }
+                if (!state.settings.lastInvidiousBase) {
+                    state.settings.lastInvidiousBase = INVIDIOUS_INSTANCES[0];
                 }
                 if (!Array.isArray(state.completedChecklistItems)) {
                     state.completedChecklistItems = [];
@@ -3943,24 +3961,10 @@
                         </div>
                     </div>
 
-                    <div class="video-container">
-                        ${state.settings && state.settings.autoplayVideos ? `
-                            <iframe
-                                src="https://www.youtube-nocookie.com/embed/${lesson.videoId}?autoplay=1&rel=0"
-                                allowfullscreen
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                loading="lazy">
-                            </iframe>
-                        ` : `
-                            <div class="video-placeholder" onclick="loadVideo(this, '${lesson.videoId}')">
-                                <div class="play-button">▶</div>
-                                <span>Cliquer pour charger la vidéo</span>
-                            </div>
-                        `}
-                    </div>
+                    <div class="video-container" id="lesson-video-container"></div>
                     <div class="lesson-links">
-                        <a href="https://www.youtube.com/watch?v=${lesson.videoId}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
-                            🔗 YouTube
+                        <a href="${buildInvidiousWatchUrl(getInvidiousBase(), lesson.videoId)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" id="lesson-invidious-link">
+                            🔗 Invidious
                         </a>
                         ${transcriptMap[lesson.videoId] ? `
                             <button onclick="toggleTranscript('${lesson.videoId}')" class="btn btn-secondary btn-sm">
@@ -4034,61 +4038,119 @@
                 </div>
             `;
 
+            loadInvidiousVideo(lesson.videoId, state.settings.autoplayVideos);
             closeSidebarOnMobileIfOpen();
 
             // Initialize PiP observer for this lesson
             setTimeout(initPipObserver, 100);
         }
 
-        function loadVideo(placeholder, videoId) {
-            const container = placeholder.parentElement;
+        function normalizeInvidiousBase(base) {
+            return base.replace(/\/$/, '');
+        }
 
-            // Create iframe element for better error handling
+        function getInvidiousBase() {
+            return normalizeInvidiousBase(state.settings?.lastInvidiousBase || INVIDIOUS_INSTANCES[0]);
+        }
+
+        function getInvidiousInstanceOrder() {
+            const bases = INVIDIOUS_INSTANCES.map(normalizeInvidiousBase);
+            const preferred = getInvidiousBase();
+            const idx = bases.indexOf(preferred);
+            if (idx === -1) return bases;
+            return bases.slice(idx).concat(bases.slice(0, idx));
+        }
+
+        function buildInvidiousEmbedUrl(base, videoId, autoplay) {
+            const cleanBase = normalizeInvidiousBase(base);
+            return `${cleanBase}/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&playsinline=1`;
+        }
+
+        function buildInvidiousWatchUrl(base, videoId) {
+            const cleanBase = normalizeInvidiousBase(base);
+            return `${cleanBase}/watch?v=${videoId}`;
+        }
+
+        function buildInvidiousChannelUrl(base, handle) {
+            const cleanBase = normalizeInvidiousBase(base);
+            return `${cleanBase}/${handle.replace(/^\//, '')}`;
+        }
+
+        function updateLessonInvidiousLink(videoId, base) {
+            const link = document.getElementById('lesson-invidious-link');
+            if (!link) return;
+            link.href = buildInvidiousWatchUrl(base, videoId);
+        }
+
+        function loadInvidiousVideoFromBase(videoId, autoplay, base) {
+            state.settings.lastInvidiousBase = normalizeInvidiousBase(base);
+            saveState();
+            loadInvidiousVideo(videoId, autoplay, 0);
+        }
+
+        function loadInvidiousVideo(videoId, autoplay, attemptIndex = 0) {
+            const container = document.getElementById('lesson-video-container');
+            if (!container) return;
+
+            const instances = getInvidiousInstanceOrder();
+            if (attemptIndex >= instances.length) {
+                showInvidiousError(container, videoId, autoplay);
+                return;
+            }
+
+            const base = instances[attemptIndex];
             const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.src = buildInvidiousEmbedUrl(base, videoId, autoplay);
             iframe.allowFullscreen = true;
             iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
             iframe.loading = 'lazy';
+            iframe.referrerPolicy = 'origin-when-cross-origin';
 
-            // Create fallback link
-            const fallbackDiv = document.createElement('div');
-            fallbackDiv.style.cssText = 'text-align: center; margin-top: 10px; font-size: 13px; color: var(--text-secondary);';
-            fallbackDiv.innerHTML = `
-                Si la vidéo ne se charge pas,
-                <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" style="color: var(--accent-blue);">
-                    cliquez ici pour la voir sur YouTube
-                </a>
-            `;
-
-            // Timeout fallback - YouTube iframes don't fire onerror reliably
             let loaded = false;
             const timeout = setTimeout(() => {
                 if (!loaded) {
-                    showVideoError(container, videoId);
+                    loadInvidiousVideo(videoId, autoplay, attemptIndex + 1);
                 }
-            }, 15000); // 15 second timeout
+            }, INVIDIOUS_TIMEOUT_MS);
 
             iframe.onload = () => {
                 loaded = true;
                 clearTimeout(timeout);
-                // Reinitialize PiP observer after video loads
+                state.settings.lastInvidiousBase = normalizeInvidiousBase(base);
+                saveState();
+                updateLessonInvidiousLink(videoId, base);
                 setTimeout(initPipObserver, 100);
             };
 
-            // Clear container and add new elements
             container.innerHTML = '';
             container.appendChild(iframe);
-            container.appendChild(fallbackDiv);
         }
 
-        function showVideoError(container, videoId) {
+        function copyInvidiousLink(videoId) {
+            copyTextToClipboard(buildInvidiousWatchUrl(getInvidiousBase(), videoId));
+        }
+
+        function showInvidiousError(container, videoId, autoplay) {
+            const instanceButtons = INVIDIOUS_INSTANCES.map(base => {
+                const label = normalizeInvidiousBase(base).replace('https://', '');
+                return `
+                    <button class="btn btn-secondary btn-sm" onclick="loadInvidiousVideoFromBase('${videoId}', ${autoplay ? 'true' : 'false'}, '${base}')">
+                        Essayer ${label}
+                    </button>
+                `;
+            }).join('');
+
             container.innerHTML = `
-                <div class="video-error" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; background: var(--bg-tertiary); border-radius: var(--radius); text-align: center;">
+                <div class="video-error" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 20px; background: var(--bg-tertiary); border-radius: var(--radius); text-align: center;">
                     <span style="font-size: 48px; margin-bottom: 15px;">📺</span>
-                    <p style="margin-bottom: 20px; color: var(--text-secondary);">Vidéo non disponible ou connexion lente</p>
-                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" class="btn btn-primary" style="text-decoration: none;">
-                        ▶️ Regarder sur YouTube
-                    </a>
+                    <p style="margin-bottom: 10px; color: var(--text-secondary);">Impossible de charger la vidéo via Invidious.</p>
+                    <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 13px;">Certaines instances peuvent être bloquées; essayez une autre.</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 16px;">
+                        ${instanceButtons}
+                    </div>
+                    <button class="btn btn-secondary btn-sm" onclick="copyInvidiousLink('${videoId}')">
+                        📋 Copier le lien
+                    </button>
                 </div>
             `;
         }
@@ -4242,12 +4304,12 @@
 
                     <div class="section-card">
                         <div class="section-header">
-                            <div class="section-title">📺 Chaine YouTube</div>
+                            <div class="section-title">📺 Chaîne Invidious</div>
                         </div>
                         <div class="section-content">
-                            <p style="margin-bottom: 15px;">Retrouve toutes les videos sur la chaine de Sofian Kasmi</p>
-                            <a href="https://www.youtube.com/@sofiankasmi" target="_blank" class="btn btn-primary">
-                                Voir la chaine →
+                            <p style="margin-bottom: 15px;">Retrouve toutes les vidéos sur la chaîne Invidious de Sofian Kasmi</p>
+                            <a href="${buildInvidiousChannelUrl(INVIDIOUS_INSTANCES[0], '@sofiankasmi')}" target="_blank" class="btn btn-primary">
+                                Voir la chaîne →
                             </a>
                         </div>
                     </div>
@@ -4371,6 +4433,28 @@
                 showToast('Copié dans le presse-papiers');
             } catch (e) {
                 // Fallback for older browsers / insecure contexts
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Copié dans le presse-papiers');
+                } catch (e2) {
+                    showToast('Impossible de copier (navigateur)', 'error');
+                } finally {
+                    document.body.removeChild(ta);
+                }
+            }
+        }
+
+        async function copyTextToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copié dans le presse-papiers');
+            } catch (e) {
                 const ta = document.createElement('textarea');
                 ta.value = text;
                 ta.style.position = 'fixed';
