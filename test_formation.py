@@ -70,6 +70,10 @@ def run_tests():
 
         # Test 3: Test sidebar navigation
         print("\n[TEST 3] Testing sidebar navigation...")
+        modules_tab = page.locator("#sidebar-tab-modules")
+        if modules_tab.count() > 0:
+            modules_tab.first.click()
+            page.wait_for_timeout(300)
         phases = page.locator(".phase-header")
         phase_count = phases.count()
         print(f"  Found {phase_count} phases in sidebar")
@@ -128,12 +132,18 @@ def run_tests():
 
         # Test 8: Navigate to Exercises
         print("\n[TEST 8] Testing Exercises section...")
+        menu_tab = page.locator("#sidebar-tab-menu")
+        if menu_tab.count() > 0:
+            menu_tab.first.click()
+            page.wait_for_timeout(200)
         exercises_nav = page.locator('.nav-item[data-view="exercises"]')
         if exercises_nav.count() > 0:
             exercises_nav.first.click()
             page.wait_for_timeout(500)
             page.screenshot(path=f"{SCREENSHOTS_DIR}/05_exercises.png", full_page=True)
 
+            open_sections = page.locator("details.details-card[open]")
+            assert open_sections.count() > 0, "Expected at least one exercises section open"
             exercise_items = page.locator(".exercise-item")
             print(f"  Found {exercise_items.count()} exercises")
 
@@ -175,11 +185,15 @@ def run_tests():
         print("\n[TEST 11] Testing study timer accumulation...")
         dashboard_nav = page.locator('.nav-item[data-view="dashboard"]')
         if dashboard_nav.count() > 0:
-            dashboard_nav.first.click()
+            page.evaluate("() => showDashboard()")
             page.wait_for_timeout(400)
             before_seconds = get_dashboard_study_seconds(page)
 
             # Open a lesson and let the timer run briefly.
+            modules_tab = page.locator("#sidebar-tab-modules")
+            if modules_tab.count() > 0:
+                modules_tab.first.click()
+                page.wait_for_timeout(200)
             phases.first.click()
             page.wait_for_timeout(300)
             lessons = page.locator(".lesson-item")
@@ -187,7 +201,7 @@ def run_tests():
                 lessons.first.click()
                 page.wait_for_timeout(2500)
 
-            dashboard_nav.first.click()
+            page.evaluate("() => showDashboard()")
             page.wait_for_timeout(400)
             after_seconds = get_dashboard_study_seconds(page)
             assert after_seconds >= before_seconds + 2, "Study time should increase while viewing a lesson"
@@ -240,6 +254,10 @@ def run_tests():
         # Check if notes persisted
         notes_textarea = page.locator("#lesson-notes")
         # Navigate to a lesson first
+        modules_tab = page.locator("#sidebar-tab-modules")
+        if modules_tab.count() > 0:
+            modules_tab.first.click()
+            page.wait_for_timeout(200)
         phases.first.click()
         page.wait_for_timeout(300)
         lessons = page.locator(".lesson-item")

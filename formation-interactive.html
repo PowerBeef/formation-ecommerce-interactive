@@ -417,6 +417,42 @@
             flex-shrink: 0;
         }
 
+        .sidebar-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 14px 16px 0;
+        }
+
+        .sidebar-tab {
+            padding: 8px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sidebar-tab.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-panel {
+            padding-top: 8px;
+        }
+
+        .sidebar-panel.hidden {
+            display: none;
+        }
+
         /* Navigation */
         .nav-section {
             padding: 15px 0;
@@ -1661,6 +1697,61 @@
             font-size: 18px;
         }
 
+        .details-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .details-card summary {
+            list-style: none;
+        }
+
+        .details-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .details-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px 22px;
+            cursor: pointer;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .details-summary-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .details-summary-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .details-chevron {
+            font-size: 12px;
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+        }
+
+        details[open] .details-chevron {
+            transform: rotate(180deg);
+        }
+
+        .details-body {
+            padding: 20px 22px;
+        }
+
         /* Timeline */
         .timeline {
             position: relative;
@@ -1945,6 +2036,22 @@
             color: var(--text-muted);
         }
 
+        body.focus-mode .main-content {
+            margin-left: 0;
+        }
+
+        body.focus-mode .sidebar {
+            transform: translateX(-100%);
+        }
+
+        body.focus-mode .sidebar.open {
+            transform: translateX(0);
+        }
+
+        body.focus-mode .menu-toggle {
+            display: block;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -2008,36 +2115,45 @@
                 </div>
             </div>
 
-            <nav class="nav-section">
-                <div class="nav-section-title">Menu Principal</div>
-                <div class="nav-item" data-view="dashboard" onclick="showDashboard()">
-                    <span class="nav-item-icon">🏠</span>
-                    <span>Tableau de bord</span>
-                </div>
-                <div class="nav-item" data-view="timeline" onclick="showTimeline()">
-                    <span class="nav-item-icon">📅</span>
-                    <span>Planning (12 semaines)</span>
-                </div>
-                <div class="nav-item" data-view="exercises" onclick="showExercises()">
-                    <span class="nav-item-icon">📝</span>
-                    <span>Exercices</span>
-                    <span class="nav-item-badge" id="nav-badge-exercises">0</span>
-                </div>
-                <div class="nav-item" data-view="guides" onclick="showGuides()">
-                    <span class="nav-item-icon">🧩</span>
-                    <span>Guides & Templates</span>
-                    <span class="nav-item-badge" id="nav-badge-guides">0</span>
-                </div>
-                <div class="nav-item" data-view="resources" onclick="showResources()">
-                    <span class="nav-item-icon">🔗</span>
-                    <span>Ressources</span>
-                </div>
-            </nav>
+            <div class="sidebar-tabs">
+                <button class="sidebar-tab active" id="sidebar-tab-menu" onclick="setSidebarTab('menu')">Menu</button>
+                <button class="sidebar-tab" id="sidebar-tab-modules" onclick="setSidebarTab('modules')">Modules</button>
+            </div>
 
-            <nav class="nav-section" id="phases-nav">
-                <div class="nav-section-title">Modules de Formation</div>
-                <!-- Phases will be injected here -->
-            </nav>
+            <div class="sidebar-panel" id="sidebar-panel-menu">
+                <nav class="nav-section">
+                    <div class="nav-section-title">Menu Principal</div>
+                    <div class="nav-item" data-view="dashboard" onclick="showDashboard()">
+                        <span class="nav-item-icon">🏠</span>
+                        <span>Tableau de bord</span>
+                    </div>
+                    <div class="nav-item" data-view="timeline" onclick="showTimeline()">
+                        <span class="nav-item-icon">📅</span>
+                        <span>Planning (12 semaines)</span>
+                    </div>
+                    <div class="nav-item" data-view="exercises" onclick="showExercises()">
+                        <span class="nav-item-icon">📝</span>
+                        <span>Exercices</span>
+                        <span class="nav-item-badge" id="nav-badge-exercises">0</span>
+                    </div>
+                    <div class="nav-item" data-view="guides" onclick="showGuides()">
+                        <span class="nav-item-icon">🧩</span>
+                        <span>Guides & Templates</span>
+                        <span class="nav-item-badge" id="nav-badge-guides">0</span>
+                    </div>
+                    <div class="nav-item" data-view="resources" onclick="showResources()">
+                        <span class="nav-item-icon">🔗</span>
+                        <span>Ressources</span>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="sidebar-panel hidden" id="sidebar-panel-modules">
+                <nav class="nav-section" id="phases-nav">
+                    <div class="nav-section-title">Modules de Formation</div>
+                    <!-- Phases will be injected here -->
+                </nav>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -3502,7 +3618,8 @@
             settings: {
                 lightTheme: false,
                 autoplayVideos: false,
-                lastInvidiousBase: INVIDIOUS_INSTANCES[0]
+                lastInvidiousBase: INVIDIOUS_INSTANCES[0],
+                focusModeEnabled: false
             },
             pipDismissed: false
         };
@@ -3515,10 +3632,13 @@
                 state = { ...state, ...parsed };
                 // Ensure settings object exists for backward compatibility
                 if (!state.settings) {
-                    state.settings = { lightTheme: false, autoplayVideos: false, lastInvidiousBase: INVIDIOUS_INSTANCES[0] };
+                    state.settings = { lightTheme: false, autoplayVideos: false, lastInvidiousBase: INVIDIOUS_INSTANCES[0], focusModeEnabled: false };
                 }
                 if (!state.settings.lastInvidiousBase) {
                     state.settings.lastInvidiousBase = INVIDIOUS_INSTANCES[0];
+                }
+                if (typeof state.settings.focusModeEnabled !== 'boolean') {
+                    state.settings.focusModeEnabled = false;
                 }
                 if (!Array.isArray(state.completedChecklistItems)) {
                     state.completedChecklistItems = [];
@@ -3758,7 +3878,39 @@
             }
         }
 
+        let ui = {
+            sidebarTab: 'menu'
+        };
+
+        function setSidebarTab(tab) {
+            const menuTab = document.getElementById('sidebar-tab-menu');
+            const modulesTab = document.getElementById('sidebar-tab-modules');
+            const menuPanel = document.getElementById('sidebar-panel-menu');
+            const modulesPanel = document.getElementById('sidebar-panel-modules');
+
+            if (!menuTab || !modulesTab || !menuPanel || !modulesPanel) return;
+
+            const showMenu = tab === 'menu';
+            menuTab.classList.toggle('active', showMenu);
+            modulesTab.classList.toggle('active', !showMenu);
+            menuPanel.classList.toggle('hidden', !showMenu);
+            modulesPanel.classList.toggle('hidden', showMenu);
+            ui.sidebarTab = tab;
+        }
+
+        function getDefaultSidebarTabForView(view) {
+            if (view === 'lesson') return 'modules';
+            return 'menu';
+        }
+
+        function applySidebarTabForCurrentView() {
+            setSidebarTab(getDefaultSidebarTabForView(state.currentView));
+        }
+
         function toggleSidebar() {
+            const isMobile = window.innerWidth <= 768;
+            const isFocus = document.body.classList.contains('focus-mode');
+            if (!isMobile && !isFocus) return;
             document.getElementById('sidebar').classList.toggle('open');
             document.querySelector('.sidebar-overlay').classList.toggle('active');
         }
@@ -3769,6 +3921,23 @@
             if (sidebar && sidebar.classList.contains('open')) {
                 toggleSidebar();
             }
+        }
+
+        function applyFocusModeForCurrentView() {
+            const shouldFocus = state.currentView === 'lesson' && state.settings.focusModeEnabled;
+            document.body.classList.toggle('focus-mode', shouldFocus);
+            if (!shouldFocus) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.querySelector('.sidebar-overlay');
+                if (sidebar) sidebar.classList.remove('open');
+                if (overlay) overlay.classList.remove('active');
+            }
+        }
+
+        function toggleFocusMode() {
+            state.settings.focusModeEnabled = !state.settings.focusModeEnabled;
+            saveState();
+            applyFocusModeForCurrentView();
         }
 
         // ========================================
@@ -3782,6 +3951,8 @@
             renderSidebar();
             setActiveNav('dashboard');
             setHeaderContext('Tableau de bord', 'Formation E-commerce Organique');
+            applySidebarTabForCurrentView();
+            applyFocusModeForCurrentView();
 
             const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
             const completedLessons = state.completedLessons.length;
@@ -3896,6 +4067,8 @@
             resetPipState();
             renderSidebar();
             setActiveNav(null);
+            applySidebarTabForCurrentView();
+            applyFocusModeForCurrentView();
 
             // Find lesson
             let lesson = null;
@@ -3950,6 +4123,9 @@
                                     ← Précédente
                                 </button>
                             ` : ''}
+                            <button class="btn btn-secondary btn-sm" onclick="toggleFocusMode()">
+                                ${state.settings.focusModeEnabled ? '↩️ Quitter Focus' : '🎯 Focus'}
+                            </button>
                             <button class="btn ${isCompleted ? 'btn-secondary' : 'btn-success'} btn-sm" onclick="toggleLessonComplete('${lessonId}')">
                                 ${isCompleted ? '↩️ Annuler' : '✅ Terminer'}
                             </button>
@@ -4220,6 +4396,8 @@
             renderSidebar();
             setActiveNav('timeline');
             setHeaderContext('Planning', 'Roadmap 12 semaines');
+            applySidebarTabForCurrentView();
+            applyFocusModeForCurrentView();
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
@@ -4271,6 +4449,10 @@
             renderSidebar();
             setActiveNav('resources');
             setHeaderContext('Ressources', 'Outils et liens utiles');
+            applySidebarTabForCurrentView();
+            applyFocusModeForCurrentView();
+
+            const resourceGroups = coursData.resources || [];
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
@@ -4281,12 +4463,16 @@
                         </div>
                     </div>
 
-                    ${(coursData.resources || []).map(group => `
-                        <div class="section-card">
-                            <div class="section-header">
-                                <div class="section-title">🛠️ ${group.category}</div>
-                            </div>
-                            <div class="section-content">
+                    ${resourceGroups.map((group, index) => `
+                        <details class="details-card" ${index === 0 ? 'open' : ''}>
+                            <summary class="details-summary">
+                                <div>
+                                    <div class="details-summary-title">🛠️ ${group.category}</div>
+                                    <div class="details-summary-meta">${(group.items || []).length} ressources</div>
+                                </div>
+                                <div class="details-chevron">▼</div>
+                            </summary>
+                            <div class="details-body">
                                 <div style="display: grid; gap: 12px;">
                                     ${(group.items || []).map(tool => `
                                         <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px; background: var(--bg-tertiary); border-radius: var(--radius-sm);">
@@ -4294,12 +4480,12 @@
                                                 <div style="font-weight: 500;">${tool.name}</div>
                                                 <div style="font-size: 13px; color: var(--text-secondary);">${tool.desc}</div>
                                             </div>
-                                            <a href="${tool.url}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 8px 12px; white-space: nowrap;">Ouvrir →</a>
+                                            <a href="${tool.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="padding: 8px 12px; white-space: nowrap;">Ouvrir →</a>
                                         </div>
                                     `).join('')}
                                 </div>
                             </div>
-                        </div>
+                        </details>
                     `).join('')}
 
                     <div class="section-card">
@@ -4358,6 +4544,8 @@
             saveState();
             renderSidebar();
             setActiveNav('exercises');
+            applySidebarTabForCurrentView();
+            applyFocusModeForCurrentView();
 
             const exercises = getAllExercises();
             const completed = state.completedExercises.length;
@@ -4369,6 +4557,18 @@
                 byPhase.get(item.phase.id).items.push(item);
             }
 
+            let openPhaseId = null;
+            for (const { phase, items } of byPhase.values()) {
+                const done = items.filter(i => state.completedExercises.includes(i.exercise.id)).length;
+                if (done < items.length) {
+                    openPhaseId = phase.id;
+                    break;
+                }
+            }
+            if (!openPhaseId && byPhase.size > 0) {
+                openPhaseId = Array.from(byPhase.values())[0].phase.id;
+            }
+
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
                     <div class="page-header">
@@ -4378,15 +4578,19 @@
                         </div>
                     </div>
 
-                    ${Array.from(byPhase.values()).map(({ phase, items }) => `
-                        <div class="section-card">
-                            <div class="section-header">
-                                <div class="section-title">${phase.icon} ${phase.title}</div>
-                                <div style="color: var(--text-muted); font-size: 13px;">
-                                    ${items.filter(i => state.completedExercises.includes(i.exercise.id)).length}/${items.length}
+                    ${Array.from(byPhase.values()).map(({ phase, items }) => {
+                        const done = items.filter(i => state.completedExercises.includes(i.exercise.id)).length;
+                        const total = items.length;
+                        return `
+                        <details class="details-card" ${phase.id === openPhaseId ? 'open' : ''}>
+                            <summary class="details-summary">
+                                <div>
+                                    <div class="details-summary-title">${phase.icon} ${phase.title}</div>
+                                    <div class="details-summary-meta">${done}/${total} exercices complétés</div>
                                 </div>
-                            </div>
-                            <div class="section-content">
+                                <div class="details-chevron">▼</div>
+                            </summary>
+                            <div class="details-body">
                                 ${items.map(({ lesson, exercise }) => `
                                     <div class="exercise-item" style="align-items: flex-start;">
                                         <div class="exercise-checkbox ${state.completedExercises.includes(exercise.id) ? 'checked' : ''}"
@@ -4404,8 +4608,9 @@
                                     </div>
                                 `).join('')}
                             </div>
-                        </div>
-                    `).join('')}
+                        </details>
+                        `;
+                    }).join('')}
                 </div>
             `;
             closeSidebarOnMobileIfOpen();
@@ -4507,6 +4712,8 @@
             saveState();
             renderSidebar();
             setActiveNav('guides');
+            applySidebarTabForCurrentView();
+            applyFocusModeForCurrentView();
             const guideCount = Array.isArray(coursData.guides) ? coursData.guides.length : 0;
             setHeaderContext('Guides & Templates', `${guideCount} guides`);
 
@@ -5242,6 +5449,11 @@
             if (state.currentView === 'lesson' && state.currentLesson) {
                 const allLessons = coursData.phases.flatMap(p => p.lessons);
                 const currentIndex = allLessons.findIndex(l => l.id === state.currentLesson);
+
+                if (e.key === 'f' || e.key === 'F') {
+                    toggleFocusMode();
+                    return;
+                }
 
                 if (e.key === 'ArrowLeft' && currentIndex > 0) {
                     showLesson(allLessons[currentIndex - 1].id);
