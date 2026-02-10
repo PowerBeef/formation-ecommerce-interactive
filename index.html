@@ -4,30 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formation E-commerce Organique | Sofian Kasmi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* ========================================
            CSS VARIABLES & RESET
         ======================================== */
         :root {
-            --bg-primary: #0f0f0f;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #252525;
-            --bg-hover: #2d2d2d;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #8a8a8a;
-            --accent-blue: #3B82F6;
-            --accent-blue-hover: #2563EB;
-            --accent-green: #10B981;
-            --accent-green-hover: #059669;
-            --accent-orange: #F59E0B;
-            --accent-red: #EF4444;
-            --accent-purple: #8B5CF6;
-            --border-color: #333333;
-            --shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-            --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.45);
-            --radius: 12px;
-            --radius-sm: 8px;
+            --font-body: 'Manrope', 'Segoe UI', sans-serif;
+            --font-display: 'Fraunces', Georgia, serif;
+
+            --bg-primary: #090d14;
+            --bg-secondary: #101827;
+            --bg-tertiary: #1a2233;
+            --bg-hover: #212c40;
+            --bg-elevated: #0f1a2c;
+            --text-primary: #f4f7ff;
+            --text-secondary: #a8b4cb;
+            --text-muted: #75839f;
+            --accent-blue: #3d8bff;
+            --accent-blue-hover: #2e76e4;
+            --accent-green: #1bb980;
+            --accent-green-hover: #149969;
+            --accent-orange: #f2a93c;
+            --accent-red: #e65b67;
+            --accent-purple: #818cf8;
+            --border-color: #26344c;
+            --shadow: 0 10px 24px rgba(3, 9, 20, 0.28);
+            --shadow-lg: 0 26px 40px rgba(3, 9, 20, 0.5);
+            --radius: 14px;
+            --radius-sm: 10px;
             --transition: 180ms ease;
 
             /* Spacing & layout */
@@ -38,111 +45,113 @@
             --space-5: 20px;
             --space-6: 24px;
             --space-7: 32px;
-            --content-max: 1160px;
+            --space-8: 40px;
+            --content-max: 1240px;
         }
 
         /* Light theme variables */
-        body.light-theme {
-            --bg-primary: #f5f5f5;
+        body[data-theme="light"] {
+            --bg-primary: #f4f7fc;
             --bg-secondary: #ffffff;
-            --bg-tertiary: #e8e8e8;
-            --bg-hover: #d5d5d5;
-            --text-primary: #1a1a1a;
-            --text-secondary: #666666;
-            --text-muted: #999999;
-            --border-color: #e0e0e0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
-            background: #f5f5f5 !important;
-            color: #1a1a1a !important;
+            --bg-tertiary: #edf2fa;
+            --bg-hover: #dde7f5;
+            --bg-elevated: #f9fbff;
+            --text-primary: #152238;
+            --text-secondary: #415574;
+            --text-muted: #6b7f9b;
+            --border-color: #d7e1ef;
+            --shadow: 0 10px 24px rgba(20, 32, 56, 0.12);
+            --shadow-lg: 0 24px 44px rgba(20, 32, 56, 0.18);
+            background: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
         }
 
-        body.light-theme .sidebar {
+        body[data-theme="light"] .sidebar {
             background: #ffffff;
             border-right-color: #e0e0e0;
         }
 
-        body.light-theme .sidebar-header {
+        body[data-theme="light"] .sidebar-header {
             background: #ffffff;
         }
 
-        body.light-theme .header {
+        body[data-theme="light"] .header {
             background: #ffffff;
             border-bottom-color: #e0e0e0;
         }
 
-        body.light-theme .content-area {
+        body[data-theme="light"] .content-area {
             background: #f5f5f5;
         }
 
-        body.light-theme .section-card,
-        body.light-theme .lesson-exercise,
-        body.light-theme .key-points {
+        body[data-theme="light"] .section-card,
+        body[data-theme="light"] .lesson-exercise,
+        body[data-theme="light"] .key-points {
             background: #ffffff;
             border-color: #e0e0e0;
         }
 
-        body.light-theme .video-placeholder {
+        body[data-theme="light"] .video-placeholder {
             background: #e8e8e8;
         }
 
-        body.light-theme .nav-item {
+        body[data-theme="light"] .nav-item {
             color: #1a1a1a;
         }
 
-        body.light-theme .nav-item:hover {
+        body[data-theme="light"] .nav-item:hover {
             background: #e8e8e8;
         }
 
-        body.light-theme .phase-header {
+        body[data-theme="light"] .phase-header {
             background: #e8e8e8;
         }
 
-        body.light-theme .phase-header:hover {
+        body[data-theme="light"] .phase-header:hover {
             background: #d5d5d5;
         }
 
-        body.light-theme .progress-overview {
+        body[data-theme="light"] .progress-overview {
             border-bottom-color: #e0e0e0;
         }
 
-        body.light-theme .progress-bar {
+        body[data-theme="light"] .progress-bar {
             background: #e8e8e8;
         }
 
-        body.light-theme .search-box {
+        body[data-theme="light"] .search-box {
             background: #e8e8e8;
             border-color: #e0e0e0;
         }
 
-        body.light-theme .search-input {
+        body[data-theme="light"] .search-input {
             color: #1a1a1a;
         }
 
-        body.light-theme .progress-dropdown,
-        body.light-theme .settings-panel,
-        body.light-theme .search-results {
+        body[data-theme="light"] .progress-dropdown,
+        body[data-theme="light"] .settings-panel,
+        body[data-theme="light"] .search-results {
             background: #ffffff;
             border-color: #e0e0e0;
         }
 
-        body.light-theme .dropdown-header,
-        body.light-theme .settings-header {
+        body[data-theme="light"] .dropdown-header,
+        body[data-theme="light"] .settings-header {
             border-bottom-color: #e0e0e0;
         }
 
-        body.light-theme .notes-textarea {
+        body[data-theme="light"] .notes-textarea {
             background: #e8e8e8;
             color: #1a1a1a;
             border-color: #e0e0e0;
         }
 
-        body.light-theme .btn-secondary {
+        body[data-theme="light"] .btn-secondary {
             background: #e8e8e8;
             color: #1a1a1a;
         }
 
-        body.light-theme .btn-secondary:hover {
+        body[data-theme="light"] .btn-secondary:hover {
             background: #d5d5d5;
         }
 
@@ -205,6 +214,20 @@
             border-bottom: 1px solid var(--border-color);
         }
 
+        .settings-item-stack {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+
+        .settings-item-stretch {
+            align-items: stretch;
+        }
+
+        .settings-reset-copy {
+            margin-bottom: 10px;
+        }
+
         .settings-item:last-child {
             border-bottom: none;
         }
@@ -226,10 +249,12 @@
             width: 44px;
             height: 24px;
             background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             cursor: pointer;
             transition: var(--transition);
             flex-shrink: 0;
+            appearance: none;
         }
 
         .toggle-switch.active {
@@ -263,7 +288,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: var(--font-body);
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -271,6 +296,18 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            display: block;
+            fill: currentColor;
+            flex-shrink: 0;
         }
 
         /* ========================================
@@ -310,6 +347,11 @@
             gap: 12px;
             text-decoration: none;
             color: var(--text-primary);
+            width: 100%;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            text-align: left;
         }
 
         .logo-icon {
@@ -320,12 +362,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            color: #fff;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
         }
 
         .logo-text {
             font-size: 18px;
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .logo-text span {
@@ -392,6 +436,10 @@
 
         .sidebar-continue-button:hover {
             background: var(--bg-hover);
+        }
+
+        .sidebar-continue-copy {
+            min-width: 0;
         }
 
         .sidebar-continue-title {
@@ -477,6 +525,12 @@
             transition: var(--transition);
             cursor: pointer;
             border-left: 3px solid transparent;
+            width: 100%;
+            border-right: 0;
+            border-top: 0;
+            border-bottom: 0;
+            background: transparent;
+            text-align: left;
         }
 
         .nav-item:hover {
@@ -493,6 +547,9 @@
         .nav-item-icon {
             width: 20px;
             text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-item-badge {
@@ -527,6 +584,10 @@
             cursor: pointer;
             color: var(--text-secondary);
             transition: var(--transition);
+            width: 100%;
+            border: 0;
+            background: transparent;
+            text-align: left;
         }
 
         .phase-header:hover {
@@ -594,6 +655,10 @@
             font-size: 13px;
             cursor: pointer;
             transition: var(--transition);
+            width: 100%;
+            border: 0;
+            background: transparent;
+            text-align: left;
         }
 
         .lesson-item:hover {
@@ -725,6 +790,7 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
+            pointer-events: none;
         }
 
         .header-right {
@@ -744,6 +810,8 @@
             border: 1px solid var(--border-color);
             cursor: pointer;
             transition: var(--transition);
+            color: var(--text-primary);
+            appearance: none;
         }
 
         .progress-indicator:hover {
@@ -908,6 +976,12 @@
             font-size: 12px;
         }
 
+        .dropdown-reset {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
         .btn {
             padding: 10px 20px;
             border-radius: var(--radius-sm);
@@ -951,6 +1025,18 @@
             background: var(--accent-green-hover);
         }
 
+        .btn-danger {
+            background: var(--accent-red);
+            color: #fff;
+            border-color: var(--accent-red);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-danger:hover {
+            filter: brightness(1.05);
+        }
+
         /* Content Area */
         .content-area {
             padding: 30px;
@@ -978,9 +1064,11 @@
 
         .page-title {
             margin: 0;
-            font-size: 28px;
-            line-height: 1.2;
+            font-size: clamp(28px, 3vw, 38px);
+            line-height: 1.15;
             letter-spacing: -0.02em;
+            font-family: var(--font-display);
+            font-weight: 700;
         }
 
         .page-subtitle {
@@ -996,6 +1084,139 @@
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .today-layout {
+            display: grid;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .today-primary-rail {
+            display: grid;
+            gap: 14px;
+        }
+
+        .today-focus-card {
+            background: linear-gradient(140deg, rgba(61, 139, 255, 0.12), rgba(27, 185, 128, 0.08));
+            border: 1px solid rgba(61, 139, 255, 0.35);
+            border-radius: var(--radius);
+            padding: 18px;
+        }
+
+        .today-focus-eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .today-focus-title {
+            font-family: var(--font-display);
+            font-size: clamp(24px, 3vw, 34px);
+            line-height: 1.15;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .today-focus-meta {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .today-focus-copy {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .today-focus-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .next-best-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 16px;
+        }
+
+        .next-best-title {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .next-best-copy {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .kpi-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+        }
+
+        .kpi-value {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .kpi-label {
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.3;
+        }
+
+        .bottleneck-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .bottleneck-item {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+        }
+
+        .bottleneck-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .bottleneck-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .bottleneck-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .bottleneck-footer {
+            margin-top: 10px;
+            display: flex;
             justify-content: flex-end;
         }
 
@@ -1132,6 +1353,53 @@
             background: var(--accent-blue-hover);
         }
 
+        .video-error {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 34px 20px;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px dashed var(--border-color);
+        }
+
+        .video-error-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(230, 91, 103, 0.16);
+            border: 1px solid rgba(230, 91, 103, 0.35);
+            margin-bottom: 14px;
+            color: var(--accent-red);
+            font-size: 24px;
+        }
+
+        .video-error-title {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .video-error-subtitle {
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 13px;
+            max-width: 56ch;
+        }
+
+        .video-error-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
         .video-container.pip-active {
             background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
         }
@@ -1202,6 +1470,103 @@
             color: var(--text-secondary);
             margin-bottom: 25px;
             line-height: 1.8;
+        }
+
+        .lesson-layout {
+            display: grid;
+            gap: 18px;
+        }
+
+        .lesson-zone {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 18px;
+        }
+
+        .lesson-zone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .lesson-zone-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .lesson-panel-tabs {
+            display: inline-flex;
+            gap: 6px;
+            padding: 4px;
+            border-radius: 999px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .lesson-panel-tab {
+            border: 0;
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+        }
+
+        .lesson-panel-tab.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .lesson-panel-content {
+            margin-top: 16px;
+        }
+
+        .lesson-panel-section {
+            display: none;
+        }
+
+        .lesson-panel-section.active {
+            display: block;
+        }
+
+        .lesson-panel-empty {
+            color: var(--text-muted);
+            font-size: 14px;
+            padding: 10px 0;
+        }
+
+        .lesson-player-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .lesson-action-rail {
+            position: sticky;
+            bottom: 18px;
+            z-index: 20;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-top: 6px;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
+            background: color-mix(in srgb, var(--bg-secondary) 92%, transparent);
+            backdrop-filter: blur(8px);
+        }
+
+        .lesson-action-rail .btn {
+            border-radius: 999px;
         }
 
         .key-points {
@@ -1478,10 +1843,130 @@
             color: var(--accent-blue);
         }
 
+        .exercise-item-split {
+            align-items: flex-start;
+        }
+
+        .exercise-content-grow {
+            flex: 1;
+        }
+
+        .exercise-title {
+            margin-bottom: 6px;
+        }
+
+        .exercise-copy {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .exercise-lesson-meta {
+            color: var(--text-muted);
+        }
+
+        .exercise-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .exercise-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .exercise-filter-group {
+            display: inline-flex;
+            gap: 6px;
+            padding: 4px;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-tertiary);
+        }
+
+        .exercise-filter-btn {
+            border: 0;
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px 12px;
+            cursor: pointer;
+        }
+
+        .exercise-filter-btn.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .exercise-resume-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            background: linear-gradient(140deg, rgba(61, 139, 255, 0.11), rgba(27, 185, 128, 0.08));
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .exercise-resume-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .exercise-resume-name {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
         .lesson-exercise {
             margin-top: 40px;
             padding-top: 30px;
             border-top: 1px solid var(--border-color);
+        }
+
+        .module-overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+
+        .module-overview-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-tertiary);
+            padding: 14px;
+        }
+
+        .module-overview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .module-overview-header h3 {
+            font-size: 15px;
+        }
+
+        .module-overview-meta {
+            margin: 10px 0 12px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .dashboard-review-button {
+            margin-top: 15px;
         }
 
         /* Guides & Templates */
@@ -1523,6 +2008,12 @@
             user-select: none;
         }
 
+        .guide-summary {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
         .guide-details[open] .guide-toggle {
             color: var(--text-secondary);
         }
@@ -1557,7 +2048,7 @@
             background: rgba(0, 0, 0, 0.08);
         }
 
-        body.light-theme .guide-section summary {
+        body[data-theme="light"] .guide-section summary {
             background: rgba(0, 0, 0, 0.04);
         }
 
@@ -1568,6 +2059,11 @@
         .guide-section-title {
             font-weight: 600;
             font-size: 14px;
+        }
+
+        .guide-section-arrow {
+            color: var(--text-muted);
+            font-size: 12px;
         }
 
         .guide-section-body {
@@ -1656,7 +2152,7 @@
             background: rgba(0, 0, 0, 0.08);
         }
 
-        body.light-theme .template-header {
+        body[data-theme="light"] .template-header {
             background: rgba(0, 0, 0, 0.04);
         }
 
@@ -1752,6 +2248,45 @@
             padding: 20px 22px;
         }
 
+        .resource-grid,
+        .sources-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .resource-item,
+        .sources-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+        }
+
+        .resource-item-title,
+        .sources-item-title {
+            font-weight: 500;
+        }
+
+        .resource-item-desc,
+        .sources-item-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .resource-item-link {
+            padding: 8px 12px;
+            white-space: nowrap;
+        }
+
+        .resource-summary,
+        .sources-intro {
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+        }
+
         /* Timeline */
         .timeline {
             position: relative;
@@ -1773,6 +2308,11 @@
             padding-bottom: 25px;
         }
 
+        .timeline-item.current .timeline-content {
+            border: 1px solid rgba(61, 139, 255, 0.45);
+            box-shadow: 0 0 0 1px rgba(61, 139, 255, 0.25) inset;
+        }
+
         .timeline-marker {
             position: absolute;
             left: -25px;
@@ -1785,6 +2325,9 @@
             align-items: center;
             justify-content: center;
             font-size: 10px;
+            cursor: pointer;
+            padding: 0;
+            appearance: none;
         }
 
         .timeline-item.completed .timeline-marker {
@@ -1814,6 +2357,109 @@
         .timeline-desc {
             font-size: 13px;
             color: var(--text-secondary);
+        }
+
+        .timeline-deliverable {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .timeline-deliverable strong {
+            color: var(--accent-green);
+        }
+
+        .timeline-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .week-actions {
+            margin-top: 8px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            display: none;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .week-actions.open {
+            display: block;
+        }
+
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            z-index: 70;
+            background: color-mix(in srgb, var(--bg-secondary) 94%, transparent);
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            padding: 6px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-lg);
+            gap: 6px;
+            justify-content: space-between;
+        }
+
+        .mobile-nav-btn {
+            flex: 1;
+            border: 0;
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 8px 10px;
+            cursor: pointer;
+        }
+
+        .mobile-nav-btn.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .mobile-action-bar {
+            display: none;
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: 66px;
+            z-index: 69;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 10px;
+            background: color-mix(in srgb, var(--bg-secondary) 94%, transparent);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-lg);
+            gap: 8px;
+        }
+
+        .mobile-action-copy {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .mobile-action-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .search-recent-title {
+            padding: 10px 14px 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
         }
 
         /* Quote */
@@ -1927,7 +2573,7 @@
             }
 
             .search-input {
-                width: 200px;
+                width: 100%;
             }
 
             .header-right {
@@ -1943,7 +2589,7 @@
             }
 
             .content-area {
-                padding: 20px;
+                padding: 18px 14px 176px;
             }
 
             .page-header {
@@ -1964,6 +2610,28 @@
                 grid-template-columns: 1fr;
             }
 
+            .kpi-strip {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .today-focus-title {
+                font-size: 26px;
+            }
+
+            .today-focus-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lesson-panel-tabs {
+                width: 100%;
+            }
+
+            .lesson-panel-tab {
+                flex: 1 1 calc(50% - 6px);
+                text-align: center;
+            }
+
             .lesson-navigation {
                 flex-direction: column;
                 gap: 10px;
@@ -1972,6 +2640,36 @@
             .lesson-navigation .btn {
                 width: 100%;
                 justify-content: center;
+            }
+
+            .lesson-action-rail {
+                display: none;
+            }
+
+            .mobile-bottom-nav {
+                display: flex;
+            }
+
+            .mobile-action-bar.active {
+                display: block;
+            }
+
+            .search-box.mobile-expanded {
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                z-index: 1200;
+                padding: 14px;
+                background: var(--bg-secondary);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .search-box.mobile-expanded .search-results {
+                position: static;
+                margin-top: 10px;
+                display: block;
+                max-height: calc(100vh - 90px);
             }
         }
 
@@ -2016,6 +2714,13 @@
             cursor: pointer;
             border-bottom: 1px solid var(--border-color);
             transition: var(--transition);
+            width: 100%;
+            text-align: left;
+            border-left: 0;
+            border-right: 0;
+            border-top: 0;
+            background: transparent;
+            color: var(--text-primary);
         }
 
         .search-result-item:hover {
@@ -2034,6 +2739,11 @@
         .search-result-phase {
             font-size: 12px;
             color: var(--text-muted);
+        }
+
+        :where(button, [role="button"], a, input, textarea, summary):focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
         }
 
         body.focus-mode .main-content {
@@ -2081,18 +2791,22 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
     <div class="app-container">
         <!-- Sidebar Overlay -->
-        <div class="sidebar-overlay" onclick="toggleSidebar()" aria-hidden="true"></div>
+        <div class="sidebar-overlay" data-action="toggle-sidebar" aria-hidden="true"></div>
 
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar" role="navigation" aria-label="Navigation du cours">
             <div class="sidebar-header">
-                <a href="#" class="logo" onclick="showDashboard()">
-                    <div class="logo-icon">📚</div>
-                    <div class="logo-text">Formation <span>E-com</span></div>
-                </a>
+                <button class="logo" type="button" data-action="navigate" data-view="today" aria-label="Aller à Aujourd'hui">
+                    <div class="logo-icon" aria-hidden="true">
+                        <svg class="icon icon-book" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H8a4 4 0 0 0-4 4V5.5Zm2.5-.5A.5.5 0 0 0 6 5.5V19.1A5.95 5.95 0 0 1 8 18.5h10V5H6.5Zm3 3H16v2H9.5V8Zm0 4H16v2H9.5v-2Z"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">Formation <span>Interactive</span></div>
+                </button>
             </div>
 
             <div class="progress-overview">
@@ -2105,8 +2819,8 @@
                 </div>
                 <div class="sidebar-continue" id="sidebar-continue" style="display: none;">
                     <div class="sidebar-continue-label">Prochaine leçon</div>
-                    <button class="sidebar-continue-button" id="sidebar-continue-btn" onclick="continueNextLesson()">
-                        <div style="min-width: 0;">
+                    <button class="sidebar-continue-button" id="sidebar-continue-btn" type="button" data-action="continue-next-lesson">
+                        <div class="sidebar-continue-copy">
                             <div class="sidebar-continue-title" id="sidebar-continue-title"></div>
                             <div class="sidebar-continue-meta" id="sidebar-continue-meta"></div>
                         </div>
@@ -2116,35 +2830,63 @@
             </div>
 
             <div class="sidebar-tabs">
-                <button class="sidebar-tab active" id="sidebar-tab-menu" onclick="setSidebarTab('menu')">Menu</button>
-                <button class="sidebar-tab" id="sidebar-tab-modules" onclick="setSidebarTab('modules')">Modules</button>
+                <button class="sidebar-tab active" id="sidebar-tab-menu" type="button" data-action="set-sidebar-tab" data-sidebar-tab="menu">Navigation</button>
+                <button class="sidebar-tab" id="sidebar-tab-modules" type="button" data-action="set-sidebar-tab" data-sidebar-tab="modules">Modules</button>
             </div>
 
             <div class="sidebar-panel" id="sidebar-panel-menu">
                 <nav class="nav-section">
                     <div class="nav-section-title">Menu Principal</div>
-                    <div class="nav-item" data-view="dashboard" onclick="showDashboard()">
-                        <span class="nav-item-icon">🏠</span>
-                        <span>Tableau de bord</span>
-                    </div>
-                    <div class="nav-item" data-view="timeline" onclick="showTimeline()">
-                        <span class="nav-item-icon">📅</span>
-                        <span>Planning (12 semaines)</span>
-                    </div>
-                    <div class="nav-item" data-view="exercises" onclick="showExercises()">
-                        <span class="nav-item-icon">📝</span>
+                    <button class="nav-item" type="button" data-view="today" data-action="navigate">
+                        <span class="nav-item-icon" aria-hidden="true">
+                            <svg class="icon icon-home" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                                <path d="M4 10.5 12 4l8 6.5V20h-6v-5h-4v5H4v-9.5Z"/>
+                            </svg>
+                        </span>
+                        <span>Aujourd'hui</span>
+                    </button>
+                    <button class="nav-item" type="button" data-view="modules" data-action="navigate">
+                        <span class="nav-item-icon" aria-hidden="true">
+                            <svg class="icon icon-layers" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                                <path d="m12 3 9 4.5-9 4.5L3 7.5 12 3Zm-9 9L12 16.5 21 12v3L12 19.5 3 15v-3Z"/>
+                            </svg>
+                        </span>
+                        <span>Modules</span>
+                    </button>
+                    <button class="nav-item" type="button" data-view="exercises" data-action="navigate">
+                        <span class="nav-item-icon" aria-hidden="true">
+                            <svg class="icon icon-checklist" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                                <path d="M9.6 5H20v2H9.6V5ZM9.6 11H20v2H9.6v-2ZM9.6 17H20v2H9.6v-2ZM4.8 6.7l1.4 1.4 2.8-2.8 1.4 1.4-4.2 4.2L3.4 8.1l1.4-1.4Zm0 6 1.4 1.4 2.8-2.8 1.4 1.4-4.2 4.2-2.8-2.8 1.4-1.4Z"/>
+                            </svg>
+                        </span>
                         <span>Exercices</span>
                         <span class="nav-item-badge" id="nav-badge-exercises">0</span>
-                    </div>
-                    <div class="nav-item" data-view="guides" onclick="showGuides()">
-                        <span class="nav-item-icon">🧩</span>
-                        <span>Guides & Templates</span>
+                    </button>
+                    <button class="nav-item" type="button" data-view="guides" data-action="navigate">
+                        <span class="nav-item-icon" aria-hidden="true">
+                            <svg class="icon icon-guide" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                                <path d="M5 4h14v16H5V4Zm2 2v12h10V6H7Zm2 2h6v2H9V8Zm0 4h6v2H9v-2Z"/>
+                            </svg>
+                        </span>
+                        <span>Guides</span>
                         <span class="nav-item-badge" id="nav-badge-guides">0</span>
-                    </div>
-                    <div class="nav-item" data-view="resources" onclick="showResources()">
-                        <span class="nav-item-icon">🔗</span>
+                    </button>
+                    <button class="nav-item" type="button" data-view="resources" data-action="navigate">
+                        <span class="nav-item-icon" aria-hidden="true">
+                            <svg class="icon icon-link" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                                <path d="M10.6 14.8 9.2 13.4l5.2-5.2a3 3 0 1 1 4.2 4.2l-2.1 2.1-1.4-1.4 2.1-2.1a1 1 0 1 0-1.4-1.4l-5.2 5.2Zm2.8-5.6 1.4 1.4-5.2 5.2a3 3 0 1 1-4.2-4.2l2.1-2.1 1.4 1.4-2.1 2.1a1 1 0 1 0 1.4 1.4l5.2-5.2Z"/>
+                            </svg>
+                        </span>
                         <span>Ressources</span>
-                    </div>
+                    </button>
+                    <button class="nav-item" type="button" data-view="planning" data-action="navigate">
+                        <span class="nav-item-icon" aria-hidden="true">
+                            <svg class="icon icon-calendar" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                                <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm11 8H6v10h12V10ZM6 8h12V6H6v2Z"/>
+                            </svg>
+                        </span>
+                        <span>Planning</span>
+                    </button>
                 </nav>
             </div>
 
@@ -2160,19 +2902,23 @@
         <main class="main-content" role="main" aria-label="Contenu principal">
             <header class="header" role="banner">
                 <div class="header-left">
-                    <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Ouvrir/fermer le menu" aria-expanded="false">☰</button>
+                    <button class="menu-toggle" type="button" data-action="toggle-sidebar" aria-label="Ouvrir/fermer le menu" aria-expanded="false">☰</button>
                     <div class="search-box" role="search">
-                        <span class="search-icon" aria-hidden="true">🔍</span>
-                        <input type="text" class="search-input" placeholder="Rechercher une leçon..." id="search-input" oninput="debouncedSearch(this.value)" aria-label="Rechercher une leçon">
+                        <span class="search-icon" aria-hidden="true">
+                            <svg class="icon icon-search" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                                <path d="m17 15.6 4.7 4.7-1.4 1.4-4.7-4.7a8 8 0 1 1 1.4-1.4ZM5 11a6 6 0 1 0 12 0 6 6 0 0 0-12 0Z"/>
+                            </svg>
+                        </span>
+                        <input type="text" class="search-input" placeholder="Rechercher une leçon..." id="search-input" data-action="search-input" aria-label="Rechercher une leçon">
                         <div class="search-results" id="search-results"></div>
                     </div>
                 </div>
                 <div class="header-center" aria-live="polite">
-                    <div class="header-title" id="header-title">Tableau de bord</div>
+                    <div class="header-title" id="header-title">Aujourd'hui</div>
                     <div class="header-subtitle" id="header-subtitle">Formation E-commerce Organique</div>
                 </div>
                 <div class="header-right">
-                    <div class="progress-indicator" id="progress-indicator" onclick="toggleProgressDropdown(event)">
+                    <button class="progress-indicator" id="progress-indicator" type="button" data-action="toggle-progress-dropdown" aria-label="Ouvrir la progression">
                         <div class="progress-ring">
                             <svg viewBox="0 0 36 36">
                                 <path class="progress-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
@@ -2182,11 +2928,11 @@
                         </div>
                         <span class="progress-indicator-label">Progression</span>
                         <span class="dropdown-arrow">▼</span>
-                    </div>
+                    </button>
                     <div class="progress-dropdown" id="progress-dropdown">
                         <!-- Content rendered by JS -->
                     </div>
-                    <button class="settings-button" onclick="toggleSettingsPanel(event)" title="Paramètres">
+                    <button class="settings-button" type="button" data-action="toggle-settings-panel" title="Paramètres">
                         <span>&#9881;</span>
                     </button>
                     <div class="settings-panel" id="settings-panel">
@@ -2197,25 +2943,25 @@
                                     <div class="settings-item-label">Mode clair</div>
                                     <div class="settings-item-desc">Changer le thème de l'interface</div>
                                 </div>
-                                <div class="toggle-switch" id="theme-toggle" onclick="toggleTheme()"></div>
+                                <button class="toggle-switch" id="theme-toggle" type="button" role="switch" aria-label="Activer le thème clair" data-action="toggle-theme"></button>
                             </div>
                             <div class="settings-item">
                                 <div>
                                     <div class="settings-item-label">Lecture automatique</div>
                                     <div class="settings-item-desc">Lancer les vidéos automatiquement</div>
                                 </div>
-                                <div class="toggle-switch" id="autoplay-toggle" onclick="toggleAutoplay()"></div>
+                                <button class="toggle-switch" id="autoplay-toggle" type="button" role="switch" aria-label="Activer la lecture automatique" data-action="toggle-autoplay"></button>
                             </div>
-                            <div class="settings-item" style="flex-direction: column; align-items: flex-start;">
+                            <div class="settings-item settings-item-stack">
                                 <div class="settings-item-label">Lecture via Invidious</div>
                                 <div class="settings-item-desc">Rotation automatique d'instances si l'une est bloquée.</div>
                             </div>
-                            <div class="settings-item" style="flex-direction: column; align-items: stretch;">
-                                <div style="margin-bottom: 10px;">
+                            <div class="settings-item settings-item-stack settings-item-stretch">
+                                <div class="settings-reset-copy">
                                     <div class="settings-item-label">Réinitialiser la progression</div>
                                     <div class="settings-item-desc">Supprimer toutes les données sauvegardées</div>
                                 </div>
-                                <button class="btn" style="background: var(--accent-red); color: white; width: 100%;" onclick="resetProgress()">
+                                <button class="btn btn-danger" type="button" data-action="reset-progress">
                                     &#128465; Réinitialiser
                                 </button>
                             </div>
@@ -2228,10 +2974,19 @@
                 <!-- Content will be injected here -->
             </div>
 
+            <div class="mobile-action-bar" id="mobile-action-bar" aria-live="polite"></div>
+
+            <nav class="mobile-bottom-nav" aria-label="Navigation mobile">
+                <button class="mobile-nav-btn" type="button" data-action="navigate" data-view="today">Aujourd'hui</button>
+                <button class="mobile-nav-btn" type="button" data-action="navigate" data-view="modules">Modules</button>
+                <button class="mobile-nav-btn" type="button" data-action="navigate" data-view="exercises">Exercices</button>
+                <button class="mobile-nav-btn" type="button" data-action="navigate" data-view="planning">Planning</button>
+            </nav>
+
             <!-- Picture-in-Picture Video Player -->
             <div class="pip-container" id="pip-container">
-                <button class="pip-close" onclick="closePip()" title="Fermer">&times;</button>
-                <div class="pip-overlay" onclick="scrollToMainVideo()"></div>
+                <button class="pip-close" type="button" data-action="close-pip" title="Fermer">&times;</button>
+                <div class="pip-overlay" data-action="scroll-to-main-video"></div>
                 <div class="pip-video" id="pip-video"></div>
             </div>
         </main>
@@ -3603,47 +4358,273 @@
         // ========================================
         // STATE MANAGEMENT
         // ========================================
-        let state = {
-            completedLessons: [],
-            completedExercises: [],
-            completedChecklistItems: [],
-            completedWeeks: [],
-            notes: {},
-            currentView: 'dashboard',
-            currentLesson: null,
-            timerSeconds: 0,
+        const STORAGE_KEY = 'formation-ecom-state';
+        const STATE_SCHEMA_VERSION = 3;
+        const LEGACY_V2_SCHEMA_VERSION = 2;
+
+        const defaultStateV2 = {
+            meta: { schemaVersion: LEGACY_V2_SCHEMA_VERSION, lastSavedAt: null },
+            progress: {
+                completedLessonIds: [],
+                completedExerciseIds: [],
+                completedChecklistIds: [],
+                completedWeekIds: [],
+                timerSeconds: 0
+            },
+            ui: {
+                currentView: 'today',
+                currentLessonId: null,
+                sidebarTab: 'menu',
+                searchQuery: '',
+                pipDismissed: false
+            },
+            prefs: {
+                theme: 'dark',
+                autoplayVideos: false,
+                focusModeEnabled: false,
+                lastInvidiousBase: ''
+            },
+            notesByLessonId: {}
+        };
+
+        const defaultStateV3 = {
+            meta: { schemaVersion: STATE_SCHEMA_VERSION, lastSavedAt: null },
+            progress: {
+                completedLessonIds: [],
+                completedExerciseIds: [],
+                completedChecklistIds: [],
+                completedWeekIds: [],
+                timerSeconds: 0
+            },
+            ui: {
+                currentView: 'today',
+                currentLessonId: null,
+                sidebarTab: 'menu',
+                searchQuery: '',
+                pipDismissed: false,
+                lessonPanel: 'overview',
+                exercisesFilter: 'todo',
+                returnContext: {
+                    view: 'today',
+                    scrollY: 0
+                }
+            },
+            prefs: {
+                theme: 'dark',
+                autoplayVideos: false,
+                focusModeEnabled: false,
+                lastInvidiousBase: ''
+            },
+            notesByLessonId: {}
+        };
+
+        let runtimeState = {
             timerInterval: null,
             timerRunning: false,
-            searchQuery: '',
-            settings: {
-                lightTheme: false,
-                autoplayVideos: false,
-                lastInvidiousBase: INVIDIOUS_INSTANCES[0],
-                focusModeEnabled: false
-            },
-            pipDismissed: false
+            storageWarningShown: false,
+            recentLessonIds: [],
+            lastStartedExerciseId: null,
+            pendingScrollRestore: null,
+            videoRetryState: {
+                windowStartedAt: 0,
+                retriesInWindow: 0,
+                cooldownUntil: 0
+            }
         };
+
+        let state = JSON.parse(JSON.stringify(defaultStateV3));
+
+        function toUniqueArray(value) {
+            if (!Array.isArray(value)) return [];
+            return [...new Set(value.filter(Boolean))];
+        }
+
+        function sanitizeReturnContext(candidate = {}) {
+            const allowedViews = new Set(['today', 'modules', 'exercises', 'guides', 'resources', 'planning']);
+            const view = allowedViews.has(candidate.view) ? candidate.view : 'today';
+            const scrollY = Number.isFinite(candidate.scrollY) ? Math.max(0, Math.floor(candidate.scrollY)) : 0;
+            return { view, scrollY };
+        }
+
+        function sanitizeV2State(candidate = {}) {
+            const next = JSON.parse(JSON.stringify(defaultStateV2));
+
+            next.meta.schemaVersion = LEGACY_V2_SCHEMA_VERSION;
+            next.meta.lastSavedAt = typeof candidate.meta?.lastSavedAt === 'string' ? candidate.meta.lastSavedAt : null;
+
+            next.progress.completedLessonIds = toUniqueArray(candidate.progress?.completedLessonIds);
+            next.progress.completedExerciseIds = toUniqueArray(candidate.progress?.completedExerciseIds);
+            next.progress.completedChecklistIds = toUniqueArray(candidate.progress?.completedChecklistIds);
+            next.progress.completedWeekIds = toUniqueArray(candidate.progress?.completedWeekIds);
+            next.progress.timerSeconds = Number.isFinite(candidate.progress?.timerSeconds)
+                ? Math.max(0, Math.floor(candidate.progress.timerSeconds))
+                : 0;
+
+            const allowedViews = new Set(['today', 'lesson', 'modules', 'exercises', 'guides', 'resources', 'planning']);
+            next.ui.currentView = allowedViews.has(candidate.ui?.currentView) ? candidate.ui.currentView : 'today';
+            next.ui.currentLessonId = typeof candidate.ui?.currentLessonId === 'string' ? candidate.ui.currentLessonId : null;
+            next.ui.sidebarTab = candidate.ui?.sidebarTab === 'modules' ? 'modules' : 'menu';
+            next.ui.searchQuery = typeof candidate.ui?.searchQuery === 'string' ? candidate.ui.searchQuery : '';
+            next.ui.pipDismissed = Boolean(candidate.ui?.pipDismissed);
+
+            const incomingTheme = candidate.prefs?.theme;
+            next.prefs.theme = incomingTheme === 'light' ? 'light' : 'dark';
+            next.prefs.autoplayVideos = Boolean(candidate.prefs?.autoplayVideos);
+            next.prefs.focusModeEnabled = Boolean(candidate.prefs?.focusModeEnabled);
+            next.prefs.lastInvidiousBase = normalizeInvidiousBase(candidate.prefs?.lastInvidiousBase || INVIDIOUS_INSTANCES[0]);
+
+            if (candidate.notesByLessonId && typeof candidate.notesByLessonId === 'object') {
+                next.notesByLessonId = { ...candidate.notesByLessonId };
+            }
+            return next;
+        }
+
+        function sanitizeV3State(candidate = {}) {
+            const next = JSON.parse(JSON.stringify(defaultStateV3));
+
+            next.meta.schemaVersion = STATE_SCHEMA_VERSION;
+            next.meta.lastSavedAt = typeof candidate.meta?.lastSavedAt === 'string' ? candidate.meta.lastSavedAt : null;
+
+            next.progress.completedLessonIds = toUniqueArray(candidate.progress?.completedLessonIds);
+            next.progress.completedExerciseIds = toUniqueArray(candidate.progress?.completedExerciseIds);
+            next.progress.completedChecklistIds = toUniqueArray(candidate.progress?.completedChecklistIds);
+            next.progress.completedWeekIds = toUniqueArray(candidate.progress?.completedWeekIds);
+            next.progress.timerSeconds = Number.isFinite(candidate.progress?.timerSeconds)
+                ? Math.max(0, Math.floor(candidate.progress.timerSeconds))
+                : 0;
+
+            const allowedViews = new Set(['today', 'lesson', 'modules', 'exercises', 'guides', 'resources', 'planning']);
+            next.ui.currentView = allowedViews.has(candidate.ui?.currentView) ? candidate.ui.currentView : 'today';
+            next.ui.currentLessonId = typeof candidate.ui?.currentLessonId === 'string' ? candidate.ui.currentLessonId : null;
+            next.ui.sidebarTab = candidate.ui?.sidebarTab === 'modules' ? 'modules' : 'menu';
+            next.ui.searchQuery = typeof candidate.ui?.searchQuery === 'string' ? candidate.ui.searchQuery : '';
+            next.ui.pipDismissed = Boolean(candidate.ui?.pipDismissed);
+
+            const allowedPanels = new Set(['overview', 'notes', 'transcript', 'exercise']);
+            next.ui.lessonPanel = allowedPanels.has(candidate.ui?.lessonPanel) ? candidate.ui.lessonPanel : 'overview';
+            const allowedFilters = new Set(['todo', 'all', 'done']);
+            next.ui.exercisesFilter = allowedFilters.has(candidate.ui?.exercisesFilter) ? candidate.ui.exercisesFilter : 'todo';
+            next.ui.returnContext = sanitizeReturnContext(candidate.ui?.returnContext || {});
+
+            const incomingTheme = candidate.prefs?.theme;
+            next.prefs.theme = incomingTheme === 'light' ? 'light' : 'dark';
+            next.prefs.autoplayVideos = Boolean(candidate.prefs?.autoplayVideos);
+            next.prefs.focusModeEnabled = Boolean(candidate.prefs?.focusModeEnabled);
+            next.prefs.lastInvidiousBase = normalizeInvidiousBase(candidate.prefs?.lastInvidiousBase || INVIDIOUS_INSTANCES[0]);
+
+            if (candidate.notesByLessonId && typeof candidate.notesByLessonId === 'object') {
+                next.notesByLessonId = { ...candidate.notesByLessonId };
+            }
+            return next;
+        }
+
+        function migrateStateV1ToV2(parsedState = {}) {
+            if (parsedState?.meta?.schemaVersion === LEGACY_V2_SCHEMA_VERSION) {
+                return sanitizeV2State(parsedState);
+            }
+
+            const migrated = JSON.parse(JSON.stringify(defaultStateV2));
+
+            migrated.progress.completedLessonIds = toUniqueArray(parsedState.completedLessons);
+            migrated.progress.completedExerciseIds = toUniqueArray(parsedState.completedExercises);
+            migrated.progress.completedChecklistIds = toUniqueArray(parsedState.completedChecklistItems);
+            migrated.progress.completedWeekIds = toUniqueArray(parsedState.completedWeeks);
+            migrated.progress.timerSeconds = Number.isFinite(parsedState.timerSeconds)
+                ? Math.max(0, Math.floor(parsedState.timerSeconds))
+                : 0;
+
+            const legacyView = parsedState.currentView === 'dashboard'
+                ? 'today'
+                : (parsedState.currentView === 'timeline' ? 'planning' : parsedState.currentView);
+            const allowedViews = new Set(['today', 'lesson', 'modules', 'exercises', 'guides', 'resources', 'planning']);
+            migrated.ui.currentView = allowedViews.has(legacyView) ? legacyView : 'today';
+            migrated.ui.currentLessonId = typeof parsedState.currentLesson === 'string' ? parsedState.currentLesson : null;
+            migrated.ui.sidebarTab = migrated.ui.currentView === 'lesson' || migrated.ui.currentView === 'modules'
+                ? 'modules'
+                : 'menu';
+            migrated.ui.searchQuery = typeof parsedState.searchQuery === 'string' ? parsedState.searchQuery : '';
+            migrated.ui.pipDismissed = Boolean(parsedState.pipDismissed);
+
+            const legacySettings = parsedState.settings || {};
+            migrated.prefs.theme = legacySettings.lightTheme ? 'light' : 'dark';
+            migrated.prefs.autoplayVideos = Boolean(legacySettings.autoplayVideos);
+            migrated.prefs.focusModeEnabled = Boolean(legacySettings.focusModeEnabled);
+            migrated.prefs.lastInvidiousBase = normalizeInvidiousBase(
+                legacySettings.lastInvidiousBase || INVIDIOUS_INSTANCES[0]
+            );
+
+            if (parsedState.notes && typeof parsedState.notes === 'object') {
+                migrated.notesByLessonId = { ...parsedState.notes };
+            }
+
+            return sanitizeV2State(migrated);
+        }
+
+        function migrateStateV2ToV3(parsedState = {}) {
+            const safeV2 = sanitizeV2State(parsedState);
+            const migrated = JSON.parse(JSON.stringify(defaultStateV3));
+
+            migrated.meta.lastSavedAt = safeV2.meta.lastSavedAt;
+
+            migrated.progress.completedLessonIds = [...safeV2.progress.completedLessonIds];
+            migrated.progress.completedExerciseIds = [...safeV2.progress.completedExerciseIds];
+            migrated.progress.completedChecklistIds = [...safeV2.progress.completedChecklistIds];
+            migrated.progress.completedWeekIds = [...safeV2.progress.completedWeekIds];
+            migrated.progress.timerSeconds = safeV2.progress.timerSeconds;
+
+            migrated.ui.currentView = safeV2.ui.currentView;
+            migrated.ui.currentLessonId = safeV2.ui.currentLessonId;
+            migrated.ui.sidebarTab = safeV2.ui.sidebarTab;
+            migrated.ui.searchQuery = safeV2.ui.searchQuery;
+            migrated.ui.pipDismissed = safeV2.ui.pipDismissed;
+            migrated.ui.lessonPanel = 'overview';
+            migrated.ui.exercisesFilter = 'todo';
+            migrated.ui.returnContext = {
+                view: safeV2.ui.currentView === 'lesson' ? 'today' : safeV2.ui.currentView,
+                scrollY: 0
+            };
+
+            migrated.prefs.theme = safeV2.prefs.theme;
+            migrated.prefs.autoplayVideos = safeV2.prefs.autoplayVideos;
+            migrated.prefs.focusModeEnabled = safeV2.prefs.focusModeEnabled;
+            migrated.prefs.lastInvidiousBase = safeV2.prefs.lastInvidiousBase;
+            migrated.notesByLessonId = { ...safeV2.notesByLessonId };
+
+            return sanitizeV3State(migrated);
+        }
+
+        function migrateStateToCurrent(parsedState = {}) {
+            if (parsedState?.meta?.schemaVersion === STATE_SCHEMA_VERSION) {
+                return sanitizeV3State(parsedState);
+            }
+            if (parsedState?.meta?.schemaVersion === LEGACY_V2_SCHEMA_VERSION) {
+                return migrateStateV2ToV3(parsedState);
+            }
+            return migrateStateV2ToV3(migrateStateV1ToV2(parsedState));
+        }
 
         // Load state from localStorage
         function loadState() {
-            const saved = localStorage.getItem('formation-ecom-state');
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                state = { ...state, ...parsed };
-                // Ensure settings object exists for backward compatibility
-                if (!state.settings) {
-                    state.settings = { lightTheme: false, autoplayVideos: false, lastInvidiousBase: INVIDIOUS_INSTANCES[0], focusModeEnabled: false };
-                }
-                if (!state.settings.lastInvidiousBase) {
-                    state.settings.lastInvidiousBase = INVIDIOUS_INSTANCES[0];
-                }
-                if (typeof state.settings.focusModeEnabled !== 'boolean') {
-                    state.settings.focusModeEnabled = false;
-                }
-                if (!Array.isArray(state.completedChecklistItems)) {
-                    state.completedChecklistItems = [];
-                }
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) {
+                state = JSON.parse(JSON.stringify(defaultStateV3));
+                applyTheme();
+                return;
             }
+
+            try {
+                const parsed = JSON.parse(saved);
+                state = migrateStateToCurrent(parsed);
+            } catch (error) {
+                state = JSON.parse(JSON.stringify(defaultStateV3));
+            }
+
+            if (state.ui.currentView === 'today') {
+                state.ui.sidebarTab = 'menu';
+            } else if (state.ui.currentView === 'modules' || state.ui.currentView === 'lesson') {
+                state.ui.sidebarTab = 'modules';
+            }
+
             applyTheme();
         }
 
@@ -3653,6 +4634,8 @@
 
         // Save state to localStorage with size management
         function saveState() {
+            state.meta.schemaVersion = STATE_SCHEMA_VERSION;
+            state.meta.lastSavedAt = new Date().toISOString();
             const serialized = JSON.stringify(state);
             const sizeKB = new Blob([serialized]).size / 1024;
 
@@ -3661,7 +4644,7 @@
             }
 
             try {
-                localStorage.setItem('formation-ecom-state', serialized);
+                localStorage.setItem(STORAGE_KEY, serialized);
             } catch (e) {
                 if (e.name === 'QuotaExceededError') {
                     showStorageError();
@@ -3671,8 +4654,8 @@
 
         function showStorageWarning(sizeKB) {
             // Only show warning once per session
-            if (state._storageWarningShown) return;
-            state._storageWarningShown = true;
+            if (runtimeState.storageWarningShown) return;
+            runtimeState.storageWarningShown = true;
 
             const warning = document.createElement('div');
             warning.className = 'storage-warning';
@@ -3680,7 +4663,7 @@
                 <div style="position: fixed; bottom: 20px; right: 20px; background: var(--accent-orange); color: white; padding: 15px 20px; border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 10000; max-width: 300px;">
                     <strong>⚠️ Stockage presque plein</strong>
                     <p style="margin: 10px 0 0; font-size: 13px;">Vos notes utilisent ${Math.round(sizeKB)}KB. Pensez à exporter vos notes importantes.</p>
-                    <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: 5px; right: 10px; background: none; border: none; color: white; cursor: pointer; font-size: 18px;">×</button>
+                    <button type="button" data-action="dismiss-parent" style="position: absolute; top: 5px; right: 10px; background: none; border: none; color: white; cursor: pointer; font-size: 18px;">×</button>
                 </div>
             `;
             document.body.appendChild(warning);
@@ -3694,7 +4677,7 @@
                     <span style="font-size: 48px;">💾</span>
                     <h3 style="margin: 15px 0;">Stockage plein!</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 20px;">Impossible de sauvegarder. Exportez vos notes pour éviter toute perte de données.</p>
-                    <button onclick="this.parentElement.parentElement.remove()" class="btn btn-primary">Compris</button>
+                    <button type="button" data-action="dismiss-parent" class="btn btn-primary">Compris</button>
                 </div>
             `;
             document.body.appendChild(error);
@@ -3704,37 +4687,44 @@
         // STUDY TIMER
         // ========================================
         function startTimer() {
-            if (state.timerRunning) return;
-            state.timerRunning = true;
-            state.timerInterval = setInterval(() => {
-                state.timerSeconds++;
+            if (runtimeState.timerRunning) return;
+            runtimeState.timerRunning = true;
+            runtimeState.timerInterval = setInterval(() => {
+                state.progress.timerSeconds++;
                 updateTimerDisplay();
                 // Save every minute to persist progress
-                if (state.timerSeconds % 60 === 0) saveState();
+                if (state.progress.timerSeconds % 60 === 0) saveState();
             }, 1000);
         }
 
         function stopTimer() {
-            if (!state.timerRunning) return;
-            state.timerRunning = false;
-            clearInterval(state.timerInterval);
-            state.timerInterval = null;
+            if (!runtimeState.timerRunning) return;
+            runtimeState.timerRunning = false;
+            clearInterval(runtimeState.timerInterval);
+            runtimeState.timerInterval = null;
             saveState();
         }
 
         function updateTimerDisplay() {
-            // Update dashboard timer display if visible
-            const timerElements = document.querySelectorAll('.stat-value');
-            timerElements.forEach(el => {
-                if (el.previousElementSibling && el.previousElementSibling.textContent.includes('⏱️')) {
-                    el.textContent = formatTime(state.timerSeconds);
+            const kpiCards = document.querySelectorAll('.kpi-card');
+            kpiCards.forEach(card => {
+                const label = card.querySelector('.kpi-label');
+                const value = card.querySelector('.kpi-value');
+                if (!label || !value) return;
+                if (label.textContent.includes("Temps d'étude")) {
+                    value.textContent = formatTime(state.progress.timerSeconds);
                 }
             });
             // Update header dropdown timer
-            const dropdownTimer = document.querySelector('.dropdown-stat-value');
-            if (dropdownTimer && dropdownTimer.closest('.dropdown-stat')?.querySelector('.dropdown-stat-label')?.textContent.includes('Temps')) {
-                dropdownTimer.textContent = formatTime(state.timerSeconds);
-            }
+            const dropdownStats = document.querySelectorAll('.dropdown-stat');
+            dropdownStats.forEach((stat) => {
+                const label = stat.querySelector('.dropdown-stat-label');
+                const value = stat.querySelector('.dropdown-stat-value');
+                if (!label || !value) return;
+                if (label.textContent.includes('Temps')) {
+                    value.textContent = formatTime(state.progress.timerSeconds);
+                }
+            });
         }
 
         // ========================================
@@ -3745,30 +4735,34 @@
             let html = '<div class="nav-section-title">Modules de Formation</div>';
 
             coursData.phases.forEach((phase, phaseIndex) => {
-                const completedCount = phase.lessons.filter(l => state.completedLessons.includes(l.id)).length;
+                const completedCount = phase.lessons.filter(l => state.progress.completedLessonIds.includes(l.id)).length;
                 const totalCount = phase.lessons.length;
                 const isCompleted = completedCount === totalCount;
 
                 html += `
                     <div class="phase-group">
-                        <div class="phase-header ${state.currentLesson && phase.lessons.some(l => l.id === state.currentLesson) ? 'active' : ''}"
-                             onclick="togglePhase(${phaseIndex})">
+                        <button class="phase-header ${state.ui.currentLessonId && phase.lessons.some(l => l.id === state.ui.currentLessonId) ? 'active' : ''}"
+                                type="button"
+                                data-action="toggle-phase"
+                                data-phase-index="${phaseIndex}">
                             <div class="phase-icon">${phase.icon}</div>
                             <div class="phase-info">
                                 <div class="phase-title">${phase.title}</div>
                                 <div class="phase-progress">${completedCount}/${totalCount} leçons</div>
                             </div>
                             <span class="phase-arrow">▼</span>
-                        </div>
+                        </button>
                         <div class="phase-lessons" id="phase-${phaseIndex}">
                             ${phase.lessons.map(lesson => `
-                                <div class="lesson-item ${state.completedLessons.includes(lesson.id) ? 'completed' : ''} ${state.currentLesson === lesson.id ? 'active' : ''}"
-                                     onclick="showLesson('${lesson.id}')"
+                                <button class="lesson-item ${state.progress.completedLessonIds.includes(lesson.id) ? 'completed' : ''} ${state.ui.currentLessonId === lesson.id ? 'active' : ''}"
+                                     type="button"
+                                     data-action="open-lesson"
+                                     data-lesson-id="${lesson.id}"
                                      title="${lesson.title} (${lesson.duration})">
-                                    <div class="lesson-checkbox">${state.completedLessons.includes(lesson.id) ? '✓' : ''}</div>
+                                    <div class="lesson-checkbox">${state.progress.completedLessonIds.includes(lesson.id) ? '✓' : ''}</div>
                                     <span>${lesson.title.substring(0, 30)}${lesson.title.length > 30 ? '...' : ''}</span>
                                     ${lesson.exercise ? '<span class="exercise-badge" title="Exercice disponible">📝</span>' : ''}
-                                </div>
+                                </button>
                             `).join('')}
                         </div>
                     </div>
@@ -3780,10 +4774,24 @@
         }
 
         function setActiveNav(view) {
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('active');
+                el.removeAttribute('aria-current');
+            });
+            document.querySelectorAll('.mobile-nav-btn').forEach(el => {
+                el.classList.toggle('active', el.dataset.view === view);
+                if (el.dataset.view === view) {
+                    el.setAttribute('aria-current', 'page');
+                } else {
+                    el.removeAttribute('aria-current');
+                }
+            });
             if (!view) return;
             const active = document.querySelector(`.nav-item[data-view="${view}"]`);
-            if (active) active.classList.add('active');
+            if (active) {
+                active.classList.add('active');
+                active.setAttribute('aria-current', 'page');
+            }
         }
 
         function setHeaderContext(title, subtitle = '') {
@@ -3813,7 +4821,7 @@
 
         function updateProgress() {
             const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
-            const completedCount = state.completedLessons.length;
+            const completedCount = state.progress.completedLessonIds.length;
             const percentage = Math.round((completedCount / totalLessons) * 100);
 
             document.getElementById('global-progress-text').textContent = `${percentage}%`;
@@ -3826,7 +4834,7 @@
         function getNextLessonData() {
             for (const phase of coursData.phases) {
                 for (const lesson of phase.lessons) {
-                    if (!state.completedLessons.includes(lesson.id)) {
+                    if (!state.progress.completedLessonIds.includes(lesson.id)) {
                         return { phase, lesson };
                     }
                 }
@@ -3834,10 +4842,214 @@
             return null;
         }
 
+        function getFlatLessons() {
+            return coursData.phases.flatMap(phase => phase.lessons.map(lesson => ({ phase, lesson })));
+        }
+
+        function getLessonContext(lessonId) {
+            const all = getFlatLessons();
+            const found = all.find(item => item.lesson.id === lessonId);
+            return found || null;
+        }
+
+        function rememberRecentLesson(lessonId) {
+            if (!lessonId) return;
+            runtimeState.recentLessonIds = runtimeState.recentLessonIds.filter(id => id !== lessonId);
+            runtimeState.recentLessonIds.unshift(lessonId);
+            runtimeState.recentLessonIds = runtimeState.recentLessonIds.slice(0, 8);
+        }
+
+        function getRecentLessonSuggestions(limit = 6) {
+            const byId = new Map(getFlatLessons().map(item => [item.lesson.id, item]));
+            const fromRecent = runtimeState.recentLessonIds
+                .map(id => byId.get(id))
+                .filter(Boolean);
+            const withCurrent = [];
+            if (state.ui.currentLessonId && byId.has(state.ui.currentLessonId)) {
+                withCurrent.push(byId.get(state.ui.currentLessonId));
+            }
+            const nextData = getNextLessonData();
+            if (nextData) {
+                withCurrent.push({ lesson: nextData.lesson, phase: nextData.phase });
+            }
+            const merged = [...withCurrent, ...fromRecent];
+            const seen = new Set();
+            return merged.filter(item => {
+                if (seen.has(item.lesson.id)) return false;
+                seen.add(item.lesson.id);
+                return true;
+            }).slice(0, limit);
+        }
+
+        function getNextIncompleteExerciseData() {
+            for (const phase of coursData.phases) {
+                for (const lesson of phase.lessons) {
+                    if (!lesson.exercise) continue;
+                    if (!state.progress.completedExerciseIds.includes(lesson.exercise.id)) {
+                        return { phase, lesson, exercise: lesson.exercise };
+                    }
+                }
+            }
+            return null;
+        }
+
+        function getFirstIncompleteChecklistData() {
+            if (!Array.isArray(coursData.guides)) return null;
+            for (const guide of coursData.guides) {
+                for (const section of guide.sections || []) {
+                    const checklist = section.checklist || [];
+                    for (let i = 0; i < checklist.length; i++) {
+                        const itemId = `g-${guide.id}-${section.id}-${i}`;
+                        if (!state.progress.completedChecklistIds.includes(itemId)) {
+                            return { guide, section, itemId, text: checklist[i] };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        function getNextBestAction() {
+            const nextExercise = getNextIncompleteExerciseData();
+            if (nextExercise) {
+                return {
+                    type: 'exercise',
+                    title: nextExercise.exercise.title,
+                    subtitle: `${nextExercise.phase.icon} ${nextExercise.phase.title} • ${nextExercise.exercise.duration}`,
+                    description: `Passe à l'exercice lié à "${nextExercise.lesson.title}".`,
+                    action: {
+                        kind: 'open-lesson',
+                        lessonId: nextExercise.lesson.id,
+                        label: 'Démarrer l\'exercice'
+                    }
+                };
+            }
+
+            const checklist = getFirstIncompleteChecklistData();
+            if (checklist) {
+                return {
+                    type: 'checklist',
+                    title: checklist.section.title,
+                    subtitle: `${checklist.guide.icon} ${checklist.guide.title}`,
+                    description: checklist.text,
+                    action: {
+                        kind: 'navigate-guides',
+                        guideId: checklist.guide.id,
+                        label: 'Ouvrir le guide'
+                    }
+                };
+            }
+
+            return {
+                type: 'review',
+                title: 'Révision rapide',
+                subtitle: 'Tout est complété',
+                description: 'Reprends une leçon clé pour consolider les acquis.',
+                action: {
+                    kind: 'open-lesson',
+                    lessonId: coursData.phases[0]?.lessons[0]?.id || null,
+                    label: 'Revoir une leçon'
+                }
+            };
+        }
+
+        function getTopModuleBottlenecks(limit = 3) {
+            return coursData.phases
+                .map(phase => {
+                    const total = phase.lessons.length;
+                    const completed = phase.lessons.filter(l => state.progress.completedLessonIds.includes(l.id)).length;
+                    const remaining = total - completed;
+                    const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
+                    const nextLesson = phase.lessons.find(l => !state.progress.completedLessonIds.includes(l.id)) || phase.lessons[0];
+                    return { phase, total, completed, remaining, percentage, nextLesson };
+                })
+                .filter(item => item.remaining > 0)
+                .sort((a, b) => {
+                    if (b.remaining !== a.remaining) return b.remaining - a.remaining;
+                    return a.percentage - b.percentage;
+                })
+                .slice(0, limit);
+        }
+
+        function compactText(text, maxLength = 120) {
+            const clean = String(text || '').replace(/\s+/g, ' ').trim();
+            if (clean.length <= maxLength) return clean;
+            return `${clean.slice(0, maxLength - 1)}…`;
+        }
+
+        function getLessonPosition(lessonId) {
+            const all = getFlatLessons();
+            const index = all.findIndex(item => item.lesson.id === lessonId);
+            return index === -1 ? null : index + 1;
+        }
+
+        function setLessonPanel(panel, persist = true) {
+            const allowed = new Set(['overview', 'notes', 'transcript', 'exercise']);
+            const nextPanel = allowed.has(panel) ? panel : 'overview';
+            state.ui.lessonPanel = nextPanel;
+            if (persist) saveState();
+        }
+
+        function setExercisesFilter(filter, persist = true) {
+            const allowed = new Set(['todo', 'all', 'done']);
+            state.ui.exercisesFilter = allowed.has(filter) ? filter : 'todo';
+            if (persist) saveState();
+        }
+
+        function activateLessonPanel(panel, options = {}) {
+            const { persist = true, transcriptVideoId = null } = options;
+            setLessonPanel(panel, persist);
+
+            document.querySelectorAll('[data-action="set-lesson-panel"]').forEach(btn => {
+                const isActive = btn.dataset.panel === state.ui.lessonPanel;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            document.querySelectorAll('[data-panel-section]').forEach(section => {
+                section.classList.toggle('active', section.dataset.panelSection === state.ui.lessonPanel);
+            });
+
+            if (state.ui.lessonPanel === 'transcript') {
+                if (transcriptVideoId) {
+                    toggleTranscript(transcriptVideoId, true);
+                }
+            } else {
+                closeTranscript();
+            }
+        }
+
+        function captureReturnContext() {
+            if (state.ui.currentView === 'lesson') return;
+            state.ui.returnContext = {
+                view: ['today', 'modules', 'exercises', 'guides', 'resources', 'planning'].includes(state.ui.currentView)
+                    ? state.ui.currentView
+                    : 'today',
+                scrollY: Math.max(0, Math.floor(window.scrollY || 0))
+            };
+        }
+
+        function returnToContext() {
+            const ctx = sanitizeReturnContext(state.ui.returnContext || {});
+            runtimeState.pendingScrollRestore = ctx.scrollY;
+            navigateTo(ctx.view);
+        }
+
+        function applyPendingScrollRestore() {
+            if (!Number.isFinite(runtimeState.pendingScrollRestore)) return;
+            const target = Math.max(0, Math.floor(runtimeState.pendingScrollRestore));
+            runtimeState.pendingScrollRestore = null;
+            const restore = () => window.scrollTo({ top: target, behavior: 'auto' });
+            requestAnimationFrame(() => {
+                restore();
+                setTimeout(restore, 100);
+            });
+        }
+
         function continueNextLesson() {
             const next = getNextLessonData();
             if (!next) return;
-            showLesson(next.lesson.id);
+            navigateTo('lesson', { lessonId: next.lesson.id });
         }
 
         function updateSidebarContinue() {
@@ -3862,7 +5074,7 @@
             const guidesBadge = document.getElementById('nav-badge-guides');
 
             const totalExercises = getTotalExercises();
-            const completedExercises = state.completedExercises.length;
+            const completedExercises = state.progress.completedExerciseIds.length;
             const remainingExercises = Math.max(0, totalExercises - completedExercises);
 
             if (exercisesBadge) {
@@ -3878,11 +5090,7 @@
             }
         }
 
-        let ui = {
-            sidebarTab: 'menu'
-        };
-
-        function setSidebarTab(tab) {
+        function setSidebarTab(tab, persist = true) {
             const menuTab = document.getElementById('sidebar-tab-menu');
             const modulesTab = document.getElementById('sidebar-tab-modules');
             const menuPanel = document.getElementById('sidebar-panel-menu');
@@ -3895,24 +5103,34 @@
             modulesTab.classList.toggle('active', !showMenu);
             menuPanel.classList.toggle('hidden', !showMenu);
             modulesPanel.classList.toggle('hidden', showMenu);
-            ui.sidebarTab = tab;
+            state.ui.sidebarTab = showMenu ? 'menu' : 'modules';
+            if (persist) saveState();
         }
 
         function getDefaultSidebarTabForView(view) {
-            if (view === 'lesson') return 'modules';
+            if (view === 'lesson' || view === 'modules') return 'modules';
             return 'menu';
         }
 
         function applySidebarTabForCurrentView() {
-            setSidebarTab(getDefaultSidebarTabForView(state.currentView));
+            const fallback = getDefaultSidebarTabForView(state.ui.currentView);
+            const target = state.ui.sidebarTab || fallback;
+            setSidebarTab(target, false);
         }
 
         function toggleSidebar() {
             const isMobile = window.innerWidth <= 768;
             const isFocus = document.body.classList.contains('focus-mode');
             if (!isMobile && !isFocus) return;
-            document.getElementById('sidebar').classList.toggle('open');
-            document.querySelector('.sidebar-overlay').classList.toggle('active');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const toggleButton = document.querySelector('.menu-toggle');
+            if (!sidebar || !overlay) return;
+            const isOpen = sidebar.classList.toggle('open');
+            overlay.classList.toggle('active', isOpen);
+            if (toggleButton) {
+                toggleButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            }
         }
 
         function closeSidebarOnMobileIfOpen() {
@@ -3924,107 +5142,209 @@
         }
 
         function applyFocusModeForCurrentView() {
-            const shouldFocus = state.currentView === 'lesson' && state.settings.focusModeEnabled;
+            const shouldFocus = state.ui.currentView === 'lesson' && state.prefs.focusModeEnabled;
             document.body.classList.toggle('focus-mode', shouldFocus);
             if (!shouldFocus) {
                 const sidebar = document.getElementById('sidebar');
                 const overlay = document.querySelector('.sidebar-overlay');
+                const toggleButton = document.querySelector('.menu-toggle');
                 if (sidebar) sidebar.classList.remove('open');
                 if (overlay) overlay.classList.remove('active');
+                if (toggleButton) toggleButton.setAttribute('aria-expanded', 'false');
             }
         }
 
         function toggleFocusMode() {
-            state.settings.focusModeEnabled = !state.settings.focusModeEnabled;
+            state.prefs.focusModeEnabled = !state.prefs.focusModeEnabled;
             saveState();
             applyFocusModeForCurrentView();
+        }
+
+        function getLessonNavigationContext(lessonId) {
+            const allLessons = getFlatLessons();
+            const idx = allLessons.findIndex(item => item.lesson.id === lessonId);
+            if (idx === -1) return null;
+            return {
+                previous: idx > 0 ? allLessons[idx - 1].lesson : null,
+                next: idx < allLessons.length - 1 ? allLessons[idx + 1].lesson : null
+            };
+        }
+
+        function renderMobileActionBar() {
+            const bar = document.getElementById('mobile-action-bar');
+            if (!bar) return;
+
+            if (window.innerWidth > 768) {
+                bar.classList.remove('active');
+                bar.innerHTML = '';
+                return;
+            }
+
+            if (state.ui.currentView === 'today') {
+                const nextData = getNextLessonData();
+                bar.innerHTML = `
+                    <div class="mobile-action-copy">Reprends ton parcours sans chercher dans les modules.</div>
+                    <div class="mobile-action-row">
+                        ${nextData
+                            ? `<button class="btn btn-primary btn-sm" type="button" data-action="open-lesson" data-lesson-id="${nextData.lesson.id}">Continuer</button>`
+                            : '<button class="btn btn-primary btn-sm" type="button" data-action="navigate" data-view="guides">Guides</button>'}
+                        <button class="btn btn-secondary btn-sm" type="button" data-action="navigate" data-view="exercises">Exercices</button>
+                        <button class="btn btn-secondary btn-sm" type="button" data-action="navigate" data-view="modules">Modules</button>
+                    </div>
+                `;
+                bar.classList.add('active');
+                return;
+            }
+
+            if (state.ui.currentView === 'lesson' && state.ui.currentLessonId) {
+                const nav = getLessonNavigationContext(state.ui.currentLessonId);
+                const isCompleted = state.progress.completedLessonIds.includes(state.ui.currentLessonId);
+                const currentLabel = isCompleted ? 'Annuler' : 'Terminer';
+                const currentClass = isCompleted ? 'btn-secondary' : 'btn-success';
+
+                bar.innerHTML = `
+                    <div class="mobile-action-copy">Navigation rapide de la leçon</div>
+                    <div class="mobile-action-row">
+                        ${nav?.previous ? `<button class="btn btn-secondary btn-sm" type="button" data-action="open-lesson" data-lesson-id="${nav.previous.id}">Précédent</button>` : '<span></span>'}
+                        <button class="btn ${currentClass} btn-sm" type="button" data-action="toggle-lesson-complete" data-lesson-id="${state.ui.currentLessonId}">${currentLabel}</button>
+                        ${nav?.next ? `<button class="btn btn-primary btn-sm" type="button" data-action="open-lesson" data-lesson-id="${nav.next.id}">Suivante</button>` : '<button class="btn btn-secondary btn-sm" type="button" data-action="return-to-context">Retour</button>'}
+                    </div>
+                `;
+                bar.classList.add('active');
+                return;
+            }
+
+            bar.classList.remove('active');
+            bar.innerHTML = '';
         }
 
         // ========================================
         // VIEWS
         // ========================================
         function showDashboard() {
-            state.currentView = 'dashboard';
-            state.currentLesson = null;
-            stopTimer(); // Stop timer when leaving lesson
+            state.ui.currentView = 'today';
+            state.ui.currentLessonId = null;
+            state.ui.sidebarTab = 'menu';
+            stopTimer();
+            resetPipState();
             saveState();
             renderSidebar();
-            setActiveNav('dashboard');
-            setHeaderContext('Tableau de bord', 'Formation E-commerce Organique');
+            setActiveNav('today');
+            setHeaderContext("Aujourd'hui", 'Formation E-commerce Organique');
             applySidebarTabForCurrentView();
             applyFocusModeForCurrentView();
 
             const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
-            const completedLessons = state.completedLessons.length;
-            const percentage = Math.round((completedLessons / totalLessons) * 100);
+            const completedLessons = state.progress.completedLessonIds.length;
+            const percentage = totalLessons === 0 ? 0 : Math.round((completedLessons / totalLessons) * 100);
 
             const nextData = getNextLessonData();
             const nextLesson = nextData ? nextData.lesson : null;
             const nextPhase = nextData ? nextData.phase : null;
+            const nextBest = getNextBestAction();
+            const bottlenecks = getTopModuleBottlenecks(3);
+            const totalExercises = getTotalExercises();
+            const completedExercises = state.progress.completedExerciseIds.length;
+
+            let bestActionButton = '';
+            if (nextBest.action?.kind === 'open-lesson' && nextBest.action.lessonId) {
+                bestActionButton = `<button class="btn btn-primary" type="button" data-action="open-lesson" data-lesson-id="${nextBest.action.lessonId}">${nextBest.action.label}</button>`;
+            } else if (nextBest.action?.kind === 'navigate-guides') {
+                bestActionButton = `<button class="btn btn-primary" type="button" data-action="open-guide" data-guide-id="${nextBest.action.guideId}">${nextBest.action.label}</button>`;
+            }
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
                     <div class="page-header">
                         <div class="page-header-left">
-                            <h1 class="page-title">👋 Bienvenue dans ta formation</h1>
+                            <h1 class="page-title">Bienvenue dans ta formation</h1>
                             <p class="page-subtitle">Marketing Organique pour E-commerce par Sofian Kasmi</p>
                         </div>
                         <div class="page-actions">
-                            <button class="btn btn-secondary btn-sm" onclick="showGuides()">🧩 Guides</button>
-                            <button class="btn btn-secondary btn-sm" onclick="showExercises()">📝 Exercices</button>
+                            <button class="btn btn-secondary btn-sm" type="button" data-action="navigate" data-view="guides">Guides</button>
+                            <button class="btn btn-secondary btn-sm" type="button" data-action="navigate" data-view="exercises">Exercices</button>
                         </div>
                     </div>
 
-                    <div class="dashboard-grid">
-                        <div class="stat-card">
-                            <div class="stat-icon blue">📚</div>
-                            <div class="stat-value">${completedLessons}/${totalLessons}</div>
-                            <div class="stat-label">Leçons complétées</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon green">📝</div>
-                            <div class="stat-value">${state.completedExercises.length}/${getTotalExercises()}</div>
-                            <div class="stat-label">Exercices réalisés</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon orange">⏱️</div>
-                            <div class="stat-value">${formatTime(state.timerSeconds)}</div>
-                            <div class="stat-label">Temps d'étude total</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon purple">🎯</div>
-                            <div class="stat-value">${percentage}%</div>
-                            <div class="stat-label">Progression globale</div>
-                        </div>
-                    </div>
+                    <div class="today-layout">
+                        <section class="today-primary-rail">
+                            ${nextLesson ? `
+                            <article class="today-focus-card">
+                                <div class="today-focus-eyebrow">Priorité du jour</div>
+                                <h2 class="today-focus-title">Continuer la prochaine leçon</h2>
+                                <p class="today-focus-meta">${nextPhase.icon} ${nextPhase.title} • Leçon ${getLessonPosition(nextLesson.id)}/${totalLessons} • ${nextLesson.duration}</p>
+                                <p class="today-focus-copy">Objectif: ${compactText(nextLesson.description, 130)}</p>
+                                <div class="today-focus-actions">
+                                    <button class="btn btn-primary" type="button" data-action="open-lesson" data-lesson-id="${nextLesson.id}">Continuer la prochaine leçon</button>
+                                    <button class="btn btn-secondary" type="button" data-action="navigate" data-view="modules">Voir les modules</button>
+                                </div>
+                            </article>
+                            ` : `
+                            <article class="today-focus-card">
+                                <div class="today-focus-eyebrow">Priorité du jour</div>
+                                <h2 class="today-focus-title">Toutes les leçons sont terminées</h2>
+                                <p class="today-focus-copy">Maintiens l'élan avec les exercices pratiques et les checklists des guides.</p>
+                                <div class="today-focus-actions">
+                                    <button class="btn btn-primary" type="button" data-action="navigate" data-view="exercises">Passer aux exercices</button>
+                                    <button class="btn btn-secondary" type="button" data-action="navigate" data-view="guides">Ouvrir les guides</button>
+                                </div>
+                            </article>
+                            `}
 
-                    ${nextLesson ? `
-                    <div class="section-card">
-                        <div class="section-header">
-                            <div class="section-title">🚀 Continuer ta formation</div>
-                        </div>
-                        <div class="section-content">
-                            <h3 style="margin-bottom: 10px;">${nextLesson.title}</h3>
-                            ${nextPhase ? `<p style="color: var(--text-muted); font-size: 13px; margin-bottom: 10px;">${nextPhase.icon} ${nextPhase.title} • ${nextLesson.duration}</p>` : ''}
-                            <p style="color: var(--text-secondary); margin-bottom: 20px;">${nextLesson.description}</p>
-                            <button class="btn btn-primary" onclick="showLesson('${nextLesson.id}')">
-                                ▶️ Continuer
-                            </button>
-                        </div>
+                            <article class="next-best-card">
+                                <div class="next-best-title">Prochaine meilleure action: ${nextBest.title}</div>
+                                <p class="next-best-copy">${nextBest.subtitle}</p>
+                                <p class="next-best-copy">${compactText(nextBest.description, 130)}</p>
+                                ${bestActionButton}
+                            </article>
+
+                            <div class="kpi-strip">
+                                <div class="kpi-card">
+                                    <div class="kpi-value">${completedLessons}/${totalLessons}</div>
+                                    <div class="kpi-label">Leçons complétées</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">${completedExercises}/${totalExercises}</div>
+                                    <div class="kpi-label">Exercices réalisés</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">${formatTime(state.progress.timerSeconds)}</div>
+                                    <div class="kpi-label">Temps d'étude total</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">${percentage}%</div>
+                                    <div class="kpi-label">Progression globale</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="section-card">
+                            <div class="section-header">
+                                <div class="section-title">Bottlenecks à débloquer</div>
+                                <button class="btn btn-secondary btn-sm" type="button" data-action="navigate" data-view="modules">Voir tous les modules</button>
+                            </div>
+                            <div class="section-content">
+                                <div class="bottleneck-list">
+                                    ${bottlenecks.map(item => `
+                                        <article class="bottleneck-item">
+                                            <div class="bottleneck-header">
+                                                <div class="bottleneck-title">${item.phase.icon} ${item.phase.title}</div>
+                                                <div class="bottleneck-meta">${item.completed}/${item.total}</div>
+                                            </div>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width:${item.percentage}%"></div>
+                                            </div>
+                                            <div class="bottleneck-footer">
+                                                <button class="btn btn-secondary btn-sm" type="button" data-action="open-lesson" data-lesson-id="${item.nextLesson.id}">
+                                                    Continuer ce module
+                                                </button>
+                                            </div>
+                                        </article>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </section>
                     </div>
-                    ` : `
-                    <div class="section-card">
-                        <div class="section-header">
-                            <div class="section-title">🎉 Félicitations!</div>
-                        </div>
-                        <div class="section-content">
-                            <p>Tu as complété toutes les leçons! N'oublie pas de faire les exercices pratiques dans chaque leçon.</p>
-                            <button class="btn btn-primary" onclick="showLesson('${coursData.phases[0].lessons[0].id}')" style="margin-top: 15px;">
-                                Revoir les leçons
-                            </button>
-                        </div>
-                    </div>
-                    `}
 
                     <div class="quote-box">
                         <div class="quote-text">"Ton objectif en tant que débutant, c'est de devenir un bon fondateur. Quand tu auras des compétences, tu vas prendre de bonnes décisions, mettre en place de bonnes actions, et par conséquence, tu vas faire beaucoup d'argent."</div>
@@ -4033,74 +5353,145 @@
 
                     <div class="section-card">
                         <div class="section-header">
-                            <div class="section-title">📊 Progression par module</div>
+                            <div class="section-title">Élan de progression</div>
                         </div>
                         <div class="section-content">
-                            ${coursData.phases.map(phase => {
-                                const completed = phase.lessons.filter(l => state.completedLessons.includes(l.id)).length;
-                                const total = phase.lessons.length;
-                                const pct = Math.round((completed / total) * 100);
-                                return `
-                                    <div style="margin-bottom: 20px;">
-                                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                            <span>${phase.icon} ${phase.title}</span>
-                                            <span style="color: var(--text-muted)">${completed}/${total}</span>
-                                        </div>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: ${pct}%"></div>
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
+                            <p class="resource-summary">La progression des modules détaillée est disponible dans l'onglet Modules. Ici, l'objectif est d'avancer sans friction.</p>
+                            <button class="btn btn-secondary" type="button" data-action="navigate" data-view="modules">Ouvrir la vue Modules</button>
                         </div>
                     </div>
                 </div>
             `;
             closeSidebarOnMobileIfOpen();
+            renderMobileActionBar();
+            applyPendingScrollRestore();
+        }
+
+        function showModules() {
+            state.ui.currentView = 'modules';
+            state.ui.currentLessonId = null;
+            stopTimer();
+            resetPipState();
+            state.ui.sidebarTab = 'modules';
+            saveState();
+            renderSidebar();
+            setActiveNav('modules');
+            setHeaderContext('Modules', `${coursData.phases.length} modules de formation`);
+            applySidebarTabForCurrentView();
+            applyFocusModeForCurrentView();
+
+            const nextData = getNextLessonData();
+
+            document.getElementById('content-area').innerHTML = `
+                <div class="fade-in">
+                    <div class="page-header">
+                        <div class="page-header-left">
+                            <h1 class="page-title">Modules</h1>
+                            <p class="page-subtitle">Parcours complet, progression par module et accès rapide à chaque leçon.</p>
+                        </div>
+                    </div>
+
+                    ${nextData ? `
+                    <div class="section-card">
+                        <div class="section-header">
+                            <div class="section-title">Prochaine étape</div>
+                        </div>
+                        <div class="section-content">
+                            <p class="resource-summary">${nextData.phase.icon} ${nextData.phase.title} • ${nextData.lesson.duration}</p>
+                            <h3>${nextData.lesson.title}</h3>
+                            <p class="resource-summary">${nextData.lesson.description}</p>
+                            <button class="btn btn-primary" type="button" data-action="open-lesson" data-lesson-id="${nextData.lesson.id}">Continuer la prochaine leçon</button>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <div class="section-title">Progression des modules</div>
+                        </div>
+                        <div class="section-content">
+                            <div class="module-overview-grid">
+                                ${coursData.phases.map((phase) => {
+                                    const total = phase.lessons.length;
+                                    const completed = phase.lessons.filter(l => state.progress.completedLessonIds.includes(l.id)).length;
+                                    const percentage = Math.round((completed / total) * 100);
+                                    const nextLesson = phase.lessons.find(l => !state.progress.completedLessonIds.includes(l.id)) || phase.lessons[0];
+                                    return `
+                                        <article class="module-overview-card">
+                                            <div class="module-overview-header">
+                                                <h3>${phase.icon} ${phase.title}</h3>
+                                                <span>${completed}/${total}</span>
+                                            </div>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width:${percentage}%"></div>
+                                            </div>
+                                            <p class="module-overview-meta">${phase.weeks} semaines • ${percentage}% complété</p>
+                                            <button class="btn btn-secondary btn-sm" type="button" data-action="open-lesson" data-lesson-id="${nextLesson.id}">Ouvrir une leçon</button>
+                                        </article>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            closeSidebarOnMobileIfOpen();
+            renderMobileActionBar();
+            applyPendingScrollRestore();
         }
 
         function showLesson(lessonId) {
-            state.currentView = 'lesson';
-            state.currentLesson = lessonId;
+            state.ui.currentView = 'lesson';
+            state.ui.currentLessonId = lessonId;
+            state.ui.sidebarTab = 'modules';
+            if (!['overview', 'notes', 'transcript', 'exercise'].includes(state.ui.lessonPanel)) {
+                state.ui.lessonPanel = 'overview';
+            }
             saveState();
-            startTimer(); // Start tracking study time
+            startTimer();
             resetPipState();
             renderSidebar();
             setActiveNav(null);
             applySidebarTabForCurrentView();
             applyFocusModeForCurrentView();
 
-            // Find lesson
-            let lesson = null;
-            let phase = null;
-            let lessonIndex = -1;
-            let allLessons = [];
+            const allLessons = getFlatLessons();
+            const lessonEntry = allLessons.find(item => item.lesson.id === lessonId);
+            if (!lessonEntry) return;
 
-            for (const p of coursData.phases) {
-                for (let i = 0; i < p.lessons.length; i++) {
-                    allLessons.push({ lesson: p.lessons[i], phase: p });
-                    if (p.lessons[i].id === lessonId) {
-                        lesson = p.lessons[i];
-                        phase = p;
-                        lessonIndex = allLessons.length - 1;
-                    }
-                }
-            }
-
-            if (!lesson) return;
-            setHeaderContext(lesson.title, `${phase.icon} ${phase.title}`);
-
+            const lesson = lessonEntry.lesson;
+            const phase = lessonEntry.phase;
+            const lessonIndex = allLessons.findIndex(item => item.lesson.id === lessonId);
             const prevLesson = lessonIndex > 0 ? allLessons[lessonIndex - 1].lesson : null;
             const nextLesson = lessonIndex < allLessons.length - 1 ? allLessons[lessonIndex + 1].lesson : null;
             const lessonNumber = lessonIndex + 1;
             const totalLessons = allLessons.length;
-            const isCompleted = state.completedLessons.includes(lessonId);
-            const notes = state.notes[lessonId] || '';
+            const isCompleted = state.progress.completedLessonIds.includes(lessonId);
+            const notes = state.notesByLessonId[lessonId] || '';
+            const hasTranscript = Boolean(transcriptMap[lesson.videoId]);
+            const hasExercise = Boolean(lesson.exercise);
+            const returnContext = sanitizeReturnContext(state.ui.returnContext || {});
+            const returnLabels = {
+                today: "Aujourd'hui",
+                modules: 'Modules',
+                exercises: 'Exercices',
+                guides: 'Guides',
+                resources: 'Ressources',
+                planning: 'Planning'
+            };
+            const completeRailClass = !nextLesson && !isCompleted ? 'btn-success' : 'btn-secondary';
+            const completeRailLabel = isCompleted ? 'Annuler terminé' : 'Marquer terminé';
 
-            // Expand the correct phase
+            rememberRecentLesson(lessonId);
+            setHeaderContext(lesson.title, `${phase.icon} ${phase.title}`);
+
             const phaseIndex = coursData.phases.indexOf(phase);
-            document.getElementById(`phase-${phaseIndex}`).classList.add('expanded');
-            document.querySelector(`#phase-${phaseIndex}`).previousElementSibling.classList.add('expanded');
+            const phaseEl = document.getElementById(`phase-${phaseIndex}`);
+            if (phaseEl) {
+                phaseEl.classList.add('expanded');
+                const phaseHeader = phaseEl.previousElementSibling;
+                if (phaseHeader) phaseHeader.classList.add('expanded');
+            }
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
@@ -4108,116 +5499,126 @@
                         <div class="page-header-left">
                             <h1 class="page-title">${lesson.title}</h1>
                             <p class="page-subtitle">${phase.icon} ${phase.title}</p>
-                            <div class="lesson-meta">
-                                <div class="meta-item">📍 Leçon ${lessonNumber}/${totalLessons}</div>
-                                <div class="meta-item">⏱️ ${lesson.duration}</div>
-                                ${lesson.exercise ? '<div class="meta-item">📝 Exercice</div>' : ''}
-                                ${transcriptMap[lesson.videoId] ? '<div class="meta-item">📄 Transcription</div>' : ''}
-                                ${isCompleted ? '<div class="meta-item meta-success">✅ Terminé</div>' : ''}
-                            </div>
                         </div>
                         <div class="page-actions">
-                            <button class="btn btn-secondary btn-sm" onclick="showDashboard()">← Tableau de bord</button>
-                            ${prevLesson ? `
-                                <button class="btn btn-secondary btn-sm" onclick="showLesson('${prevLesson.id}')">
-                                    ← Précédente
-                                </button>
-                            ` : ''}
-                            <button class="btn btn-secondary btn-sm" onclick="toggleFocusMode()">
-                                ${state.settings.focusModeEnabled ? '↩️ Quitter Focus' : '🎯 Focus'}
-                            </button>
-                            <button class="btn ${isCompleted ? 'btn-secondary' : 'btn-success'} btn-sm" onclick="toggleLessonComplete('${lessonId}')">
-                                ${isCompleted ? '↩️ Annuler' : '✅ Terminer'}
-                            </button>
-                            ${nextLesson ? `
-                                <button class="btn btn-primary btn-sm" onclick="showLesson('${nextLesson.id}')">
-                                    Suivante →
-                                </button>
-                            ` : ''}
+                            <button class="btn btn-secondary btn-sm" type="button" data-action="return-to-context">← Retour à ${returnLabels[returnContext.view] || "Aujourd'hui"}</button>
+                            <button class="btn btn-secondary btn-sm" type="button" data-action="toggle-focus-mode">${state.prefs.focusModeEnabled ? 'Quitter Focus' : 'Focus'}</button>
                         </div>
                     </div>
 
-                    <div class="video-container" id="lesson-video-container"></div>
-                    <div class="lesson-links">
-                        <a href="${buildInvidiousWatchUrl(getInvidiousBase(), lesson.videoId)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" id="lesson-invidious-link">
-                            🔗 Invidious
-                        </a>
-                        ${transcriptMap[lesson.videoId] ? `
-                            <button onclick="toggleTranscript('${lesson.videoId}')" class="btn btn-secondary btn-sm">
-                                📄 Transcription
-                            </button>
-                        ` : ''}
-                    </div>
-
-                    <div id="transcript-container" class="transcript-panel" style="display: none;">
-                        <div class="transcript-header">
-                            <input type="text" id="transcript-search" placeholder="Rechercher dans la transcription..."
-                                   oninput="debouncedTranscriptSearch(this.value)">
-                            <button onclick="closeTranscript()" class="transcript-close">✕</button>
-                        </div>
-                        <div id="transcript-content"></div>
-                    </div>
-
-                    <p class="lesson-description">${lesson.description}</p>
-
-                    <div class="key-points">
-                        <h4>🎯 Points clés à retenir</h4>
-                        <ul>
-                            ${lesson.keyPoints.map(point => `<li>${point}</li>`).join('')}
-                        </ul>
-                    </div>
-
-                    <div class="section-card">
-                        <div class="section-header">
-                            <div class="section-title">📝 Mes notes</div>
-                            <span class="notes-status" id="notes-status">Auto-sauvegarde activée</span>
-                        </div>
-                        <div class="section-content">
-                            <textarea class="notes-textarea" id="lesson-notes" placeholder="Prends des notes ici..." oninput="saveNotes('${lessonId}')">${notes}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="lesson-navigation">
-                        ${prevLesson ? `
-                            <button class="btn btn-secondary" onclick="showLesson('${prevLesson.id}')">
-                                ← Précédente
-                            </button>
-                        ` : '<div></div>'}
-
-                        <button class="btn ${isCompleted ? 'btn-secondary' : 'btn-success'}" onclick="toggleLessonComplete('${lessonId}')">
-                            ${isCompleted ? '↩️ Marquer comme non terminé' : '✅ Marquer comme terminé'}
-                        </button>
-
-                        ${nextLesson ? `
-                            <button class="btn btn-primary" onclick="showLesson('${nextLesson.id}')">
-                                Suivante →
-                            </button>
-                        ` : '<div></div>'}
-                    </div>
-
-                    ${lesson.exercise ? `
-                    <div class="lesson-exercise">
-                        <h3>📝 Exercice Pratique</h3>
-                        <div class="exercise-item">
-                            <div class="exercise-checkbox ${state.completedExercises.includes(lesson.exercise.id) ? 'checked' : ''}"
-                                 onclick="toggleExercise('${lesson.exercise.id}')">
-                                ${state.completedExercises.includes(lesson.exercise.id) ? '✓' : ''}
+                    <div class="lesson-layout">
+                        <section class="lesson-zone">
+                            <div class="lesson-zone-header">
+                                <div>
+                                    <div class="lesson-zone-title">Zone vidéo</div>
+                                    <div class="lesson-player-meta">
+                                        <div class="meta-item">Leçon ${lessonNumber}/${totalLessons}</div>
+                                        <div class="meta-item">${lesson.duration}</div>
+                                        ${hasExercise ? '<div class="meta-item">Exercice</div>' : ''}
+                                        ${hasTranscript ? '<div class="meta-item">Transcript</div>' : ''}
+                                        ${isCompleted ? '<div class="meta-item meta-success">Terminé</div>' : ''}
+                                    </div>
+                                </div>
+                                <div class="lesson-links">
+                                    <a href="${buildInvidiousWatchUrl(getInvidiousBase(), lesson.videoId)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" id="lesson-invidious-link">Ouvrir Invidious</a>
+                                    <a href="https://www.youtube.com/watch?v=${lesson.videoId}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Ouvrir YouTube</a>
+                                </div>
                             </div>
-                            <div class="exercise-content">
-                                <h4>${lesson.exercise.title}</h4>
-                                <p>${lesson.exercise.description}</p>
-                                <p class="exercise-duration">⏱️ Durée estimée: ${lesson.exercise.duration}</p>
+                            <div class="video-container" id="lesson-video-container"></div>
+                        </section>
+
+                        <section class="lesson-zone">
+                            <div class="lesson-zone-header">
+                                <div class="lesson-zone-title">Espace de travail</div>
+                                <div class="lesson-panel-tabs" role="tablist" aria-label="Panneaux de leçon">
+                                    <button class="lesson-panel-tab" type="button" role="tab" aria-selected="false" data-action="set-lesson-panel" data-panel="overview">Aperçu</button>
+                                    <button class="lesson-panel-tab" type="button" role="tab" aria-selected="false" data-action="set-lesson-panel" data-panel="notes">Notes</button>
+                                    <button class="lesson-panel-tab" type="button" role="tab" aria-selected="false" data-action="set-lesson-panel" data-panel="transcript">Transcript</button>
+                                    <button class="lesson-panel-tab" type="button" role="tab" aria-selected="false" data-action="set-lesson-panel" data-panel="exercise">Exercice</button>
+                                </div>
                             </div>
+
+                            <div class="lesson-panel-content">
+                                <section class="lesson-panel-section" data-panel-section="overview">
+                                    <p class="lesson-description">${lesson.description}</p>
+                                    <div class="key-points">
+                                        <h4>Points clés à retenir</h4>
+                                        <ul>
+                                            ${lesson.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                </section>
+
+                                <section class="lesson-panel-section" data-panel-section="notes">
+                                    <div class="section-card">
+                                        <div class="section-header">
+                                            <div class="section-title">Mes notes</div>
+                                            <span class="notes-status" id="notes-status">Auto-sauvegarde activée</span>
+                                        </div>
+                                        <div class="section-content">
+                                            <textarea class="notes-textarea" id="lesson-notes" placeholder="Prends des notes ici..." data-action="lesson-notes-input" data-lesson-id="${lessonId}">${notes}</textarea>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="lesson-panel-section" data-panel-section="transcript">
+                                    ${hasTranscript ? `
+                                    <div id="transcript-container" class="transcript-panel" data-video-id="${lesson.videoId}">
+                                        <div class="transcript-header">
+                                            <input type="text" id="transcript-search" placeholder="Rechercher dans la transcription..." data-action="transcript-search-input">
+                                            <button type="button" data-action="close-transcript" class="transcript-close">✕</button>
+                                        </div>
+                                        <div id="transcript-content"></div>
+                                    </div>
+                                    ` : '<p class="lesson-panel-empty">Aucune transcription disponible pour cette leçon.</p>'}
+                                </section>
+
+                                <section class="lesson-panel-section" data-panel-section="exercise">
+                                    ${hasExercise ? `
+                                    <div class="lesson-exercise">
+                                        <h3>Exercice pratique</h3>
+                                        <div class="exercise-item">
+                                            <div class="exercise-checkbox ${state.progress.completedExerciseIds.includes(lesson.exercise.id) ? 'checked' : ''}"
+                                                 data-action="toggle-exercise"
+                                                 data-exercise-id="${lesson.exercise.id}"
+                                                 role="button"
+                                                 tabindex="0">
+                                                ${state.progress.completedExerciseIds.includes(lesson.exercise.id) ? '✓' : ''}
+                                            </div>
+                                            <div class="exercise-content">
+                                                <h4>${lesson.exercise.title}</h4>
+                                                <p>${lesson.exercise.description}</p>
+                                                <p class="exercise-duration">Durée estimée: ${lesson.exercise.duration}</p>
+                                                <div class="exercise-actions">
+                                                    <button class="btn btn-secondary btn-sm" type="button" data-action="navigate" data-view="exercises">Voir tous les exercices</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ` : '<p class="lesson-panel-empty">Cette leçon ne contient pas d\'exercice pratique.</p>'}
+                                </section>
+                            </div>
+                        </section>
+
+                        <div class="lesson-action-rail">
+                            ${prevLesson ? `<button class="btn btn-secondary" type="button" data-action="open-lesson" data-lesson-id="${prevLesson.id}">Précédente</button>` : '<span></span>'}
+                            <button class="btn ${completeRailClass}" type="button" data-action="toggle-lesson-complete" data-lesson-id="${lessonId}">${completeRailLabel}</button>
+                            ${nextLesson
+                                ? `<button class="btn btn-primary" type="button" data-action="open-lesson" data-lesson-id="${nextLesson.id}">Suivante</button>`
+                                : `<button class="btn btn-secondary" type="button" data-action="navigate" data-view="today">Aujourd'hui</button>`}
                         </div>
                     </div>
-                    ` : ''}
                 </div>
             `;
 
-            loadInvidiousVideo(lesson.videoId, state.settings.autoplayVideos);
+            loadInvidiousVideo(lesson.videoId, state.prefs.autoplayVideos);
+            activateLessonPanel(state.ui.lessonPanel, {
+                persist: false,
+                transcriptVideoId: state.ui.lessonPanel === 'transcript' ? lesson.videoId : null
+            });
             closeSidebarOnMobileIfOpen();
-
-            // Initialize PiP observer for this lesson
+            renderMobileActionBar();
+            applyPendingScrollRestore();
             setTimeout(initPipObserver, 100);
         }
 
@@ -4226,7 +5627,7 @@
         }
 
         function getInvidiousBase() {
-            return normalizeInvidiousBase(state.settings?.lastInvidiousBase || INVIDIOUS_INSTANCES[0]);
+            return normalizeInvidiousBase(state.prefs?.lastInvidiousBase || INVIDIOUS_INSTANCES[0]);
         }
 
         function getInvidiousInstanceOrder() {
@@ -4259,23 +5660,91 @@
         }
 
         function loadInvidiousVideoFromBase(videoId, autoplay, base) {
-            state.settings.lastInvidiousBase = normalizeInvidiousBase(base);
+            state.prefs.lastInvidiousBase = normalizeInvidiousBase(base);
             saveState();
-            loadInvidiousVideo(videoId, autoplay, 0);
+            const ordered = getInstanceOrderStartingFrom(base);
+            loadInvidiousVideo(videoId, autoplay, 0, ordered);
         }
 
-        function loadInvidiousVideo(videoId, autoplay, attemptIndex = 0) {
+        function getInstanceOrderStartingFrom(base) {
+            const normalized = normalizeInvidiousBase(base);
+            const instances = INVIDIOUS_INSTANCES.map(normalizeInvidiousBase);
+            const idx = instances.indexOf(normalized);
+            if (idx === -1) return getInvidiousInstanceOrder();
+            return instances.slice(idx).concat(instances.slice(0, idx));
+        }
+
+        function canRetryVideoManually() {
+            const now = Date.now();
+            const retryState = runtimeState.videoRetryState;
+
+            if (retryState.cooldownUntil > now) {
+                const seconds = Math.ceil((retryState.cooldownUntil - now) / 1000);
+                showToast(`Réessaie dans ${seconds}s`, 'error');
+                return false;
+            }
+
+            if (!retryState.windowStartedAt || now - retryState.windowStartedAt > 30000) {
+                retryState.windowStartedAt = now;
+                retryState.retriesInWindow = 0;
+            }
+
+            if (retryState.retriesInWindow >= 3) {
+                retryState.cooldownUntil = now + 12000;
+                showToast('Trop de tentatives. Pause de 12 secondes.', 'error');
+                return false;
+            }
+
+            retryState.retriesInWindow += 1;
+            return true;
+        }
+
+        function retryVideo(videoId, autoplay) {
+            if (!canRetryVideoManually()) return;
+            loadInvidiousVideoFromBase(videoId, autoplay, getInvidiousBase());
+        }
+
+        function rotateInvidiousInstance(videoId, autoplay) {
+            if (!canRetryVideoManually()) return;
+            const instances = INVIDIOUS_INSTANCES.map(normalizeInvidiousBase);
+            const current = getInvidiousBase();
+            const idx = Math.max(0, instances.indexOf(current));
+            const nextBase = instances[(idx + 1) % instances.length];
+            loadInvidiousVideoFromBase(videoId, autoplay, nextBase);
+        }
+
+        function continueWithoutVideo(videoId, autoplay) {
+            const container = document.getElementById('lesson-video-container');
+            if (!container) return;
+            container.innerHTML = `
+                <div class="video-error">
+                    <span class="video-error-icon">▶</span>
+                    <p class="video-error-title">Mode sans vidéo activé</p>
+                    <p class="video-error-subtitle">Tu peux continuer avec les points clés, les notes et l'exercice, puis relancer la vidéo plus tard.</p>
+                    <div class="video-error-actions">
+                        <button class="btn btn-secondary btn-sm" type="button" data-action="retry-video" data-video-id="${videoId}" data-autoplay="${autoplay ? 'true' : 'false'}">Réessayer</button>
+                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Ouvrir sur YouTube</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadInvidiousVideo(videoId, autoplay, attemptIndex = 0, instanceOrder = null) {
             const container = document.getElementById('lesson-video-container');
             if (!container) return;
 
-            const instances = getInvidiousInstanceOrder();
-            if (attemptIndex >= instances.length) {
-                showInvidiousError(container, videoId, autoplay);
+            const instances = Array.isArray(instanceOrder) && instanceOrder.length
+                ? instanceOrder
+                : getInvidiousInstanceOrder();
+            const maxAutoAttempts = Math.min(2, instances.length);
+            if (attemptIndex >= maxAutoAttempts) {
+                showInvidiousError(container, videoId, autoplay, instances[Math.max(0, maxAutoAttempts - 1)]);
                 return;
             }
 
             const base = instances[attemptIndex];
             const iframe = document.createElement('iframe');
+            const startedAt = Date.now();
             iframe.src = buildInvidiousEmbedUrl(base, videoId, autoplay);
             iframe.allowFullscreen = true;
             iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
@@ -4285,17 +5754,37 @@
             let loaded = false;
             const timeout = setTimeout(() => {
                 if (!loaded) {
-                    loadInvidiousVideo(videoId, autoplay, attemptIndex + 1);
+                    if (attemptIndex + 1 < maxAutoAttempts) {
+                        loadInvidiousVideo(videoId, autoplay, attemptIndex + 1, instances);
+                    } else {
+                        showInvidiousError(container, videoId, autoplay, base);
+                    }
                 }
             }, INVIDIOUS_TIMEOUT_MS);
 
             iframe.onload = () => {
+                const elapsed = Date.now() - startedAt;
+                if (elapsed < 500 && attemptIndex + 1 < maxAutoAttempts) {
+                    clearTimeout(timeout);
+                    loadInvidiousVideo(videoId, autoplay, attemptIndex + 1, instances);
+                    return;
+                }
                 loaded = true;
                 clearTimeout(timeout);
-                state.settings.lastInvidiousBase = normalizeInvidiousBase(base);
+                state.prefs.lastInvidiousBase = normalizeInvidiousBase(base);
                 saveState();
                 updateLessonInvidiousLink(videoId, base);
                 setTimeout(initPipObserver, 100);
+            };
+
+            iframe.onerror = () => {
+                loaded = false;
+                clearTimeout(timeout);
+                if (attemptIndex + 1 < maxAutoAttempts) {
+                    loadInvidiousVideo(videoId, autoplay, attemptIndex + 1, instances);
+                } else {
+                    showInvidiousError(container, videoId, autoplay, base);
+                }
             };
 
             container.innerHTML = '';
@@ -4306,36 +5795,28 @@
             copyTextToClipboard(buildInvidiousWatchUrl(getInvidiousBase(), videoId));
         }
 
-        function showInvidiousError(container, videoId, autoplay) {
-            const instanceButtons = INVIDIOUS_INSTANCES.map(base => {
-                const label = normalizeInvidiousBase(base).replace('https://', '');
-                return `
-                    <button class="btn btn-secondary btn-sm" onclick="loadInvidiousVideoFromBase('${videoId}', ${autoplay ? 'true' : 'false'}, '${base}')">
-                        Essayer ${label}
-                    </button>
-                `;
-            }).join('');
-
+        function showInvidiousError(container, videoId, autoplay, failedBase) {
+            const currentLabel = normalizeInvidiousBase(failedBase || getInvidiousBase()).replace('https://', '');
             container.innerHTML = `
-                <div class="video-error" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 20px; background: var(--bg-tertiary); border-radius: var(--radius); text-align: center;">
-                    <span style="font-size: 48px; margin-bottom: 15px;">📺</span>
-                    <p style="margin-bottom: 10px; color: var(--text-secondary);">Impossible de charger la vidéo via Invidious.</p>
-                    <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 13px;">Certaines instances peuvent être bloquées; essayez une autre.</p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 16px;">
-                        ${instanceButtons}
+                <div class="video-error">
+                    <span class="video-error-icon">⚠</span>
+                    <p class="video-error-title">Vidéo temporairement indisponible</p>
+                    <p class="video-error-subtitle">L'instance <strong>${currentLabel}</strong> ne répond pas correctement. Réessaie, change d'instance, ou continue sans vidéo.</p>
+                    <div class="video-error-actions">
+                        <button class="btn btn-primary btn-sm" type="button" data-action="retry-video" data-video-id="${videoId}" data-autoplay="${autoplay ? 'true' : 'false'}">Réessayer</button>
+                        <button class="btn btn-secondary btn-sm" type="button" data-action="rotate-invidious-instance" data-video-id="${videoId}" data-autoplay="${autoplay ? 'true' : 'false'}">Changer d'instance</button>
+                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Ouvrir sur YouTube</a>
+                        <button class="btn btn-secondary btn-sm" type="button" data-action="continue-without-video" data-video-id="${videoId}" data-autoplay="${autoplay ? 'true' : 'false'}">Continuer sans vidéo</button>
                     </div>
-                    <button class="btn btn-secondary btn-sm" onclick="copyInvidiousLink('${videoId}')">
-                        📋 Copier le lien
-                    </button>
                 </div>
             `;
         }
 
         function toggleLessonComplete(lessonId) {
-            if (state.completedLessons.includes(lessonId)) {
-                state.completedLessons = state.completedLessons.filter(id => id !== lessonId);
+            if (state.progress.completedLessonIds.includes(lessonId)) {
+                state.progress.completedLessonIds = state.progress.completedLessonIds.filter(id => id !== lessonId);
             } else {
-                state.completedLessons.push(lessonId);
+                state.progress.completedLessonIds.push(lessonId);
             }
             saveState();
             updateHeaderProgress();
@@ -4357,7 +5838,7 @@
                 }, 3000);
             }
 
-            state.notes[lessonId] = notes;
+            state.notesByLessonId[lessonId] = notes;
             saveState();
 
             // Improved save feedback sequence
@@ -4375,51 +5856,70 @@
         }
 
         function toggleExercise(exId) {
-            if (state.completedExercises.includes(exId)) {
-                state.completedExercises = state.completedExercises.filter(id => id !== exId);
+            runtimeState.lastStartedExerciseId = exId;
+            if (state.progress.completedExerciseIds.includes(exId)) {
+                state.progress.completedExerciseIds = state.progress.completedExerciseIds.filter(id => id !== exId);
             } else {
-                state.completedExercises.push(exId);
+                state.progress.completedExerciseIds.push(exId);
             }
             saveState();
             updateHeaderProgress();
-            // Re-render current lesson to update checkbox
-            if (state.currentLesson) {
-                showLesson(state.currentLesson);
+            if (state.ui.currentView === 'lesson' && state.ui.currentLessonId) {
+                showLesson(state.ui.currentLessonId);
+            } else if (state.ui.currentView === 'exercises') {
+                showExercises();
             }
         }
 
         function showTimeline() {
-            state.currentView = 'timeline';
-            state.currentLesson = null;
-            stopTimer(); // Stop timer when leaving lesson
+            state.ui.currentView = 'planning';
+            state.ui.currentLessonId = null;
+            state.ui.sidebarTab = 'menu';
+            stopTimer();
+            resetPipState();
             saveState();
             renderSidebar();
-            setActiveNav('timeline');
+            setActiveNav('planning');
             setHeaderContext('Planning', 'Roadmap 12 semaines');
             applySidebarTabForCurrentView();
             applyFocusModeForCurrentView();
+
+            const currentWeek = (coursData.timeline.find(item => !state.progress.completedWeekIds.includes(item.week)) || coursData.timeline[coursData.timeline.length - 1] || { week: 1 }).week;
 
             document.getElementById('content-area').innerHTML = `
                 <div class="fade-in">
                     <div class="page-header">
                         <div class="page-header-left">
-                            <h1 class="page-title">📅 Planning (12 semaines)</h1>
+                            <h1 class="page-title">Planning (12 semaines)</h1>
                             <p class="page-subtitle">Roadmap complète (débutant → intermédiaire) pour lancer et stabiliser ta marque</p>
                         </div>
                     </div>
 
                     <div class="timeline">
                         ${coursData.timeline.map(item => {
-                            const isCompleted = state.completedWeeks.includes(item.week);
+                            const isCompleted = state.progress.completedWeekIds.includes(item.week);
+                            const isCurrent = item.week === currentWeek && !isCompleted;
                             return `
-                                <div class="timeline-item ${isCompleted ? 'completed' : ''}">
-                                    <div class="timeline-marker" onclick="toggleWeek(${item.week})">${isCompleted ? '✓' : item.week}</div>
+                                <div class="timeline-item ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}">
+                                    <button class="timeline-marker"
+                                            type="button"
+                                            data-action="toggle-week"
+                                            data-week="${item.week}">
+                                        ${isCompleted ? '✓' : item.week}
+                                    </button>
                                     <div class="timeline-content">
                                         <div class="timeline-week">Semaine ${item.week}</div>
                                         <div class="timeline-title">${item.title}</div>
                                         <div class="timeline-desc">${item.tasks}</div>
-                                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color);">
-                                            <strong style="color: var(--accent-green);">Livrable:</strong> ${item.deliverable}
+                                        <div class="timeline-deliverable">
+                                            <strong>Livrable:</strong> ${item.deliverable}
+                                        </div>
+                                        <div class="timeline-actions">
+                                            <button class="btn btn-secondary btn-sm" type="button" data-action="toggle-week-actions" data-week="${item.week}">Voir actions de la semaine</button>
+                                        </div>
+                                        <div class="week-actions" id="week-actions-${item.week}">
+                                            <strong>Semaine ${item.week}:</strong> ${item.tasks}<br>
+                                            <strong>Livrable attendu:</strong> ${item.deliverable}
                                         </div>
                                     </div>
                                 </div>
@@ -4429,22 +5929,32 @@
                 </div>
             `;
             closeSidebarOnMobileIfOpen();
+            renderMobileActionBar();
+            applyPendingScrollRestore();
         }
 
         function toggleWeek(week) {
-            if (state.completedWeeks.includes(week)) {
-                state.completedWeeks = state.completedWeeks.filter(w => w !== week);
+            if (state.progress.completedWeekIds.includes(week)) {
+                state.progress.completedWeekIds = state.progress.completedWeekIds.filter(w => w !== week);
             } else {
-                state.completedWeeks.push(week);
+                state.progress.completedWeekIds.push(week);
             }
             saveState();
             showTimeline();
         }
 
+        function toggleWeekActions(week) {
+            const block = document.getElementById(`week-actions-${week}`);
+            if (!block) return;
+            block.classList.toggle('open');
+        }
+
         function showResources() {
-            state.currentView = 'resources';
-            state.currentLesson = null;
-            stopTimer(); // Stop timer when leaving lesson
+            state.ui.currentView = 'resources';
+            state.ui.currentLessonId = null;
+            state.ui.sidebarTab = 'menu';
+            stopTimer();
+            resetPipState();
             saveState();
             renderSidebar();
             setActiveNav('resources');
@@ -4458,7 +5968,7 @@
                 <div class="fade-in">
                     <div class="page-header">
                         <div class="page-header-left">
-                            <h1 class="page-title">🔗 Ressources</h1>
+                            <h1 class="page-title">Ressources</h1>
                             <p class="page-subtitle">Outils et liens utiles pour ta formation</p>
                         </div>
                     </div>
@@ -4467,20 +5977,20 @@
                         <details class="details-card" ${index === 0 ? 'open' : ''}>
                             <summary class="details-summary">
                                 <div>
-                                    <div class="details-summary-title">🛠️ ${group.category}</div>
+                                    <div class="details-summary-title">${group.category}</div>
                                     <div class="details-summary-meta">${(group.items || []).length} ressources</div>
                                 </div>
                                 <div class="details-chevron">▼</div>
                             </summary>
                             <div class="details-body">
-                                <div style="display: grid; gap: 12px;">
+                                <div class="resource-grid">
                                     ${(group.items || []).map(tool => `
-                                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px; background: var(--bg-tertiary); border-radius: var(--radius-sm);">
+                                        <div class="resource-item">
                                             <div>
-                                                <div style="font-weight: 500;">${tool.name}</div>
-                                                <div style="font-size: 13px; color: var(--text-secondary);">${tool.desc}</div>
+                                                <div class="resource-item-title">${tool.name}</div>
+                                                <div class="resource-item-desc">${tool.desc}</div>
                                             </div>
-                                            <a href="${tool.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="padding: 8px 12px; white-space: nowrap;">Ouvrir →</a>
+                                            <a href="${tool.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm resource-item-link">Ouvrir →</a>
                                         </div>
                                     `).join('')}
                                 </div>
@@ -4493,7 +6003,7 @@
                             <div class="section-title">📺 Chaîne Invidious</div>
                         </div>
                         <div class="section-content">
-                            <p style="margin-bottom: 15px;">Retrouve toutes les vidéos sur la chaîne Invidious de Sofian Kasmi</p>
+                            <p class="resource-summary">Retrouve toutes les vidéos sur la chaîne Invidious de Sofian Kasmi</p>
                             <a href="${buildInvidiousChannelUrl(INVIDIOUS_INSTANCES[0], '@sofiankasmi')}" target="_blank" class="btn btn-primary">
                                 Voir la chaîne →
                             </a>
@@ -4505,8 +6015,8 @@
                             <div class="section-title">🧩 Guides & Templates</div>
                         </div>
                         <div class="section-content">
-                            <p style="color: var(--text-secondary); margin-bottom: 14px;">Playbooks pratiques pour appliquer la formation (CRO, contenu, sourcing, conformité, etc.).</p>
-                            <button class="btn btn-primary" onclick="showGuides()">Ouvrir les guides →</button>
+                            <p class="resource-summary">Playbooks pratiques pour appliquer la formation (CRO, contenu, sourcing, conformité, etc.).</p>
+                            <button class="btn btn-primary" type="button" data-action="navigate" data-view="guides">Ouvrir les guides →</button>
                         </div>
                     </div>
 
@@ -4517,6 +6027,8 @@
                 </div>
             `;
             closeSidebarOnMobileIfOpen();
+            renderMobileActionBar();
+            applyPendingScrollRestore();
         }
 
         // ========================================
@@ -4537,10 +6049,16 @@
             return items;
         }
 
+        function getExerciseItemById(exerciseId) {
+            return getAllExercises().find(item => item.exercise.id === exerciseId) || null;
+        }
+
         function showExercises() {
-            state.currentView = 'exercises';
-            state.currentLesson = null;
-            stopTimer(); // Stop timer when leaving lesson
+            state.ui.currentView = 'exercises';
+            state.ui.currentLessonId = null;
+            state.ui.sidebarTab = 'menu';
+            stopTimer();
+            resetPipState();
             saveState();
             renderSidebar();
             setActiveNav('exercises');
@@ -4548,18 +6066,33 @@
             applyFocusModeForCurrentView();
 
             const exercises = getAllExercises();
-            const completed = state.completedExercises.length;
+            const completed = state.progress.completedExerciseIds.length;
             setHeaderContext('Exercices', `${completed}/${exercises.length} complétés`);
 
+            const selectedFilter = state.ui.exercisesFilter || 'todo';
+            let filtered = exercises;
+            if (selectedFilter === 'todo') {
+                filtered = exercises.filter(item => !state.progress.completedExerciseIds.includes(item.exercise.id));
+            } else if (selectedFilter === 'done') {
+                filtered = exercises.filter(item => state.progress.completedExerciseIds.includes(item.exercise.id));
+            }
+
+            const resumeCandidate = runtimeState.lastStartedExerciseId
+                ? getExerciseItemById(runtimeState.lastStartedExerciseId)
+                : null;
+            const resumeExercise = resumeCandidate && !state.progress.completedExerciseIds.includes(resumeCandidate.exercise.id)
+                ? resumeCandidate
+                : exercises.find(item => !state.progress.completedExerciseIds.includes(item.exercise.id)) || null;
+
             const byPhase = new Map();
-            for (const item of exercises) {
+            for (const item of filtered) {
                 if (!byPhase.has(item.phase.id)) byPhase.set(item.phase.id, { phase: item.phase, items: [] });
                 byPhase.get(item.phase.id).items.push(item);
             }
 
             let openPhaseId = null;
             for (const { phase, items } of byPhase.values()) {
-                const done = items.filter(i => state.completedExercises.includes(i.exercise.id)).length;
+                const done = items.filter(i => state.progress.completedExerciseIds.includes(i.exercise.id)).length;
                 if (done < items.length) {
                     openPhaseId = phase.id;
                     break;
@@ -4573,13 +6106,42 @@
                 <div class="fade-in">
                     <div class="page-header">
                         <div class="page-header-left">
-                            <h1 class="page-title">📝 Exercices</h1>
+                            <h1 class="page-title">Exercices</h1>
                             <p class="page-subtitle">${completed}/${exercises.length} complétés — avance en priorité sur les exercices des modules 1 à 6.</p>
                         </div>
                     </div>
 
+                    <div class="exercise-toolbar">
+                        <div class="exercise-filter-group" role="tablist" aria-label="Filtrer les exercices">
+                            <button class="exercise-filter-btn ${selectedFilter === 'todo' ? 'active' : ''}" type="button" data-action="set-exercises-filter" data-filter="todo">À faire</button>
+                            <button class="exercise-filter-btn ${selectedFilter === 'all' ? 'active' : ''}" type="button" data-action="set-exercises-filter" data-filter="all">Tous</button>
+                            <button class="exercise-filter-btn ${selectedFilter === 'done' ? 'active' : ''}" type="button" data-action="set-exercises-filter" data-filter="done">Terminés</button>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" type="button" data-action="navigate" data-view="modules">Retour aux modules</button>
+                    </div>
+
+                    ${resumeExercise ? `
+                    <div class="exercise-resume-card">
+                        <div class="exercise-resume-title">Reprendre maintenant</div>
+                        <div class="exercise-resume-name">${resumeExercise.exercise.title}</div>
+                        <p class="resource-summary">${resumeExercise.phase.icon} ${resumeExercise.phase.title} • ${resumeExercise.exercise.duration} • ${compactText(resumeExercise.exercise.description, 120)}</p>
+                        <div class="exercise-actions">
+                            <button class="btn btn-primary btn-sm" type="button" data-action="open-lesson" data-lesson-id="${resumeExercise.lesson.id}">Ouvrir la leçon</button>
+                            <button class="btn btn-secondary btn-sm" type="button" data-action="toggle-exercise" data-exercise-id="${resumeExercise.exercise.id}" data-refresh-view="true">${state.progress.completedExerciseIds.includes(resumeExercise.exercise.id) ? 'Marquer à faire' : 'Marquer terminé'}</button>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    ${byPhase.size === 0 ? `
+                        <div class="section-card">
+                            <div class="section-content">
+                                <p class="resource-summary">Aucun exercice dans ce filtre pour le moment. Passe sur "Tous" ou "À faire".</p>
+                            </div>
+                        </div>
+                    ` : ''}
+
                     ${Array.from(byPhase.values()).map(({ phase, items }) => {
-                        const done = items.filter(i => state.completedExercises.includes(i.exercise.id)).length;
+                        const done = items.filter(i => state.progress.completedExerciseIds.includes(i.exercise.id)).length;
                         const total = items.length;
                         return `
                         <details class="details-card" ${phase.id === openPhaseId ? 'open' : ''}>
@@ -4592,17 +6154,21 @@
                             </summary>
                             <div class="details-body">
                                 ${items.map(({ lesson, exercise }) => `
-                                    <div class="exercise-item" style="align-items: flex-start;">
-                                        <div class="exercise-checkbox ${state.completedExercises.includes(exercise.id) ? 'checked' : ''}"
-                                             onclick="toggleExercise('${exercise.id}'); showExercises();">
-                                            ${state.completedExercises.includes(exercise.id) ? '✓' : ''}
+                                    <div class="exercise-item exercise-item-split">
+                                        <div class="exercise-checkbox ${state.progress.completedExerciseIds.includes(exercise.id) ? 'checked' : ''}"
+                                             data-action="toggle-exercise"
+                                             data-exercise-id="${exercise.id}"
+                                             data-refresh-view="true"
+                                             role="button"
+                                             tabindex="0">
+                                            ${state.progress.completedExerciseIds.includes(exercise.id) ? '✓' : ''}
                                         </div>
-                                        <div class="exercise-content" style="flex: 1;">
-                                            <h4 style="margin-bottom: 6px;">${exercise.title}</h4>
-                                            <p style="margin-bottom: 8px;">${exercise.description}</p>
-                                            <p class="exercise-duration">⏱️ ${exercise.duration} • <span style="color: var(--text-muted);">Leçon: ${lesson.title}</span></p>
-                                            <div style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">
-                                                <button class="btn btn-secondary btn-sm" onclick="showLesson('${lesson.id}')">Ouvrir la leçon →</button>
+                                        <div class="exercise-content exercise-content-grow">
+                                            <h4 class="exercise-title">${exercise.title}</h4>
+                                            <p class="exercise-copy">${exercise.description}</p>
+                                            <p class="exercise-duration">⏱️ ${exercise.duration} • <span class="exercise-lesson-meta">Leçon: ${lesson.title}</span></p>
+                                            <div class="exercise-actions">
+                                                <button class="btn btn-secondary btn-sm" type="button" data-action="open-lesson" data-lesson-id="${lesson.id}">Ouvrir la leçon →</button>
                                             </div>
                                         </div>
                                     </div>
@@ -4614,6 +6180,8 @@
                 </div>
             `;
             closeSidebarOnMobileIfOpen();
+            renderMobileActionBar();
+            applyPendingScrollRestore();
         }
 
         // ========================================
@@ -4690,25 +6258,27 @@
         }
 
         function toggleChecklistItem(itemId, checkboxEl) {
-            const idx = state.completedChecklistItems.indexOf(itemId);
+            const idx = state.progress.completedChecklistIds.indexOf(itemId);
             if (idx >= 0) {
-                state.completedChecklistItems.splice(idx, 1);
+                state.progress.completedChecklistIds.splice(idx, 1);
             } else {
-                state.completedChecklistItems.push(itemId);
+                state.progress.completedChecklistIds.push(itemId);
             }
             saveState();
 
             if (checkboxEl) {
-                const checked = state.completedChecklistItems.includes(itemId);
+                const checked = state.progress.completedChecklistIds.includes(itemId);
                 checkboxEl.classList.toggle('checked', checked);
                 checkboxEl.textContent = checked ? '✓' : '';
             }
         }
 
         function showGuides(openGuideId = null) {
-            state.currentView = 'guides';
-            state.currentLesson = null;
-            stopTimer(); // Stop timer when leaving lesson
+            state.ui.currentView = 'guides';
+            state.ui.currentLessonId = null;
+            state.ui.sidebarTab = 'menu';
+            stopTimer();
+            resetPipState();
             saveState();
             renderSidebar();
             setActiveNav('guides');
@@ -4722,12 +6292,14 @@
                     <div class="fade-in">
                         <div class="page-header">
                             <div class="page-header-left">
-                                <h1 class="page-title">🧩 Guides & Templates</h1>
+                                <h1 class="page-title">Guides</h1>
                                 <p class="page-subtitle">Aucun guide n'est disponible.</p>
                             </div>
                         </div>
                     </div>
                 `;
+                renderMobileActionBar();
+                applyPendingScrollRestore();
                 return;
             }
 
@@ -4736,7 +6308,7 @@
                     <summary>
                         <div>
                             <div class="guide-title">${guide.icon} ${guide.title}</div>
-                            <div style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">${guide.description}</div>
+                            <div class="guide-summary">${guide.description}</div>
                         </div>
                         <div class="guide-toggle">Cliquer pour ${openGuideId === guide.id ? 'refermer' : 'ouvrir'} ▼</div>
                     </summary>
@@ -4749,9 +6321,13 @@
                                     <div class="checklist">
                                         ${section.checklist.map((text, index) => {
                                             const itemId = `g-${guide.id}-${section.id}-${index}`;
-                                            const checked = state.completedChecklistItems.includes(itemId);
+                                            const checked = state.progress.completedChecklistIds.includes(itemId);
                                             return `
-                                                <div class="checklist-item" onclick="toggleChecklistItem('${itemId}', this.querySelector('.checklist-checkbox'))">
+                                                <div class="checklist-item"
+                                                     data-action="toggle-checklist-item"
+                                                     data-checklist-id="${itemId}"
+                                                     role="button"
+                                                     tabindex="0">
                                                     <div class="checklist-checkbox ${checked ? 'checked' : ''}">${checked ? '✓' : ''}</div>
                                                     <div class="checklist-text">${escapeHtml(text)}</div>
                                                 </div>
@@ -4772,7 +6348,7 @@
                                         <div class="template-wrap">
                                             <div class="template-header">
                                                 <div class="template-title">${escapeHtml(tpl.title || 'Template')}</div>
-                                                <button class="btn-copy" onclick="copyElementText('${elementId}')">Copier</button>
+                                                <button class="btn-copy" type="button" data-action="copy-element-text" data-element-id="${elementId}">Copier</button>
                                             </div>
                                             <pre class="template-block" id="${elementId}">${escapeHtml(tpl.content || '')}</pre>
                                         </div>
@@ -4784,7 +6360,7 @@
                                 <details class="guide-section" id="guide-${guide.id}-section-${section.id}" ${section.open ? 'open' : ''}>
                                     <summary>
                                         <div class="guide-section-title">${escapeHtml(section.title)}</div>
-                                        <div style="color: var(--text-muted); font-size: 12px;">▼</div>
+                                        <div class="guide-section-arrow">▼</div>
                                     </summary>
                                     <div class="guide-section-body">
                                         ${(section.paragraphs || []).map(p => `<p>${escapeHtml(p)}</p>`).join('')}
@@ -4803,7 +6379,7 @@
                 <div class="fade-in">
                     <div class="page-header">
                         <div class="page-header-left">
-                            <h1 class="page-title">🧩 Guides & Templates</h1>
+                            <h1 class="page-title">Guides</h1>
                             <p class="page-subtitle">Des playbooks pratiques (CRO, contenu organique, sourcing, conformité) pour appliquer la formation.</p>
                         </div>
                     </div>
@@ -4816,15 +6392,15 @@
                                 <div class="section-title">📚 Sources (recherche)</div>
                             </div>
                             <div class="section-content">
-                                <p style="color: var(--text-secondary); margin-bottom: 14px;">
+                                <p class="sources-intro">
                                     Guides rédigés à partir de sources reconnues (TikTok for Business, Baymard, web.dev, EU/CNIL). Vérifie toujours les règles locales (ceci n'est pas un avis juridique).
                                 </p>
-                                <div style="display: grid; gap: 10px;">
+                                <div class="sources-grid">
                                     ${coursData.sources.map(s => `
-                                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px; background: var(--bg-tertiary); border-radius: var(--radius-sm);">
+                                        <div class="sources-item">
                                             <div>
-                                                <div style="font-weight: 500;">${escapeHtml(s.name)}</div>
-                                                ${s.desc ? `<div style="font-size: 13px; color: var(--text-secondary);">${escapeHtml(s.desc)}</div>` : ''}
+                                                <div class="sources-item-title">${escapeHtml(s.name)}</div>
+                                                ${s.desc ? `<div class="sources-item-desc">${escapeHtml(s.desc)}</div>` : ''}
                                             </div>
                                             <a href="${s.url}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Ouvrir →</a>
                                         </div>
@@ -4836,6 +6412,8 @@
                 </div>
             `;
             closeSidebarOnMobileIfOpen();
+            renderMobileActionBar();
+            applyPendingScrollRestore();
 
             if (openGuideId) {
                 setTimeout(() => {
@@ -4850,24 +6428,21 @@
 
         function resetProgress() {
             if (confirm('Êtes-vous sûr de vouloir réinitialiser toute votre progression? Cette action est irréversible.')) {
-                localStorage.removeItem('formation-ecom-state');
-                state = {
-                    completedLessons: [],
-                    completedExercises: [],
-                    completedChecklistItems: [],
-                    completedWeeks: [],
-                    notes: {},
-                    currentView: 'dashboard',
-                    currentLesson: null,
-                    timerSeconds: 0,
-                    timerInterval: null,
-                    timerRunning: false,
-                    searchQuery: '',
-                    settings: {
-                        lightTheme: false,
-                        autoplayVideos: false
-                    },
-                    pipDismissed: false
+                localStorage.removeItem(STORAGE_KEY);
+                state = JSON.parse(JSON.stringify(defaultStateV3));
+                if (runtimeState.timerInterval) {
+                    clearInterval(runtimeState.timerInterval);
+                }
+                runtimeState.timerRunning = false;
+                runtimeState.timerInterval = null;
+                runtimeState.storageWarningShown = false;
+                runtimeState.recentLessonIds = [];
+                runtimeState.lastStartedExerciseId = null;
+                runtimeState.pendingScrollRestore = null;
+                runtimeState.videoRetryState = {
+                    windowStartedAt: 0,
+                    retriesInWindow: 0,
+                    cooldownUntil: 0
                 };
                 applyTheme();
                 updateSettingsUI();
@@ -4884,7 +6459,7 @@
         // ========================================
         function updateHeaderProgress() {
             const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
-            const completedLessons = state.completedLessons.length;
+            const completedLessons = state.progress.completedLessonIds.length;
             const percentage = Math.round((completedLessons / totalLessons) * 100);
 
             document.getElementById('progress-text').textContent = percentage + '%';
@@ -4920,7 +6495,7 @@
 
         function renderProgressDropdown() {
             const totalLessons = coursData.phases.reduce((sum, p) => sum + p.lessons.length, 0);
-            const completedLessons = state.completedLessons.length;
+            const completedLessons = state.progress.completedLessonIds.length;
             const percentage = Math.round((completedLessons / totalLessons) * 100);
 
             // Find next lesson
@@ -4928,7 +6503,7 @@
             let nextPhase = null;
             for (const phase of coursData.phases) {
                 for (const lesson of phase.lessons) {
-                    if (!state.completedLessons.includes(lesson.id)) {
+                    if (!state.progress.completedLessonIds.includes(lesson.id)) {
                         nextLesson = lesson;
                         nextPhase = phase;
                         break;
@@ -4939,7 +6514,7 @@
 
             document.getElementById('progress-dropdown').innerHTML = `
                 <div class="dropdown-header">
-                    <span class="dropdown-title">📊 Tableau de bord</span>
+                    <span class="dropdown-title">Progression</span>
                 </div>
                 <div class="dropdown-content">
                     <div class="dropdown-stats">
@@ -4948,11 +6523,11 @@
                             <div class="dropdown-stat-label">Leçons</div>
                         </div>
                         <div class="dropdown-stat">
-                            <div class="dropdown-stat-value">${state.completedExercises.length}/${getTotalExercises()}</div>
+                            <div class="dropdown-stat-value">${state.progress.completedExerciseIds.length}/${getTotalExercises()}</div>
                             <div class="dropdown-stat-label">Exercices</div>
                         </div>
                         <div class="dropdown-stat">
-                            <div class="dropdown-stat-value">${formatTime(state.timerSeconds)}</div>
+                            <div class="dropdown-stat-value">${formatTime(state.progress.timerSeconds)}</div>
                             <div class="dropdown-stat-label">Temps d'étude</div>
                         </div>
                         <div class="dropdown-stat">
@@ -4965,8 +6540,8 @@
                     <div class="dropdown-next-lesson">
                         <div class="dropdown-next-title">🚀 Prochaine leçon</div>
                         <div class="dropdown-next-name">${nextLesson.title}</div>
-                        <button class="btn btn-primary btn-sm" onclick="showLesson('${nextLesson.id}'); toggleProgressDropdown(event);">
-                            ▶️ Continuer
+                        <button class="btn btn-primary btn-sm" type="button" data-action="dropdown-open-next-lesson" data-lesson-id="${nextLesson.id}">
+                            Continuer
                         </button>
                     </div>
                     ` : `
@@ -4978,7 +6553,7 @@
 
                     <div class="dropdown-modules">
                         ${coursData.phases.map(phase => {
-                            const completed = phase.lessons.filter(l => state.completedLessons.includes(l.id)).length;
+                            const completed = phase.lessons.filter(l => state.progress.completedLessonIds.includes(l.id)).length;
                             const total = phase.lessons.length;
                             return `
                                 <div class="dropdown-module">
@@ -4989,8 +6564,8 @@
                         }).join('')}
                     </div>
 
-                    <div class="dropdown-reset" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
-                        <button class="btn btn-sm" style="background: var(--accent-red); color: white; width: 100%;" onclick="resetProgress()">
+                    <div class="dropdown-reset">
+                        <button class="btn btn-sm btn-danger" type="button" data-action="reset-progress">
                             🗑️ Réinitialiser ma progression
                         </button>
                     </div>
@@ -5021,40 +6596,304 @@
         function updateSettingsUI() {
             const themeToggle = document.getElementById('theme-toggle');
             const autoplayToggle = document.getElementById('autoplay-toggle');
+            if (!themeToggle || !autoplayToggle) return;
 
-            if (state.settings && state.settings.lightTheme) {
+            if (state.prefs?.theme === 'light') {
                 themeToggle.classList.add('active');
+                themeToggle.setAttribute('aria-checked', 'true');
             } else {
                 themeToggle.classList.remove('active');
+                themeToggle.setAttribute('aria-checked', 'false');
             }
 
-            if (state.settings && state.settings.autoplayVideos) {
+            if (state.prefs?.autoplayVideos) {
                 autoplayToggle.classList.add('active');
+                autoplayToggle.setAttribute('aria-checked', 'true');
             } else {
                 autoplayToggle.classList.remove('active');
+                autoplayToggle.setAttribute('aria-checked', 'false');
             }
         }
 
         function toggleTheme() {
-            state.settings.lightTheme = !state.settings.lightTheme;
+            state.prefs.theme = state.prefs.theme === 'light' ? 'dark' : 'light';
             applyTheme();
             saveState();
             updateSettingsUI();
         }
 
         function applyTheme() {
-            if (state.settings && state.settings.lightTheme) {
-                document.body.classList.add('light-theme');
-            } else {
-                document.body.classList.remove('light-theme');
-            }
+            const theme = state.prefs?.theme === 'light' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', theme);
         }
 
         function toggleAutoplay() {
-            state.settings.autoplayVideos = !state.settings.autoplayVideos;
+            state.prefs.autoplayVideos = !state.prefs.autoplayVideos;
             saveState();
             updateSettingsUI();
         }
+
+        function renderToday() {
+            showDashboard();
+        }
+
+        function renderLesson(lessonId) {
+            showLesson(lessonId);
+        }
+
+        function renderExercises() {
+            showExercises();
+        }
+
+        function renderGuides(openGuideId = null) {
+            showGuides(openGuideId);
+        }
+
+        function renderResources() {
+            showResources();
+        }
+
+        function renderPlanning() {
+            showTimeline();
+        }
+
+        function navigateTo(view, payload = {}) {
+            if (view === 'lesson') {
+                const targetLessonId = payload.lessonId || state.ui.currentLessonId;
+                if (!targetLessonId) return;
+                if (state.ui.currentView !== 'lesson') {
+                    captureReturnContext();
+                }
+                renderLesson(targetLessonId);
+                return;
+            }
+            if (view === 'today') {
+                renderToday();
+                return;
+            }
+            if (view === 'modules') {
+                showModules();
+                return;
+            }
+            if (view === 'planning') {
+                renderPlanning();
+                return;
+            }
+            if (view === 'exercises') {
+                renderExercises();
+                return;
+            }
+            if (view === 'guides') {
+                renderGuides(payload.openGuideId || null);
+                return;
+            }
+            if (view === 'resources') {
+                renderResources();
+                return;
+            }
+        }
+
+        function handleAction(actionEl, event) {
+            const action = actionEl.dataset.action;
+            switch (action) {
+                case 'toggle-sidebar':
+                    toggleSidebar();
+                    break;
+                case 'navigate':
+                    navigateTo(actionEl.dataset.view);
+                    break;
+                case 'return-to-context':
+                    returnToContext();
+                    break;
+                case 'open-guide':
+                    if (actionEl.dataset.guideId) {
+                        navigateTo('guides', { openGuideId: actionEl.dataset.guideId });
+                    }
+                    break;
+                case 'set-sidebar-tab':
+                    setSidebarTab(actionEl.dataset.sidebarTab === 'modules' ? 'modules' : 'menu');
+                    break;
+                case 'set-lesson-panel':
+                    if (actionEl.dataset.panel) {
+                        activateLessonPanel(actionEl.dataset.panel, {
+                            persist: true,
+                            transcriptVideoId: state.ui.currentLessonId
+                                ? getLessonContext(state.ui.currentLessonId)?.lesson.videoId
+                                : null
+                        });
+                    }
+                    break;
+                case 'set-exercises-filter':
+                    setExercisesFilter(actionEl.dataset.filter || 'todo');
+                    if (state.ui.currentView === 'exercises') {
+                        showExercises();
+                    }
+                    break;
+                case 'continue-next-lesson':
+                    continueNextLesson();
+                    break;
+                case 'toggle-progress-dropdown':
+                    toggleProgressDropdown(event);
+                    break;
+                case 'toggle-settings-panel':
+                    toggleSettingsPanel(event);
+                    break;
+                case 'toggle-theme':
+                    toggleTheme();
+                    break;
+                case 'toggle-autoplay':
+                    toggleAutoplay();
+                    break;
+                case 'reset-progress':
+                    resetProgress();
+                    break;
+                case 'close-pip':
+                    closePip();
+                    break;
+                case 'scroll-to-main-video':
+                    scrollToMainVideo();
+                    break;
+                case 'dismiss-parent':
+                    actionEl.parentElement?.parentElement?.remove();
+                    break;
+                case 'toggle-phase':
+                    togglePhase(Number(actionEl.dataset.phaseIndex));
+                    break;
+                case 'open-lesson':
+                    if (actionEl.dataset.lessonId) {
+                        navigateTo('lesson', { lessonId: actionEl.dataset.lessonId });
+                    }
+                    break;
+                case 'toggle-focus-mode':
+                    toggleFocusMode();
+                    break;
+                case 'toggle-lesson-complete':
+                    if (actionEl.dataset.lessonId) {
+                        toggleLessonComplete(actionEl.dataset.lessonId);
+                    }
+                    break;
+                case 'toggle-transcript':
+                    if (actionEl.dataset.videoId) {
+                        activateLessonPanel('transcript', {
+                            persist: true,
+                            transcriptVideoId: actionEl.dataset.videoId
+                        });
+                    }
+                    break;
+                case 'close-transcript':
+                    closeTranscript();
+                    if (state.ui.currentView === 'lesson') {
+                        activateLessonPanel('overview');
+                    }
+                    break;
+                case 'toggle-exercise':
+                    if (actionEl.dataset.exerciseId) {
+                        toggleExercise(actionEl.dataset.exerciseId);
+                    }
+                    if (actionEl.dataset.refreshView === 'true') {
+                        showExercises();
+                    }
+                    break;
+                case 'retry-invidious':
+                    if (actionEl.dataset.videoId && actionEl.dataset.invidiousBase) {
+                        loadInvidiousVideoFromBase(
+                            actionEl.dataset.videoId,
+                            actionEl.dataset.autoplay === 'true',
+                            actionEl.dataset.invidiousBase
+                        );
+                    }
+                    break;
+                case 'retry-video':
+                    if (actionEl.dataset.videoId) {
+                        retryVideo(actionEl.dataset.videoId, actionEl.dataset.autoplay === 'true');
+                    }
+                    break;
+                case 'rotate-invidious-instance':
+                    if (actionEl.dataset.videoId) {
+                        rotateInvidiousInstance(actionEl.dataset.videoId, actionEl.dataset.autoplay === 'true');
+                    }
+                    break;
+                case 'continue-without-video':
+                    if (actionEl.dataset.videoId) {
+                        continueWithoutVideo(actionEl.dataset.videoId, actionEl.dataset.autoplay === 'true');
+                    }
+                    break;
+                case 'copy-invidious-link':
+                    if (actionEl.dataset.videoId) {
+                        copyInvidiousLink(actionEl.dataset.videoId);
+                    }
+                    break;
+                case 'toggle-week':
+                    toggleWeek(Number(actionEl.dataset.week));
+                    break;
+                case 'toggle-week-actions':
+                    toggleWeekActions(Number(actionEl.dataset.week));
+                    break;
+                case 'open-search-result':
+                    if (actionEl.dataset.lessonId) {
+                        navigateTo('lesson', { lessonId: actionEl.dataset.lessonId });
+                        const searchResults = document.getElementById('search-results');
+                        const searchInput = document.getElementById('search-input');
+                        if (searchResults) searchResults.classList.remove('active');
+                        if (searchInput) searchInput.value = '';
+                        state.ui.searchQuery = '';
+                        setSearchOverlayState(false);
+                    }
+                    break;
+                case 'toggle-checklist-item':
+                    if (actionEl.dataset.checklistId) {
+                        toggleChecklistItem(actionEl.dataset.checklistId, actionEl.querySelector('.checklist-checkbox'));
+                    }
+                    break;
+                case 'copy-element-text':
+                    if (actionEl.dataset.elementId) {
+                        copyElementText(actionEl.dataset.elementId);
+                    }
+                    break;
+                case 'dropdown-open-next-lesson':
+                    if (actionEl.dataset.lessonId) {
+                        navigateTo('lesson', { lessonId: actionEl.dataset.lessonId });
+                        const indicator = document.getElementById('progress-indicator');
+                        const dropdown = document.getElementById('progress-dropdown');
+                        if (indicator) indicator.classList.remove('open');
+                        if (dropdown) dropdown.classList.remove('open');
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        document.addEventListener('click', (event) => {
+            const actionEl = event.target.closest('[data-action]');
+            if (!actionEl) return;
+
+            const inputOnlyActions = new Set(['search-input', 'lesson-notes-input', 'transcript-search-input']);
+            if (inputOnlyActions.has(actionEl.dataset.action)) return;
+            handleAction(actionEl, event);
+        });
+
+        document.addEventListener('input', (event) => {
+            const actionEl = event.target.closest('[data-action]');
+            if (!actionEl) return;
+
+            const action = actionEl.dataset.action;
+            if (action === 'search-input') {
+                debouncedSearch(event.target.value);
+            } else if (action === 'lesson-notes-input' && actionEl.dataset.lessonId) {
+                saveNotes(actionEl.dataset.lessonId);
+            } else if (action === 'transcript-search-input') {
+                debouncedTranscriptSearch(event.target.value);
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            const actionEl = event.target.closest('[data-action][role="button"]');
+            if (!actionEl) return;
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            actionEl.click();
+        });
 
         // Close settings panel when clicking outside
         document.addEventListener('click', function(e) {
@@ -5078,18 +6917,20 @@
         }
 
         function handleSearch(query) {
-            state.searchQuery = query.toLowerCase();
+            state.ui.searchQuery = query.toLowerCase();
             const resultsEl = document.getElementById('search-results');
+            if (!resultsEl) return;
+            const normalized = query.trim().toLowerCase();
 
-            if (query.length < 2) {
-                resultsEl.classList.remove('active');
+            if (normalized.length < 2) {
+                renderRecentSearchResults();
                 return;
             }
 
             const results = [];
             for (const phase of coursData.phases) {
                 for (const lesson of phase.lessons) {
-                    if (lesson.title.toLowerCase().includes(query) || lesson.description.toLowerCase().includes(query)) {
+                    if (lesson.title.toLowerCase().includes(normalized) || lesson.description.toLowerCase().includes(normalized)) {
                         results.push({ lesson, phase });
                     }
                 }
@@ -5099,14 +6940,58 @@
                 resultsEl.innerHTML = '<div class="search-result-item">Aucun resultat trouve</div>';
             } else {
                 resultsEl.innerHTML = results.slice(0, 8).map(r => `
-                    <div class="search-result-item" onclick="showLesson('${r.lesson.id}'); document.getElementById('search-results').classList.remove('active'); document.getElementById('search-input').value = '';">
+                    <button class="search-result-item" type="button" data-action="open-search-result" data-lesson-id="${r.lesson.id}">
                         <div class="search-result-title">${r.lesson.title}</div>
                         <div class="search-result-phase">${r.phase.icon} ${r.phase.title}</div>
-                    </div>
+                    </button>
                 `).join('');
             }
 
             resultsEl.classList.add('active');
+        }
+
+        function renderRecentSearchResults() {
+            const resultsEl = document.getElementById('search-results');
+            if (!resultsEl) return;
+            const recent = getRecentLessonSuggestions();
+
+            if (window.innerWidth > 768 && !state.ui.searchQuery) {
+                resultsEl.classList.remove('active');
+                return;
+            }
+
+            if (!recent.length) {
+                resultsEl.innerHTML = '<div class="search-result-item">Aucune leçon récente</div>';
+                resultsEl.classList.add('active');
+                return;
+            }
+
+            resultsEl.innerHTML = `
+                <div class="search-recent-title">Leçons récentes</div>
+                ${recent.map(item => `
+                    <button class="search-result-item" type="button" data-action="open-search-result" data-lesson-id="${item.lesson.id}">
+                        <div class="search-result-title">${item.lesson.title}</div>
+                        <div class="search-result-phase">${item.phase.icon} ${item.phase.title}</div>
+                    </button>
+                `).join('')}
+            `;
+            resultsEl.classList.add('active');
+        }
+
+        function setSearchOverlayState(expanded) {
+            const searchBox = document.querySelector('.search-box');
+            if (!searchBox) return;
+            if (window.innerWidth > 768) {
+                searchBox.classList.remove('mobile-expanded');
+                return;
+            }
+            searchBox.classList.toggle('mobile-expanded', expanded);
+            if (!expanded) {
+                const input = document.getElementById('search-input');
+                const results = document.getElementById('search-results');
+                if (input) input.blur();
+                if (results) results.classList.remove('active');
+            }
         }
 
         // Create debounced version for input handler (200ms delay)
@@ -5115,20 +7000,23 @@
         // Close search on click outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-box')) {
-                document.getElementById('search-results').classList.remove('active');
+                const results = document.getElementById('search-results');
+                if (results) results.classList.remove('active');
+                setSearchOverlayState(false);
             }
         });
 
         // ========================================
         // TRANSCRIPT FEATURE
         // ========================================
-        async function toggleTranscript(videoId) {
+        async function toggleTranscript(videoId, forceOpen = false) {
             const container = document.getElementById('transcript-container');
             const content = document.getElementById('transcript-content');
             const searchInput = document.getElementById('transcript-search');
+            if (!container || !content || !searchInput) return;
 
             // Toggle visibility if already open
-            if (container.style.display !== 'none' && container.dataset.videoId === videoId) {
+            if (!forceOpen && container.style.display !== 'none' && container.dataset.videoId === videoId) {
                 container.style.display = 'none';
                 return;
             }
@@ -5174,7 +7062,10 @@
         }
 
         function closeTranscript() {
-            document.getElementById('transcript-container').style.display = 'none';
+            const transcriptContainer = document.getElementById('transcript-container');
+            if (transcriptContainer) {
+                transcriptContainer.style.display = 'none';
+            }
             currentTranscript = '';
         }
 
@@ -5232,11 +7123,11 @@
             if (!videoContainer) return;
 
             // Reset dismissed state for new lesson
-            state.pipDismissed = false;
+            state.ui.pipDismissed = false;
 
             pipObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (state.pipDismissed) return;
+                    if (state.ui.pipDismissed) return;
 
                     const mainIframe = document.querySelector('.video-container iframe');
                     if (!mainIframe) return; // Only show PiP if video is loaded
@@ -5350,7 +7241,7 @@
         }
 
         function closePip() {
-            state.pipDismissed = true;
+            state.ui.pipDismissed = true;
             restoreMainVideo();
         }
 
@@ -5367,38 +7258,61 @@
         // ========================================
         function init() {
             loadState();
+            updateSettingsUI();
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.value = state.ui.searchQuery || '';
+                searchInput.addEventListener('focus', () => {
+                    if (window.innerWidth <= 768) {
+                        setSearchOverlayState(true);
+                        renderRecentSearchResults();
+                    }
+                });
+            }
 
             // Resume the last view for a predictable UX.
-            if (state.currentView === 'lesson' && state.currentLesson) {
-                showLesson(state.currentLesson);
+            if (state.ui.currentView === 'lesson' && state.ui.currentLessonId) {
+                navigateTo('lesson', { lessonId: state.ui.currentLessonId });
                 return;
             }
 
-            if (state.currentView === 'timeline') {
-                showTimeline();
+            if (state.ui.currentView === 'planning') {
+                navigateTo('planning');
                 return;
             }
 
-            if (state.currentView === 'exercises') {
-                showExercises();
+            if (state.ui.currentView === 'modules') {
+                navigateTo('modules');
                 return;
             }
 
-            if (state.currentView === 'guides') {
-                showGuides();
+            if (state.ui.currentView === 'exercises') {
+                navigateTo('exercises');
                 return;
             }
 
-            if (state.currentView === 'resources') {
-                showResources();
+            if (state.ui.currentView === 'guides') {
+                navigateTo('guides');
                 return;
             }
 
-            showDashboard();
+            if (state.ui.currentView === 'resources') {
+                navigateTo('resources');
+                return;
+            }
+
+            navigateTo('today');
         }
 
         // Run on load
         init();
+
+        window.addEventListener('resize', () => {
+            renderMobileActionBar();
+            if (window.innerWidth > 768) {
+                setSearchOverlayState(false);
+            }
+        });
 
         // Keyboard navigation and shortcuts
         document.addEventListener('keydown', function(e) {
@@ -5416,6 +7330,13 @@
                 if (searchResults && searchResults.classList.contains('active')) {
                     searchResults.classList.remove('active');
                     document.getElementById('search-input').value = '';
+                    state.ui.searchQuery = '';
+                    setSearchOverlayState(false);
+                    return;
+                }
+
+                if (window.innerWidth <= 768 && document.querySelector('.search-box.mobile-expanded')) {
+                    setSearchOverlayState(false);
                     return;
                 }
 
@@ -5446,9 +7367,9 @@
                 return;
             }
 
-            if (state.currentView === 'lesson' && state.currentLesson) {
+            if (state.ui.currentView === 'lesson' && state.ui.currentLessonId) {
                 const allLessons = coursData.phases.flatMap(p => p.lessons);
-                const currentIndex = allLessons.findIndex(l => l.id === state.currentLesson);
+                const currentIndex = allLessons.findIndex(l => l.id === state.ui.currentLessonId);
 
                 if (e.key === 'f' || e.key === 'F') {
                     toggleFocusMode();
@@ -5469,7 +7390,7 @@
                 if (phaseIndex < coursData.phases.length) {
                     const firstLesson = coursData.phases[phaseIndex].lessons[0];
                     if (firstLesson) {
-                        showLesson(firstLesson.id);
+                        navigateTo('lesson', { lessonId: firstLesson.id });
                     }
                 }
             }
